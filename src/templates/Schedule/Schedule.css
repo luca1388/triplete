@@ -1,0 +1,29 @@
+.schedule-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.schedule-team {
+    width: 30%;
+    text-align: left;
+}
+
+.schedule-team:nth-child(1) {
+    text-align: right;
+}
+
+.schedule-score {
+    text-align: center;
+}
+
+.score-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60px;
+    padding: 5px;
+}

@@ -5,13 +5,25 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
+import React, { ReactElement } from "react"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
-  const { site } = useStaticQuery(
+import { SiteData } from '../../types';
+
+interface SEOProps {
+  description?: string;
+  lang?: string;
+  title: string;
+  meta?: [{
+    name: string;
+    content: string
+  }];
+  image?: string;
+};
+
+const SEO: React.FC<SEOProps> = ({ description = "", lang = "en", meta = [], title, image = '' }): ReactElement => {
+  const { site }: SiteData = useStaticQuery(
     graphql`
       query {
         site {
@@ -19,14 +31,15 @@ function SEO({ description, lang, meta, title }) {
             title
             description
             author
+            image
           }
         }
       }
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const metaDescription: string = description || site.siteMetadata.description
+  const defaultTitle: string = site.siteMetadata?.title
 
   return (
     <Helmet
@@ -68,22 +81,13 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
+        {
+          name: `og:image`,
+          content: image || site.siteMetadata.image,
+        },
       ].concat(meta)}
     />
   )
-}
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-}
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
 }
 
 export default SEO
