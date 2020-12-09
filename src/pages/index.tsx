@@ -1,39 +1,50 @@
 import React from "react";
 import { PageProps, graphql } from "gatsby";
 
-import Layout from "../components/Layout/Layout";
-import SEO from "../components/SEO/seo";
+import Table from "../templates/Table/Table";
+import { standingPosition, TableProps } from "../types";
 
 type IndexPageProps = {
-  allTeam: {
-    nodes: [
+  allPosition: {
+    edges: [
       {
-        shortName: string;
-        crestUrl: string;
-        tla: string;
-        teamId: number;
+        node: {
+          position: number;
+          id: string;
+          team: {
+            crestUrl: string;
+            tla: string;
+            shortName: string;
+            name: string;
+          };
+          points: number;
+          playedGames: number;
+          draw: number;
+          lost: number;
+          goalsFor: number;
+          goalsAgainst: number;
+          won: number;
+        };
       }
     ];
   };
 };
 
 const IndexPage: React.FC<PageProps<IndexPageProps>> = ({ data }) => {
-  const teams = data.allTeam.nodes;
+  const standings: standingPosition[] = data.allPosition.edges.map(entry => ({...entry.node}));
 
   return (
-    <Layout>
-      <SEO title="Serie A Team viewer" />
-      <div
-        className="teams-container"
-        style={{
-          flexWrap: "wrap",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-      </div>
-    </Layout>
+    <div
+      className="teams-container"
+      style={{
+        flexWrap: "wrap",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Table standings={standings} />
+    </div>
   );
 };
 
@@ -41,13 +52,25 @@ export default IndexPage;
 
 export const query = graphql`
   query TeamNamesQuery {
-    allTeam {
-      nodes {
-        id
-        shortName
-        crestUrl
-        tla
-        teamId
+    allPosition {
+      edges {
+        node {
+          id
+          position
+          team {
+            id
+            shortName
+            tla
+            crestUrl
+          }
+          playedGames
+          won
+          draw
+          lost
+          points
+          goalsFor
+          goalsAgainst
+        }
       }
     }
   }
