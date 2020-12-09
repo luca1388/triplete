@@ -139,7 +139,6 @@ exports.sourceNodes = async ({
     ["team"]: { ...data.teams.find(team => team.id === scorer.team.id) },
   }))
 
-  console.log(data.scorers.length);
   data.scorers.forEach(scorer => {
     createNode({
       ...scorer,
