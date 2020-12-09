@@ -31,7 +31,6 @@ const SEO: React.FC<SEOProps> = ({ description = "", lang = "en", meta = [], tit
             title
             description
             author
-            image
           }
         }
       }
