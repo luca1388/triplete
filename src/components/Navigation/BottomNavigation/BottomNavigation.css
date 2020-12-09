@@ -1,0 +1,25 @@
+.bottomNavigationContainer {
+    justify-content: center;
+    background: red;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    /* height: 5rem; */
+    height: 58px;
+
+    background: rgb(17, 135, 212);
+    background: linear-gradient(
+        194deg,
+        rgba(17, 135, 212, 1) 0%,
+        rgba(84, 5, 167, 1) 75%
+    );
+    color: #ffffff;
+}
+
+@media only screen and (min-width: 600px) {
+    .bottomNavigationContainer {
+      display: none;
+    }
+  }

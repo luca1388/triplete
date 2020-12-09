@@ -35,11 +35,11 @@ const IndexPage: React.FC<PageProps<IndexPageProps>> = ({ data }) => {
 
   return (
     <div
-      className="teams-container"
+      className=""
       style={{
         flexWrap: "wrap",
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
       }}
     >

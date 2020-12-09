@@ -1,0 +1,46 @@
+.Header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  /* height: 35vh; */
+  height: 180px;
+  width: 100%;
+  background-image: linear-gradient(
+      194deg,
+      rgba(5, 89, 167, 0.8) 0%,
+      rgba(17, 135, 212, 0.8) 75%
+    ),
+    url(../../../content/images/header.jpg);
+  background-size: cover;
+  background-position: top;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 90%);
+}
+
+.Header h1 {
+  font-size: 4em;
+  display: inline;
+	position: relative;
+	font-family: Helvetica, Sans-Serif;
+	letter-spacing: -1px;
+	color: #fff; 
+
+}
+
+.Header h1:after {
+	content: "Triplete.net";
+  position: absolute;
+  left: 5px;
+  top: 3px;
+	color: rgba(255,255,255,0.35);   
+}
+
+@media only screen and (max-width: 960px) {
+  .Header h1 {
+    font-size: 4em;
+  }
+  .Header {
+    height: 120px;
+  }
+}

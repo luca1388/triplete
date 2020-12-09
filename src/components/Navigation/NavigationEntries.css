@@ -1,0 +1,10 @@
+.NavigationIcon {
+  padding: 0 0 10px 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .NavigationIcon {
+    padding: 0 0 5px 0;
+  }
+
+}

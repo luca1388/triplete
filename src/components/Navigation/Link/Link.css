@@ -1,0 +1,59 @@
+.Link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+  }
+
+  .Link a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    width: 95%;
+    box-sizing: border-box;
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    .Link {
+      padding: 8px 0;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .Link {
+      padding: 0 10px;
+      /* width: 100px; */
+    }
+    .Link a {
+      font-size: 11px;
+      height: 44px;
+      width: 54px;
+      padding: 0;
+    }
+  }
+  
+  .Link a:focus,
+  .Link a:hover,
+  .Link a:visited,
+  .Link a:link,
+  .Link a:active {
+    text-decoration: none;
+  }
+  
+  .Link a.active {
+      background: #1f8edc;
+      border-radius: 8%;
+  }
+
+  .Link a:hover {
+    opacity: 0.6;
+  }
+
+  .Link a.active:hover {
+    opacity: 1;
+  }

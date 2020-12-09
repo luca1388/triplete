@@ -1,0 +1,69 @@
+.NavigationContainer {
+  /* height: calc(100vh - 60px); */
+  height: 100vh;
+  width: 6rem;
+  /* background: rgb(17,135,212);
+    background: linear-gradient(194deg, rgba(17,135,212,1) 0%, rgba(84,5,167,1) 75%); */
+  /* background: rgb(84, 5, 167);
+  background: linear-gradient(
+    194deg,
+    rgba(84, 5, 167, 1) 0%,
+    rgba(17, 135, 212, 1) 75%
+  ); */
+  background: rgb(17, 135, 212);
+  background: linear-gradient(
+    194deg,
+    rgba(17, 135, 212, 1) 0%,
+    rgba(84, 5, 167, 1) 75%
+  );
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+}
+
+.NavigationList {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.LeagueContainer {
+  box-sizing: border-box;
+  padding: 2rem 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.Links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.Links h3 {
+  margin: 0;
+}
+
+.imageLogo {
+  border-radius: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+  .NavigationContainer {
+    display: none;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .imageLogo, .leagueName {
+    display: none;
+  }
+  .LeagueContainer {
+    padding-top: 0;
+  }
+}

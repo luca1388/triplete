@@ -71,6 +71,10 @@ span.teamName {
     flex: 1;
 }
 
+.imageWrapper img {
+    margin: 0;
+}
+
 .rank {
     width: 5%;
 }
