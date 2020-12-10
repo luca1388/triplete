@@ -37,7 +37,7 @@
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 34px;
+    height: 50px;
     padding: 8px 0;
     border-bottom: 1px solid #e6e6e6;
 }
@@ -60,7 +60,7 @@ span.teamName {
 }
 
 .goals {
-    width: 12%;
+    width: 8%;
 }
 
 .imageWrapper {

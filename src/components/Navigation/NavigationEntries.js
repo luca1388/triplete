@@ -19,7 +19,7 @@ const NavigationEntries = (props) => {
         <GiPodium
           className="NavigationIcon"
           color={colors.accent}
-          size={props.mobile ? 24 : 32}
+          size={props.mobile ? 32 : 40}
         />
         Classifica
       </Link>
@@ -27,7 +27,7 @@ const NavigationEntries = (props) => {
         <GiSoccerBall
           className="NavigationIcon"
           color={colors.accent}
-          size={props.mobile ? 24 : 32}
+          size={props.mobile ? 32 : 40}
         />
         Marcatori
       </Link>
@@ -35,7 +35,7 @@ const NavigationEntries = (props) => {
         <GiSoccerField
           className="NavigationIcon"
           color={colors.accent}
-          size={props.mobile ? 24 : 32}
+          size={props.mobile ? 32 : 40}
         />
         Partite
       </Link>
@@ -43,7 +43,7 @@ const NavigationEntries = (props) => {
         <GiRss
           className="NavigationIcon"
           color={colors.accent}
-          size={props.mobile ? 24 : 32}
+          size={props.mobile ? 32 : 40}
         />
         News
       </Link>
@@ -51,7 +51,7 @@ const NavigationEntries = (props) => {
         <BsInfoCircle
           className="NavigationIcon"
           color={colors.accent}
-          size={props.mobile ? 24 : 32}
+          size={props.mobile ? 32 : 40}
         />
         Altro
       </Link>
