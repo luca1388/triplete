@@ -30,7 +30,8 @@ const Table: React.FC<TableProps> = ({ standings }) => {
           <span className="match">V</span>
           <span className="match">P</span>
           <span className="match">N</span>
-          <span className="goals">DR</span>
+          <span className="goals">GF</span>
+          <span className="goals">GS</span>
           <span className="points">
             <strong>Pt</strong>
           </span>
@@ -67,9 +68,8 @@ const Table: React.FC<TableProps> = ({ standings }) => {
                 <span className="match">{entry.won}</span>
                 <span className="match">{entry.lost}</span>
                 <span className="match">{entry.draw}</span>
-                <span className="goals">
-                  {entry.goalsFor}:{entry.goalsAgainst}
-                </span>
+                <span className="goals">{entry.goalsFor}</span>
+                <span className="goals">{entry.goalsAgainst}</span>
                 <span className="points">
                   <strong>{entry.points}</strong>
                 </span>
