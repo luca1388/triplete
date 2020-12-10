@@ -6,7 +6,7 @@
  */
 
 import React, { ReactElement } from "react"
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby"
 
 import { SiteData } from '../../types';
@@ -31,6 +31,8 @@ const SEO: React.FC<SEOProps> = ({ description = "", lang = "en", meta = [], tit
             title
             description
             author
+            image
+            url
           }
         }
       }
@@ -83,6 +85,10 @@ const SEO: React.FC<SEOProps> = ({ description = "", lang = "en", meta = [], tit
         {
           name: `og:image`,
           content: image || site.siteMetadata.image,
+        },
+        {
+          name: `og:url`,
+          content: site.siteMetadata.url,
         },
       ].concat(meta)}
     />

@@ -15,17 +15,21 @@ import { SiteData } from "../../types";
 import Navigation from "../Navigation/Navigation";
 
 const Layout: React.FC = ({ children }) => {
-  const data: SiteData = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-          description
-          author
-        }
+  const data: {
+    site: SiteData
+  } = useStaticQuery(graphql`
+  query SiteTitleQuery {
+    site {
+      siteMetadata {
+        title
+        description
+        author
+        image
+        url
       }
     }
-  `);
+  }
+`);
 
   return (
     <div className="app">

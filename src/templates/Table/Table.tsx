@@ -12,16 +12,14 @@ export interface TableProps {
   
 
 const Table: React.FC<TableProps> = ({ standings }) => {
-  const description = standings
-    .map(
-      entry =>
-        entry.position + " " + entry.team.shortName + "(" + entry.points + ")"
-    )
-    .join("\n");
+  // const description = standings
+  //   .map(
+  //     entry =>
+  //       entry.position + " " + entry.team.shortName + "(" + entry.points + ")"
+  //   )
+  //   .join("\n");
 
-  return (
-    <Layout>
-      <SEO title="Serie A Standings" description={description}></SEO>
+  return (      
       <div className="standingsContainer">
         <div className="standingsHeader">
           <span className="rank"></span>
@@ -78,7 +76,6 @@ const Table: React.FC<TableProps> = ({ standings }) => {
           })}
         </div>
       </div>
-    </Layout>
   );
 };
 

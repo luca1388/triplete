@@ -1,8 +1,12 @@
 import React from "react";
-import { PageProps, graphql } from "gatsby";
+import { PageProps, graphql, useStaticQuery } from "gatsby";
 
 import Table from "../templates/Table/Table";
+import Layout from '../components/Layout/Layout';
+import SEO from '../components/SEO/seo';
 import { standingPosition, TableProps } from "../types";
+
+import { SiteData } from '../types';
 
 type IndexPageProps = {
   allPosition: {
@@ -27,24 +31,31 @@ type IndexPageProps = {
         };
       }
     ];
-  };
+  },
+  site: SiteData;
 };
+
 
 const IndexPage: React.FC<PageProps<IndexPageProps>> = ({ data }) => {
   const standings: standingPosition[] = data.allPosition.edges.map(entry => ({...entry.node}));
 
   return (
-    <div
-      className=""
-      style={{
-        flexWrap: "wrap",
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "center",
-      }}
-    >
-      <Table standings={standings} />
-    </div>
+    <Layout>
+      <SEO image={data.site.siteMetadata.image} title={data.site.siteMetadata.title} description={data.site.siteMetadata.description}></SEO>
+      <div
+        className=""
+        style={{
+          flexWrap: "wrap",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          flexDirection: "column",
+          width: '100%'
+        }}
+      >
+        <Table standings={standings} />
+      </div>
+    </Layout>
   );
 };
 
@@ -71,6 +82,14 @@ export const query = graphql`
           goalsFor
           goalsAgainst
         }
+      }
+    }
+    site {
+      siteMetadata {
+        title
+        description
+        author
+        image
       }
     }
   }
