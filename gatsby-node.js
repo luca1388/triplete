@@ -5,18 +5,18 @@
  */
 
 // You can delete this file if you're not using it
-const axios = require("axios").default
-const path = require("path")
+const axios = require("axios").default;
+const path = require("path");
 
 require("dotenv").config({
   path: `.env`,
-})
+});
 
 // constants for your GraphQL Post and Author types
-const POST_NODE_TYPE = `Team`
-const TABLE_POSITION_NODE_TYPE = `Position`
-const MATCH_NODE_TYPE = `Match`
-const SCORER_NODE_TYPE = "Scorer"
+const POST_NODE_TYPE = `Team`;
+const TABLE_POSITION_NODE_TYPE = `Position`;
+const MATCH_NODE_TYPE = `Match`;
+const SCORER_NODE_TYPE = "Scorer";
 
 exports.sourceNodes = async ({
   actions,
@@ -24,32 +24,32 @@ exports.sourceNodes = async ({
   createNodeId,
   getNodesByType,
 }) => {
-  const { createNode } = actions
+  const { createNode } = actions;
 
-  const data = {}
+  const data = {};
 
   const fetchTeams = async () =>
     axios.get("https://api.football-data.org/v2/competitions/SA/teams", {
       headers: { "X-Auth-Token": process.env.API_TOKEN },
-    })
+    });
   const fetchTable = async () =>
     axios.get("https://api.football-data.org/v2/competitions/SA/standings", {
       headers: { "X-Auth-Token": process.env.API_TOKEN },
-    })
+    });
   const fetchSchedule = async () =>
     axios.get("https://api.football-data.org/v2/competitions/SA/matches", {
       headers: { "X-Auth-Token": process.env.API_TOKEN },
-    })
+    });
 
   const fetchScorers = async () =>
     axios.get("https://api.football-data.org/v2/competitions/SA/scorers", {
       headers: { "X-Auth-Token": process.env.API_TOKEN },
-    })
+    });
 
-  data.teams = (await fetchTeams()).data.teams
-  data.table = (await fetchTable()).data.standings[0].table
-  data.schedule = (await fetchSchedule()).data.matches
-  data.scorers = (await fetchScorers()).data.scorers
+  data.teams = (await fetchTeams()).data.teams;
+  data.table = (await fetchTable()).data.standings[0].table;
+  data.schedule = (await fetchSchedule()).data.matches;
+  data.scorers = (await fetchScorers()).data.scorers;
 
   //   {
   //     "player": {
@@ -84,14 +84,14 @@ exports.sourceNodes = async ({
         content: JSON.stringify(team),
         contentDigest: createContentDigest(team),
       },
-    })
-  })
+    });
+  });
 
   // joining table data with teams to get all needed fields
   data.table = data.table.map(tableEntry => ({
     ...tableEntry,
     ["team"]: { ...data.teams.find(team => team.id === tableEntry.team.id) },
-  }))
+  }));
 
   data.table.forEach(position =>
     createNode({
@@ -105,19 +105,19 @@ exports.sourceNodes = async ({
         contentDigest: createContentDigest(position),
       },
     })
-  )
+  );
 
   // joining schedule data with teams to get all needed fields
   data.schedule = data.schedule.map(match => {
-    const homeTeam = data.teams.find(team => team.id === match.homeTeam.id)
-    const awayTeam = data.teams.find(team => team.id === match.awayTeam.id)
+    const homeTeam = data.teams.find(team => team.id === match.homeTeam.id);
+    const awayTeam = data.teams.find(team => team.id === match.awayTeam.id);
 
     return {
       ...match,
       ["homeTeam"]: homeTeam,
       ["awayTeam"]: awayTeam,
-    }
-  })
+    };
+  });
 
   data.schedule.forEach(match => {
     createNode({
@@ -130,14 +130,14 @@ exports.sourceNodes = async ({
         content: JSON.stringify(match),
         contentDigest: createContentDigest(match),
       },
-    })
-  })
+    });
+  });
 
   // joining table data with teams to get all needed fields
   data.scorers = data.scorers.map(scorer => ({
     ...scorer,
     ["team"]: { ...data.teams.find(team => team.id === scorer.team.id) },
-  }))
+  }));
 
   data.scorers.forEach(scorer => {
     createNode({
@@ -150,95 +150,126 @@ exports.sourceNodes = async ({
         content: JSON.stringify(scorer),
         contentDigest: createContentDigest(scorer),
       },
-    })
-  })
-  return
-}
+    });
+  });
+  return;
+};
 
-exports.onCreateNode = ({ node, getNode, actions }) => {}
+exports.onCreateNode = ({ node, getNode, actions }) => {};
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createPage } = actions;
 
+  const scorersResult = await graphql(`
+    query {
+      allScorer {
+        edges {
+          node {
+            id
+            player {
+              id
+              name
+              nationality
+            }
+            team {
+              id
+              shortName
+            }
+            numberOfGoals
+          }
+        }
+      }
+    }
+  `);
 
-//   const scheduleResult = await graphql(`
-//     {
-//       allMatch {
-//         totalCount
-//         edges {
-//           node {
-//             id
-//             score {
-//               fullTime {
-//                 homeTeam
-//                 awayTeam
-//               }
-//             }
-//             homeTeam {
-//               name
-//               shortName
-//               id
-//               crestUrl
-//             }
-//             awayTeam {
-//               name
-//               shortName
-//               id
-//               crestUrl
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `)
+  createPage({
+    path: "/marcatori",
+    component: path.resolve(`./src/templates/Scorers/Scorers.tsx`),
+    context: {
+      // Data passed to context is available
+      // in page queries as GraphQL variables.
+      scorers: scorersResult.data.allScorer.edges.map(edge => ({ ...edge.node})),
+    },
+  });
 
-//   const teams = await graphql(`
-//     {
-//       allTeam {
-//         edges {
-//           node {
-//             id
-//             teamId
-//           }
-//         }
-//       }
-//     }
-//   `)
+  //   const scheduleResult = await graphql(`
+  //     {
+  //       allMatch {
+  //         totalCount
+  //         edges {
+  //           node {
+  //             id
+  //             score {
+  //               fullTime {
+  //                 homeTeam
+  //                 awayTeam
+  //               }
+  //             }
+  //             homeTeam {
+  //               name
+  //               shortName
+  //               id
+  //               crestUrl
+  //             }
+  //             awayTeam {
+  //               name
+  //               shortName
+  //               id
+  //               crestUrl
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   `)
 
-//   teams.data.allTeam.edges.forEach(teamEdge => {
-//     const searchedTeamId = teamEdge.node.teamId
+  //   const teams = await graphql(`
+  //     {
+  //       allTeam {
+  //         edges {
+  //           node {
+  //             id
+  //             teamId
+  //           }
+  //         }
+  //       }
+  //     }
+  //   `)
 
-//     let searchedTeamMatches = scheduleResult.data.allMatch.edges.filter(
-//       scheduleEdge => {
-//         return (
-//           scheduleEdge.node.homeTeam.id === searchedTeamId ||
-//           scheduleEdge.node.awayTeam.id === searchedTeamId
-//         )
-//       }
-//     )
-//     const searchedTeam =
-//       searchedTeamMatches[0].node.homeTeam.id === searchedTeamId
-//         ? searchedTeamMatches[0].node.homeTeam
-//         : searchedTeamMatches[0].node.awayTeam
+  //   teams.data.allTeam.edges.forEach(teamEdge => {
+  //     const searchedTeamId = teamEdge.node.teamId
 
-//     searchedTeamMatches = searchedTeamMatches.map(match => ({
-//       ...match,
-//       teamId: searchedTeamId,
-//       teamName: searchedTeam.name,
-//     }))
+  //     let searchedTeamMatches = scheduleResult.data.allMatch.edges.filter(
+  //       scheduleEdge => {
+  //         return (
+  //           scheduleEdge.node.homeTeam.id === searchedTeamId ||
+  //           scheduleEdge.node.awayTeam.id === searchedTeamId
+  //         )
+  //       }
+  //     )
+  //     const searchedTeam =
+  //       searchedTeamMatches[0].node.homeTeam.id === searchedTeamId
+  //         ? searchedTeamMatches[0].node.homeTeam
+  //         : searchedTeamMatches[0].node.awayTeam
 
-//     createPage({
-//       path: "/schedule/teams/" + searchedTeamId,
-//       component: path.resolve(`./src/templates/Schedule/Schedule.tsx`),
-//       context: {
-//         // Data passed to context is available
-//         // in page queries as GraphQL variables.
-//         teamId: searchedTeamId,
-//         teamName: searchedTeam.name,
-//         matches: searchedTeamMatches,
-//         teamShortName: searchedTeam.shortName,
-//         teamImage: searchedTeam.crestUrl,
-//       },
-//     })
-//   })
-}
+  //     searchedTeamMatches = searchedTeamMatches.map(match => ({
+  //       ...match,
+  //       teamId: searchedTeamId,
+  //       teamName: searchedTeam.name,
+  //     }))
+
+  //     createPage({
+  //       path: "/schedule/teams/" + searchedTeamId,
+  //       component: path.resolve(`./src/templates/Schedule/Schedule.tsx`),
+  //       context: {
+  //         // Data passed to context is available
+  //         // in page queries as GraphQL variables.
+  //         teamId: searchedTeamId,
+  //         teamName: searchedTeam.name,
+  //         matches: searchedTeamMatches,
+  //         teamShortName: searchedTeam.shortName,
+  //         teamImage: searchedTeam.crestUrl,
+  //       },
+  //     })
+  //   })
+};
