@@ -42,9 +42,12 @@ exports.sourceNodes = async ({
     });
 
   const fetchScorers = async () =>
-    axios.get("https://api.football-data.org/v2/competitions/SA/scorers?limit=50", {
-      headers: { "X-Auth-Token": process.env.API_TOKEN },
-    });
+    axios.get(
+      "https://api.football-data.org/v2/competitions/SA/scorers?limit=50",
+      {
+        headers: { "X-Auth-Token": process.env.API_TOKEN },
+      }
+    );
 
   data.teams = (await fetchTeams()).data.teams;
   data.table = (await fetchTable()).data.standings[0].table;
@@ -154,6 +157,7 @@ exports.createPages = async ({ graphql, actions }) => {
             team {
               id
               shortName
+              crestUrl
             }
             numberOfGoals
           }
@@ -168,40 +172,59 @@ exports.createPages = async ({ graphql, actions }) => {
     context: {
       // Data passed to context is available
       // in page queries as GraphQL variables.
-      scorers: scorersResult.data.allScorer.edges.map(edge => ({ ...edge.node})),
+      scorers: scorersResult.data.allScorer.edges.map(edge => ({
+        ...edge.node,
+      })),
     },
   });
 
-  //   const scheduleResult = await graphql(`
-  //     {
-  //       allMatch {
-  //         totalCount
-  //         edges {
-  //           node {
-  //             id
-  //             score {
-  //               fullTime {
-  //                 homeTeam
-  //                 awayTeam
-  //               }
-  //             }
-  //             homeTeam {
-  //               name
-  //               shortName
-  //               id
-  //               crestUrl
-  //             }
-  //             awayTeam {
-  //               name
-  //               shortName
-  //               id
-  //               crestUrl
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `)
+  const scheduleResult = await graphql(`
+    {
+      allMatch {
+        totalCount
+        edges {
+          node {
+            id
+            utcDate
+            status
+            matchday
+            score {
+              fullTime {
+                homeTeam
+                awayTeam
+              }
+            }
+            homeTeam {
+              shortName
+              id
+              crestUrl
+            }
+            awayTeam {
+              shortName
+              id
+              crestUrl
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const calendar = scheduleResult.data.allMatch.edges.map(entry => ({...entry.node})).reduce( (acc, current) => {
+    acc[current.utcDate.split('T')[0]] = [ ...acc[current.utcDate.split('T')[0]] || [], current];
+    return acc;
+  }, {});
+
+  createPage({
+    path: "/partite",
+    component: path.resolve(`./src/templates/Schedule/Schedule.tsx`),
+    context: {
+      // Data passed to context is available
+      // in page queries as GraphQL variables.
+      calendar: calendar,
+    },
+  });
+
 
   //   const teams = await graphql(`
   //     {
@@ -215,28 +238,6 @@ exports.createPages = async ({ graphql, actions }) => {
   //       }
   //     }
   //   `)
-
-  //   teams.data.allTeam.edges.forEach(teamEdge => {
-  //     const searchedTeamId = teamEdge.node.teamId
-
-  //     let searchedTeamMatches = scheduleResult.data.allMatch.edges.filter(
-  //       scheduleEdge => {
-  //         return (
-  //           scheduleEdge.node.homeTeam.id === searchedTeamId ||
-  //           scheduleEdge.node.awayTeam.id === searchedTeamId
-  //         )
-  //       }
-  //     )
-  //     const searchedTeam =
-  //       searchedTeamMatches[0].node.homeTeam.id === searchedTeamId
-  //         ? searchedTeamMatches[0].node.homeTeam
-  //         : searchedTeamMatches[0].node.awayTeam
-
-  //     searchedTeamMatches = searchedTeamMatches.map(match => ({
-  //       ...match,
-  //       teamId: searchedTeamId,
-  //       teamName: searchedTeam.name,
-  //     }))
 
   //     createPage({
   //       path: "/schedule/teams/" + searchedTeamId,

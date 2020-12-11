@@ -1,29 +1,157 @@
-.schedule-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
-    box-sizing: border-box;
-    border-bottom: 1px solid #e6e6e6;
-}
-
-.schedule-team {
-    width: 30%;
-    text-align: left;
-}
-
-.schedule-team:nth-child(1) {
-    text-align: right;
-}
-
-.schedule-score {
-    text-align: center;
-}
-
-.score-container {
+.match {
     display: flex;
     justify-content: space-between;
+    align-items: inherit;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 6px;
+    padding: 10px;
+    overflow: hidden;
+    background: white;
+    margin: 20px 0;
+    box-sizing: border-box;
+    /* height: 7rem; */
+
+}
+
+.matchDay {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 60px;
+    margin-bottom: 20px;
+}
+
+.matchDayCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.matchResultContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.scorersList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.scorersContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    font-size: 12px;
+}
+
+.matchResult {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 55%; */
+    /* max-width: 300px; */
+}
+
+.teamNameBlock {
+    display: flex;
+    justify-content: space-between;
+    /* width: 45%; */
+    width: 150px;
+    align-items: center;
+}
+
+.scoreSquare {
+    background-color: rgba(217, 215, 226, 0.534);
+    /* width: 10%; */
+    /* min-width: 30px; */
+    min-width: 35px;
+    border-radius: 5px;
     padding: 5px;
+    margin: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.matchesGroup {
+    width: 95%;
+    color: rgb(5, 89, 167);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.loaderMatchDate {
+    height: 10px;
+    width: 10px;
+    border-width: 1px;
+    margin-left: 10px;
+}
+
+.scheduleContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    margin: 20px 0;
+    box-sizing: border-box;
+}
+
+.matchesOfTheDay {
+    width: 95%;
+    box-sizing: border-box;
+}
+
+.veryShortName {
+    display: none;
+}
+
+.longName {
+    display: block;
+}
+
+@media only screen and (min-width: 1280px) {
+    .scheduleContainer {
+        width: 50%;
+    }
+
+    .teamNameBlock {
+        width: 150px;
+    }
+
+    /* .matchResult {
+        width: 50%;
+    } */
+}
+
+@media only screen and (min-width: 960px) {
+    /* .matchResult {
+        width: 50%;
+    } */
+    .teamNameBlock {
+        width: 120px;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .longName {
+        display: none;
+    }
+    .veryShortName {
+        display: block;
+    }
+    .teamNameBlock {
+        width: 75px;
+    }
+    .matchDayCard {
+        font-size: 14px;
+    }
 }
