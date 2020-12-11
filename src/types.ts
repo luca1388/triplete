@@ -10,15 +10,33 @@ export interface SiteData {
   };
 }
 
+export type team = {
+  crestUrl: string;
+  tla: string;
+  shortName: string;
+};
+
+export type calendar = {
+  [key in string]: [{
+    id: string;
+    status: "SCHEDULED" | "LIVE" | "IN_PLAY" | "PAUSED" | "FINISHED" | "POSTPONED" | "SUSPENDED" | "CANCELED" | "AWARDED";
+    matchday: number;
+    utcDate: string;
+    score: {
+      fullTime: {
+        awayTeam: number;
+        homeTeam: number;
+      }
+    }
+    awayTeam: team;
+    homeTeam: team;
+  }]
+};
+
 export type standingPosition = {
   position: number;
   id: string;
-  team: {
-    name: string;
-    crestUrl: string;
-    tla: string;
-    shortName: string;
-  };
+  team: team;
   points: number;
   playedGames: number;
   draw: number;
@@ -35,10 +53,7 @@ export type scorers = [{
       name: string;
       nationality: string;
     }
-    team: {
-      id: number;
-      shortName: string;
-    }
+    team: team;
     numberOfGoals: number;
 }];
 
@@ -47,12 +62,7 @@ export interface TableProps {
     {
       position: number;
       id: string;
-      team: {
-        name: string;
-        crestUrl: string;
-        tla: string;
-        shortName: string;
-      };
+      team: team;
       points: number;
       playedGames: number;
       draw: number;
