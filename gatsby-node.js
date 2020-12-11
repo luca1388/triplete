@@ -42,7 +42,7 @@ exports.sourceNodes = async ({
     });
 
   const fetchScorers = async () =>
-    axios.get("https://api.football-data.org/v2/competitions/SA/scorers", {
+    axios.get("https://api.football-data.org/v2/competitions/SA/scorers?limit=50", {
       headers: { "X-Auth-Token": process.env.API_TOKEN },
     });
 
@@ -50,26 +50,6 @@ exports.sourceNodes = async ({
   data.table = (await fetchTable()).data.standings[0].table;
   data.schedule = (await fetchSchedule()).data.matches;
   data.scorers = (await fetchScorers()).data.scorers;
-
-  //   {
-  //     "player": {
-  //       "id": 11688,
-  //       "name": "Zlatan Ibrahimovic",
-  //       "firstName": "Zlatan",
-  //       "lastName": null,
-  //       "dateOfBirth": "1981-10-03",
-  //       "countryOfBirth": "Sweden",
-  //       "nationality": "Sweden",
-  //       "position": "Attacker",
-  //       "shirtNumber": null,
-  //       "lastUpdated": "2020-11-26T02:19:29Z"
-  //     },
-  //     "team": {
-  //       "id": 98,
-  //       "name": "AC Milan"
-  //     },
-  //     "numberOfGoals": 10
-  //   },
 
   // loop through data and create Gatsby nodes
   data.teams.forEach(team => {
