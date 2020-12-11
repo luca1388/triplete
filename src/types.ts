@@ -1,3 +1,5 @@
+import { string } from "prop-types";
+
 export interface SiteData {
   siteMetadata: {
     title: string;
@@ -25,6 +27,20 @@ export type standingPosition = {
   goalsAgainst: number;
   won: number;
 };
+
+export type scorers = [{
+    id: string;
+    player: {
+      id: number;
+      name: string;
+      nationality: string;
+    }
+    team: {
+      id: number;
+      shortName: string;
+    }
+    numberOfGoals: number;
+}];
 
 export interface TableProps {
   standings: [

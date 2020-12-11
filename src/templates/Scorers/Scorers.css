@@ -1,0 +1,63 @@
+.scorersContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow: hidden;
+    background: white;
+    margin: 20px 0;
+}
+
+.scorer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: 8px 0;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.number {
+    width: 5%;
+    text-align: center;
+}
+
+.firstScorer {
+    background-color: #fff2ac;
+    background-image: linear-gradient(to left, #ffe359 0%, #fff2ac 100%);
+    border: none;
+    border-radius: 40px;
+}
+
+@media only screen and (max-width: 960px) {
+    .playerName {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .number {
+        width: 15%;
+    }
+
+    .scorersContainer {
+        width: 90%;
+    }
+
+    .scorersContainer {
+        box-shadow: none;
+    }
+
+}
+
+@media only screen and (min-width: 1280px) {
+    .scorersContainer {
+        width: 50%;
+    }
+}
