@@ -1,11 +1,11 @@
 import React from 'react';
 
 import NavigationEntries from '../NavigationEntries';
-import style from './BottomNavigation.css';
+import './BottomNavigation.css';
 
 const BottomNavigation = props => {
     return(
-        <nav className={style.bottomNavigationContainer}>
+        <nav className="bottomNavigationContainer">
             <NavigationEntries mobile />
         </nav>
     );
