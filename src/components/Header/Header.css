@@ -3,7 +3,9 @@
   justify-content: center;
   align-items: center;
 
-  position: relative;
+  /* position: relative; */
+  position: sticky;
+  top: 0;
   /* height: 35vh; */
   height: 180px;
   width: 100%;
@@ -16,6 +18,7 @@
   background-size: cover;
   background-position: top;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 90%);
+  z-index: 1;
 }
 
 .Header h1 {

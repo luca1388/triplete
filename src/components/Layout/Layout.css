@@ -603,18 +603,18 @@ pre tt:after {
   justify-content: flex-start;
   align-items: center;
   height: 100%;
-  flex: 1
+  flex: 1;
+  padding: 0 0 0 6rem;
 }
 
 .header-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
   overflow-y: auto;
   min-height: 100vh;
-  padding: 0 0 0 6rem;
 }
 
 @media only screen and (max-width: 600px) {
@@ -626,7 +626,7 @@ pre tt:after {
 
 .app {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -635,5 +635,6 @@ pre tt:after {
 @media only screen and (max-width: 768px) {
   .main-container {
     width: 100%;
+    padding: 0;
   }
 }

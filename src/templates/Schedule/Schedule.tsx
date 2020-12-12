@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
 import SEO from "../../components/SEO/seo";
 import TeamFilter from "../../components/TeamFilter/TeamFilter";
@@ -16,9 +16,23 @@ interface ScheduleProps {
 const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
   console.log(pageContext);
   const [ filteredTeam, setFilteredTeam ] = useState<number>(-1);
+  const todayRef = useRef<HTMLDivElement>();
+
+  const today = new Date().toISOString().split('T')[0];
 
   const onFilterTeams = useCallback((team:number) => {
     setFilteredTeam(team);
+  }, []);
+
+  // useEffect(() => {
+  //   if (todayRef.current) {
+  //     todayRef.current.scrollIntoView();
+  //   }
+  // }, []);
+  const todayMatchClickHandler = useCallback(() => {
+    if (todayRef.current) {
+      todayRef.current.scrollIntoView();
+    }
   }, []);
 
   const days = Object.keys(pageContext.calendar);
@@ -26,6 +40,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
     <Layout>
       <SEO title={"Calendario Serie A"}></SEO>
       <TeamFilter onType={onFilterTeams} />
+      {/* <button onClick={todayMatchClickHandler}>Vai alle partite di oggi</button> */}
       <div className="scheduleContainer">
         {days.map(day => {
           let matches = pageContext.calendar[day];
@@ -138,6 +153,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
           });
           return (
             <div className="matchDay" key={day}>
+              {day === today && <div ref={todayRef} id="today-anchor"></div>}
               <div className="matchesGroup">
                 {getMatchDateFromUtcDate(day)}{" "}
               </div>

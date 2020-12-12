@@ -34,9 +34,9 @@ const Layout: React.FC = ({ children }) => {
 
   return (
     <div className="app">
-      <Navigation siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div className="header-container">
-        <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+        <Navigation siteTitle={data.site.siteMetadata?.title || `Title`} />
         <main className="main-container">
           {children}
           <BottomNavigation />

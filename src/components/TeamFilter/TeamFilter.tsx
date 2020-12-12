@@ -22,7 +22,6 @@ const TeamFilter: React.FC<TeamFilterProps> = ({ onType }) => {
 
   const onChangeInputHandler = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
-      // setTeam(event.target.value);
       onType(+event.target.value);
     },
     []
@@ -36,7 +35,7 @@ const TeamFilter: React.FC<TeamFilterProps> = ({ onType }) => {
         alignItems: "center",
       }}
     >
-      <span>Scegli la tua squadra: </span>
+      <span>Filtra per squadra: </span>
       <select style={{ margin: "0 0 0 10px" }} onChange={onChangeInputHandler}>
         <option value={-1}>Tutte</option>
         {teams.map(team => (
