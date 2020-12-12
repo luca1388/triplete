@@ -31,7 +31,7 @@ export type calendar = {
     }
     awayTeam: team;
     homeTeam: team;
-  }]
+  }?]
 };
 
 export type standingPosition = {

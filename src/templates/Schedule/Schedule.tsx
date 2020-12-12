@@ -20,6 +20,10 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
 
   const today = new Date().toISOString().split('T')[0];
 
+  if (!pageContext.calendar[today]) {
+    pageContext.calendar[today] = [];
+  }
+
   const onFilterTeams = useCallback((team:number) => {
     setFilteredTeam(team);
   }, []);
@@ -31,7 +35,10 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
   // }, []);
   const todayMatchClickHandler = useCallback(() => {
     if (todayRef.current) {
-      todayRef.current.scrollIntoView();
+      // todayRef.current.scrollIntoView({
+      //   behavior: "smooth"
+      // });
+      window.scroll({ top: (todayRef.current.offsetTop - 120), left: 0, behavior: 'smooth' });
     }
   }, []);
 
@@ -40,7 +47,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
     <Layout>
       <SEO title={"Calendario Serie A"}></SEO>
       <TeamFilter onType={onFilterTeams} />
-      {/* <button onClick={todayMatchClickHandler}>Vai alle partite di oggi</button> */}
+      <button onClick={todayMatchClickHandler}>Vai alle partite di oggi</button>
       <div className="scheduleContainer">
         {days.map(day => {
           let matches = pageContext.calendar[day];
