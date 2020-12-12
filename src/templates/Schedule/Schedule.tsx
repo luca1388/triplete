@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import SEO from "../../components/SEO/seo";
+import TeamFilter from "../../components/TeamFilter/TeamFilter";
 import { calendar } from "../../types";
 import { getMatchDateFromUtcDate, getTimeFromUtcDateTime } from "../../utils/date";
 
@@ -14,11 +15,17 @@ interface ScheduleProps {
 
 const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
   console.log(pageContext);
+  const [ filteredTeam, setFilteredTeam ] = useState<number>(-1);
+
+  const onFilterTeams = useCallback((team:number) => {
+    setFilteredTeam(team);
+  }, []);
 
   const days = Object.keys(pageContext.calendar);
   return (
     <Layout>
       <SEO title={"Calendario Serie A"}></SEO>
+      <TeamFilter onType={onFilterTeams} />
       <div className="scheduleContainer">
         {days.map(day => {
           let matches = pageContext.calendar[day];
@@ -65,8 +72,17 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
                 </span>
               );
             }
+
+            let filteringClasses;
+            if (filteredTeam < 0) {
+              filteringClasses = ["match"];
+            } else {
+              filteringClasses = match.homeTeam.teamId !== filteredTeam && filteredTeam !== match.awayTeam.teamId ?
+              ["match", "filteredOutMatch"] : ["match", "filteredInMatch"];
+            }
+
             return (
-              <div className="match" key={match.id}>
+              <div className={filteringClasses.join(' ')} key={match.id}>
                 <div className="matchResultContainer">
                   <div className="matchResult">
                     <span className="teamNameBlock">

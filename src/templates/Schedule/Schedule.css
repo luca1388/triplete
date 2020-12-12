@@ -1,4 +1,4 @@
-.match {
+.scheduleContainer .match {
     display: flex;
     justify-content: space-between;
     align-items: inherit;
@@ -12,6 +12,15 @@
     box-sizing: border-box;
     /* height: 7rem; */
 
+}
+
+.scheduleContainer .filteredOutMatch {
+    opacity: 0.25;
+    background: white;
+}
+
+.scheduleContainer .filteredInMatch {
+    background: #9cf1a285;
 }
 
 .matchDay {
@@ -35,20 +44,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.scorersList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.scorersContainer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 100%;
-    font-size: 12px;
 }
 
 .matchResult {
