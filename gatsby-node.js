@@ -198,11 +198,13 @@ exports.createPages = async ({ graphql, actions }) => {
               shortName
               teamId:id
               crestUrl
+              tla
             }
             awayTeam {
               shortName
               teamId:id
               crestUrl
+              tla
             }
           }
         }
