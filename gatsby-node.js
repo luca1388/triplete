@@ -155,7 +155,7 @@ exports.createPages = async ({ graphql, actions }) => {
               nationality
             }
             team {
-              id
+              teamId:id
               shortName
               crestUrl
             }
@@ -196,12 +196,12 @@ exports.createPages = async ({ graphql, actions }) => {
             }
             homeTeam {
               shortName
-              id
+              teamId:id
               crestUrl
             }
             awayTeam {
               shortName
-              id
+              teamId:id
               crestUrl
             }
           }
@@ -226,18 +226,18 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
 
-  //   const teams = await graphql(`
-  //     {
-  //       allTeam {
-  //         edges {
-  //           node {
-  //             id
-  //             teamId
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `)
+    // const teams = await graphql(`
+    //   {
+    //     allTeam {
+    //       edges {
+    //         node {
+    //           id
+    //           teamId
+    //         }
+    //       }
+    //     }
+    //   }
+    // `)
 
   //     createPage({
   //       path: "/schedule/teams/" + searchedTeamId,
