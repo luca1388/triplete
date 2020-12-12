@@ -14,6 +14,7 @@ export type team = {
   crestUrl: string;
   tla: string;
   shortName: string;
+  teamId: number;
 };
 
 export type calendar = {
