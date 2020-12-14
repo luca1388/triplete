@@ -38,8 +38,8 @@ const TeamFilter: React.FC<TeamFilterProps> = ({ onType }) => {
         alignItems: "center",
       }}
     >
-      <span>Filtra per squadra: </span>
-      <select style={{ margin: "0 0 0 10px" }} onChange={onChangeInputHandler}>
+      <label class="select-label">Scegli squadra</label>
+      <select className="select-team" style={{ margin: "0 0 0 10px" }} onChange={onChangeInputHandler}>
         <option value={-1}>Tutte</option>
         {teams.map(team => (
           <option key={team.teamId} value={team.teamId}>
