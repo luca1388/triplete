@@ -38,7 +38,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
       // todayRef.current.scrollIntoView({
       //   behavior: "smooth"
       // });
-      window.scroll({ top: (todayRef.current.offsetTop - 120), left: 0, behavior: 'smooth' });
+      // window.scroll({ top: (todayRef.current.offsetTop - 120), left: 0, behavior: 'smooth' });
     }
   }, []);
 
