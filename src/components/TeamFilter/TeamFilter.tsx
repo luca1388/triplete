@@ -2,6 +2,8 @@ import React, { useCallback } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import { team } from "../../types";
 
+import './TeamFilter.css';
+
 interface TeamFilterProps {
   onType: (team: number) => void;
 }
@@ -29,6 +31,7 @@ const TeamFilter: React.FC<TeamFilterProps> = ({ onType }) => {
 
   return (
     <div
+      className="floatingTeamFilter"
       style={{
         display: "flex",
         justifyContent: "center",
