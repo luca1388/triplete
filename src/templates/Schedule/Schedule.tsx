@@ -47,7 +47,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
     <Layout>
       <SEO title={"Calendario Serie A"}></SEO>
       <TeamFilter onType={onFilterTeams} />
-      <button onClick={todayMatchClickHandler}>Vai alle partite di oggi</button>
+      {/* <button onClick={todayMatchClickHandler}>Vai alle partite di oggi</button> */}
       <div className="scheduleContainer">
         {days.map(day => {
           let matches = pageContext.calendar[day];
