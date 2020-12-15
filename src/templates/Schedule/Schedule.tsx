@@ -17,37 +17,42 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
   console.log(pageContext);
   const [ filteredTeam, setFilteredTeam ] = useState<number>(-1);
   const todayRef = useRef<HTMLDivElement>();
+  const matchdayRef = useRef<HTMLDivElement>();
 
   const today = new Date().toISOString().split('T')[0];
-
-  if (!pageContext.calendar[today]) {
-    pageContext.calendar[today] = [];
-  }
 
   const onFilterTeams = useCallback((team:number) => {
     setFilteredTeam(team);
   }, []);
 
-  // useEffect(() => {
-  //   if (todayRef.current) {
-  //     todayRef.current.scrollIntoView();
-  //   }
-  // }, []);
-  const todayMatchClickHandler = useCallback(() => {
+  useEffect(() => {
     if (todayRef.current) {
-      // todayRef.current.scrollIntoView({
-      //   behavior: "smooth"
-      // });
-      // window.scroll({ top: (todayRef.current.offsetTop - 120), left: 0, behavior: 'smooth' });
+      console.log(todayRef.current);
+
+      window.scroll({ top: (todayRef.current.offsetTop - 140), left: 0, behavior: 'smooth' });
+    }
+    else {
+      if (matchdayRef.current) {
+        window.scroll({ top: (matchdayRef.current.offsetTop - 140), left: 0, behavior: 'smooth' });
+      }
     }
   }, []);
 
   const days = Object.keys(pageContext.calendar);
+
+  const currentMatchday = pageContext.calendar[days[0]][0]?.season.currentMatchday;
+  const firstDayOfCurrentMatchday = days.find( day => {
+    const matches = pageContext.calendar[day];
+    return matches.find(match => match.matchday === currentMatchday);
+  });
+
+  console.log('currentMatchday ' + currentMatchday);
+  console.log('firstDayOfCurrentMatchday ' + firstDayOfCurrentMatchday);
+
   return (
     <Layout>
       <SEO title={"Calendario Serie A"}></SEO>
       <TeamFilter onType={onFilterTeams} />
-      {/* <button onClick={todayMatchClickHandler}>Vai alle partite di oggi</button> */}
       <div className="scheduleContainer">
         {days.map(day => {
           let matches = pageContext.calendar[day];
@@ -161,6 +166,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
           return (
             <div className="matchDay" key={day}>
               {day === today && <div ref={todayRef} id="today-anchor"></div>}
+              { day === firstDayOfCurrentMatchday && <div ref={matchdayRef} id="matchday-anchor"></div>}
               <div className="matchesGroup">
                 {getMatchDateFromUtcDate(day)}{" "}
               </div>
