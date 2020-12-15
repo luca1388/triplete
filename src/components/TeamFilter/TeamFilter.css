@@ -1,123 +1,33 @@
 .floatingTeamFilter {
-    position: fixed;
-    border-radius: 24px;
-    /* background: #126ee2; */
-    box-shadow: 0px 5px 20px #81a4f1;
-    z-index: 1;
-    border: 1px solid #0c50a7;
-    background: white;
-    height: 50px;
-    padding: 0px 20px;
-    /* right: calc(5% - 20px); */
-    right: 1rem;
-    bottom: 3rem;
+  position: fixed;
+  border-radius: 24px;
+  /* background: #126ee2; */
+  box-shadow: 0px 5px 20px #81a4f1;
+  z-index: 1;
+  border: 1px solid #0c50a7;
+  background: white;
+  height: 50px;
+  padding: 0px 20px;
+  right: 1rem;
+  bottom: 3rem;
 }
 
 @media only screen and (min-width: 1280px) {
-    .floatingTeamFilter {
-        right: calc(20% + 1rem);
-    }
+  .floatingTeamFilter {
+    right: calc(20% + 1rem);
+  }
 }
 
 .floatingTeamFilter select {
-    border: none;
-    background: white;
-    /* width: 200px; */
+  border: none;
+  background: white;
+}
+
+.floatingTeamFilter select option.default-option {
+	font-style: italic;
 }
 
 .floatingTeamFilter select:focus {
-	outline: none;
-	border-bottom: 1px solid rgba(0,0,0, 0);
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
 }
-
-/* .select-team:focus ~ .select-label {
-	color: #2F80ED;
-	top: -20px;
-	transition: 0.2s ease all;
-	font-size: 14px;
-}
-
-.select-label {
-	color: rgba(0,0,0, 0.26);
-	font-size: 18px;
-	font-weight: normal;
-	position: absolute;
-	pointer-events: none;
-	left: 0;
-	top: 10px;
-	transition: 0.2s ease all;
-}
-
-.select-team {
-	position: relative;
-	font-family: inherit;
-	background-color: transparent;
-	width: 350px;
-	padding: 10px 10px 10px 0;
-	font-size: 18px;
-	border-radius: 0;
-	border: none;
-	border-bottom: 1px solid rgba(0,0,0, 0.12);
-}
-
-.select-team:focus {
-	outline: none;
-	border-bottom: 1px solid rgba(0,0,0, 0);
-}
-
-.floatingTeamFilter .select-team {
-	appearance: none;
-	-webkit-appearance:none
-}
-
-.floatingTeamFilter:after {
-	position: absolute;
-	top: 18px;
-	right: 10px;
-	width: 0;
-	height: 0;
-	padding: 0;
-	content: '';
-	border-left: 6px solid transparent;
-	border-right: 6px solid transparent;
-	border-top: 6px solid rgba(0, 0, 0, 0.12);
-	pointer-events: none;
-}
-
-.select-highlight {
-	position: absolute;
-	height: 60%;
-	width: 100px;
-	top: 25%;
-	left: 0;
-	pointer-events: none;
-	opacity: 0.5;
-}
-
-.select-bar {
-	position: relative;
-	display: block;
-	width: 350px;
-}
-
-.select-bar:before, .select-bar:after {
-	content: '';
-	height: 2px;
-	width: 0;
-	bottom: 1px;
-	position: absolute;
-	background: #2F80ED;
-	transition: 0.2s ease all;
-}
-
-.select-bar:before {
-	left: 50%;
-}
-
-.select-bar:after {
-	right: 50%;
-}
-
-.select-team:focus ~ .select-bar:before, .select-team:focus ~ .select-bar:after {
-	width: 50%;
-} */
