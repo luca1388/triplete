@@ -29,6 +29,9 @@ export type calendar = {
         homeTeam: number;
       }
     }
+    season: {
+      currentMatchday: number;
+    }
     awayTeam: team;
     homeTeam: team;
   }?]

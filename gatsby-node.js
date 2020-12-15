@@ -185,6 +185,9 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             id
+            season {
+              currentMatchday
+            }
             utcDate
             status
             matchday
