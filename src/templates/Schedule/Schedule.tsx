@@ -16,6 +16,7 @@ interface ScheduleProps {
 const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
   console.log(pageContext);
   const [ filteredTeam, setFilteredTeam ] = useState<number>(-1);
+  const [ scrollCompleted, setScrollCompleted ] = useState<boolean>(false);
   const todayRef = useRef<HTMLDivElement>();
   const matchdayRef = useRef<HTMLDivElement>();
 
@@ -29,11 +30,13 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
     if (todayRef.current) {
       console.log(todayRef.current);
 
-      window.scroll({ top: (todayRef.current.offsetTop - 140), left: 0, behavior: 'smooth' });
+      window.scroll({ top: (todayRef.current.offsetTop - 140), left: 0 });
+      setScrollCompleted(true);
     }
     else {
       if (matchdayRef.current) {
-        window.scroll({ top: (matchdayRef.current.offsetTop - 140), left: 0, behavior: 'smooth' });
+        window.scroll({ top: (matchdayRef.current.offsetTop - 140), left: 0 });
+        setScrollCompleted(true);
       }
     }
   }, []);
@@ -49,11 +52,13 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
   console.log('currentMatchday ' + currentMatchday);
   console.log('firstDayOfCurrentMatchday ' + firstDayOfCurrentMatchday);
 
+  const scheduleContainerClasses: string[] = ['scheduleContainer'].concat(!scrollCompleted ? 'hidden' : '' );
+
   return (
     <Layout>
       <SEO title={"Calendario Serie A"}></SEO>
       <TeamFilter onType={onFilterTeams} />
-      <div className="scheduleContainer">
+      <div className={scheduleContainerClasses.join(' ')}>
         {days.map(day => {
           let matches = pageContext.calendar[day];
           let matchesOfTheDay = matches.map(match => {

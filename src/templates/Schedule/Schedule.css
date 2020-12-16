@@ -14,6 +14,10 @@
 
 }
 
+.scheduleContainer.hidden {
+    visibility: hidden;
+}
+
 .scheduleContainer .filteredOutMatch {
     opacity: 0.25;
     background: white;
