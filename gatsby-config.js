@@ -24,6 +24,16 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/`,
+        name: "pages"
+      }
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+    },
+    {
       resolve: `gatsby-source-rss-feed`,
       options: {
         url: `https://www.corrieredellosport.it/rss/calcio/serie-a`,
