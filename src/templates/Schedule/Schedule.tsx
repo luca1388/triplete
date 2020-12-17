@@ -170,10 +170,10 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
           });
           return (
             <div className="matchDay" key={day}>
-              {day === today && <div ref={todayRef} id="today-anchor"></div>}
-              { day === firstDayOfCurrentMatchday && <div ref={matchdayRef} id="matchday-anchor"></div>}
+              {day === today && <div ref={todayRef} id="today-anchor" style={{ visibility: "hidden"}}></div>}
+              { day === firstDayOfCurrentMatchday && <div ref={matchdayRef} id="matchday-anchor" style={{ visibility: "hidden"}}></div>}
               <div className="matchesGroup">
-                {getMatchDateFromUtcDate(day)}{" "}
+                {getMatchDateFromUtcDate(day)}
               </div>
               <div className="matchesOfTheDay">{matchesOfTheDay}</div>
             </div>
