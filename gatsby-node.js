@@ -7,6 +7,7 @@
 // You can delete this file if you're not using it
 const axios = require("axios").default;
 const path = require("path");
+const { createFilePath } = require(`gatsby-source-filesystem`);
 
 require("dotenv").config({
   path: `.env`,
@@ -282,4 +283,38 @@ exports.createPages = async ({ graphql, actions }) => {
   //       },
   //     })
   //   })
+
+  const result = await graphql(`
+    {
+      allMarkdownRemark {
+        edges {
+          node {
+            id
+            frontmatter {
+              title
+              slug
+            }
+            html
+          }
+        }
+      }
+    }
+  `);
+  // Handle errors
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    return;
+  }
+  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    createPage({
+      path: node.frontmatter.slug,
+      component: path.resolve('./src/templates/About/About.tsx'),
+      context: {
+        // additional data can be passed via context
+        slug: node.frontmatter.slug,
+        title: node.frontmatter.title,
+        html: node.html
+      },
+    });
+  });
 };
