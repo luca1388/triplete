@@ -49,6 +49,26 @@ exports.sourceNodes = async ({
       }
     );
 
+  // let news = [];
+  // let feed = await parser.parseURL(urls.feedRssList[1]);
+  // // console.log(feed);
+  // news = feed.items.map(item => ({
+  //   title: item.title,
+  //   description: item.content,
+  //   date: new Date(item.pubDate),
+  //   imgSrc: item.enclosure.url,
+  //   link: item.link,
+  //   source: item.link
+  //   // source: getHostName(domData.querySelector("link").innerHTML),
+  // }));
+  // console.log(news);
+
+  // for (let feed of urls.feedRssList) {
+  //   news = news.concat(await fetchFeed(feed));
+  // }
+  // news.sort((a, b) => b.date - a.date);
+
+  // data.news = news;
   data.teams = (await fetchTeams()).data.teams;
   data.table = (await fetchTable()).data.standings[0].table;
   data.schedule = (await fetchSchedule()).data.matches;
@@ -155,7 +175,7 @@ exports.createPages = async ({ graphql, actions }) => {
               nationality
             }
             team {
-              teamId:id
+              teamId: id
               shortName
               crestUrl
             }
@@ -199,13 +219,13 @@ exports.createPages = async ({ graphql, actions }) => {
             }
             homeTeam {
               shortName
-              teamId:id
+              teamId: id
               crestUrl
               tla
             }
             awayTeam {
               shortName
-              teamId:id
+              teamId: id
               crestUrl
               tla
             }
@@ -215,10 +235,15 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  const calendar = scheduleResult.data.allMatch.edges.map(entry => ({...entry.node})).reduce( (acc, current) => {
-    acc[current.utcDate.split('T')[0]] = [ ...acc[current.utcDate.split('T')[0]] || [], current];
-    return acc;
-  }, {});
+  const calendar = scheduleResult.data.allMatch.edges
+    .map(entry => ({ ...entry.node }))
+    .reduce((acc, current) => {
+      acc[current.utcDate.split("T")[0]] = [
+        ...(acc[current.utcDate.split("T")[0]] || []),
+        current,
+      ];
+      return acc;
+    }, {});
 
   createPage({
     path: "/partite",
@@ -230,19 +255,18 @@ exports.createPages = async ({ graphql, actions }) => {
     },
   });
 
-
-    // const teams = await graphql(`
-    //   {
-    //     allTeam {
-    //       edges {
-    //         node {
-    //           id
-    //           teamId
-    //         }
-    //       }
-    //     }
-    //   }
-    // `)
+  // const teams = await graphql(`
+  //   {
+  //     allTeam {
+  //       edges {
+  //         node {
+  //           id
+  //           teamId
+  //         }
+  //       }
+  //     }
+  //   }
+  // `)
 
   //     createPage({
   //       path: "/schedule/teams/" + searchedTeamId,
