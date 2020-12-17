@@ -1,5 +1,8 @@
 import { graphql, PageProps } from "gatsby";
 import React from "react";
+import CardNews from "../components/CardNews/CardNews";
+import Layout from "../components/Layout/Layout";
+import SEO from "../components/SEO/seo";
 
 interface NewsProps {
   allFeedNewsRss: {
@@ -31,7 +34,23 @@ interface NewsProps {
 
 const News: React.FC<PageProps<NewsProps>> = ({ data }) => {
   console.log(data.allFeedNewsRss);
-  return <></>;
+  return (
+    <Layout>
+      <SEO title="Serie A news" description="Serie A: le ultime notizie" />
+      <div className="cardsGrid">
+        {data.allFeedNewsRss.edges.map(edge => (
+          <CardNews
+            title={edge.node.title}
+            description={edge.node.content}
+            imageURL={edge.node.enclosure.url}
+            link={edge.node.link}
+            date={edge.node.pubDate}
+            source={data.allFeedNewsRssMeta.edges[0].node.copyright}
+          />
+        ))}
+      </div>
+    </Layout>
+  );
 };
 
 export default News;
