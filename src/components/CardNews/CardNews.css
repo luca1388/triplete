@@ -1,0 +1,164 @@
+.news:hover .cardNews {
+	cursor: pointer;
+	/* background-color: rgb(17, 135, 212);
+	color: white; */
+	color: rgb(17, 135, 212);
+}
+
+.news:hover {
+	cursor: pointer;
+}
+
+.cardContainer {
+	width: 80%;
+}
+
+.newsTitle {
+	font-size: 24px;
+}
+
+.news {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: column;
+	max-width: 100%;
+	margin: 20px;
+	overflow: hidden;
+	/* max-height: 145px; */
+}
+
+.labels {
+	padding: 10px; 
+	display: flex; 
+	justify-content: space-between;
+	align-items: center
+}
+
+.labels h6:first {
+	font-weight: 900;
+}
+
+.cardNews {
+	display: flex;
+	font-weight: bold;
+	min-height: 160px;
+}
+
+.news h6 {
+	opacity: 0.6;
+	margin: 0;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.news h2 {
+	letter-spacing: 1px;
+	margin: 10px 0;
+}
+
+.newsPreview {
+	/* background-color: #2A265F;
+	color: #fff; */
+	padding: 30px;
+    max-width: 250px;
+	width: 250px;
+    background-size: cover;
+	background-position: 50%;
+	border-radius: 0 0px 10px 0px;
+}
+
+.newsPreview a {
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	opacity: 0.6;
+	margin-top: 30px;
+	text-decoration: none;
+}
+
+.newsInfo {
+	padding: 30px;
+	position: relative;
+	width: 100%;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.floating-btn {
+	border-radius: 26.5px;
+	background-color: #001F61;
+	border: 1px solid #001F61;
+	box-shadow: 0 16px 22px -17px #03153B;
+	color: #fff;
+	cursor: pointer;
+	font-size: 16px;
+	line-height: 20px;
+	padding: 12px 20px;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 999;
+}
+
+.floating-btn:hover {
+	background-color: #ffffff;
+	color: #001F61;
+}
+
+.floating-btn:focus {
+	outline: none;
+}
+
+.floating-text {
+	background-color: #001F61;
+	border-radius: 10px 10px 0 0;
+	color: #fff;
+	font-family: 'Muli';
+	padding: 7px 15px;
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	text-align: center;
+	z-index: 998;
+}
+
+.floating-text a {
+	color: #FF7500;
+	text-decoration: none;
+}
+
+@media screen and (max-width: 480px) {
+	.newsPreview {
+		/* width: 85px; */
+		width: 170px;
+		padding: 15px;
+	}
+
+	.cardContainer {
+		width: 95%;
+	}
+
+	.newsInfo {
+		padding: 15px;
+		
+	}
+	.newsInfo .newsTitle {
+		font-size: 16px;
+		margin: 10px 0;
+	}
+	.day {
+		display: none;
+	}
+
+	.labels {
+		font-size: 14px;
+	}
+	.cardNews {
+		min-height: initial;
+	}
+}

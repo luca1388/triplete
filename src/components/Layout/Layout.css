@@ -638,3 +638,10 @@ pre tt:after {
     padding: 0 0 50px 0;
   }
 }
+
+.cardsGrid {
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
