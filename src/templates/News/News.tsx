@@ -8,7 +8,7 @@ const News = ({ pageContext }) => {
   console.log(pageContext);
   return (
     <Layout>
-      <SEO title={pageContext.title} />
+      <SEO title={pageContext.title} image={pageContext.imageUrl} />
       <div className="newsContainer">
         <h1>{pageContext.title}</h1>
         <h5>
