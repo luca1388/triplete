@@ -644,4 +644,5 @@ pre tt:after {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  padding: 10px 0 20px 0;
 }
