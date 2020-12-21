@@ -177,3 +177,6 @@ Information from children under the age of 13. If you think that your
 child provided this kind of information on our website, we strongly
 encourage you to contact us immediately and we will do our best efforts
 to promptly remove such information from our records.
+
+# Disclaimer
+Football data provided by the <a href="https://www.football-data.org/" target="_blank">Football-Data.org</a> API and football news provided by <a href="https://www.corrieredellosport.it/" target="_blank">Corrieredellosport.it</a>.
