@@ -9,7 +9,7 @@ Facci sapere cosa ne pensi del servizio! Siamo sempre al lavoro per
 aggiungere nuove funzionalità al sito, ma se hai qualche suggerimento,
 qualche richiesta di feature da aggiungere, oppure semplicemente vuoi
 darci dei feedback saremo molto contenti di ascoltarti! Quindi non
-esitare a scriverci le tue domande al nostro 
+esitare a scriverci al nostro 
 <a target="_blank" href="mailto:triplete.help@gmail.com">indirizzo email</a>
 
 # Aiutaci
@@ -177,3 +177,6 @@ Information from children under the age of 13. If you think that your
 child provided this kind of information on our website, we strongly
 encourage you to contact us immediately and we will do our best efforts
 to promptly remove such information from our records.
+
+# Disclaimer
+Football data provided by the <a href="https://www.football-data.org/" target="_blank">Football-Data.org</a> API and football news provided by <a href="https://www.corrieredellosport.it/" target="_blank">Corrieredellosport.it</a>.
