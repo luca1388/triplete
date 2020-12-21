@@ -7,7 +7,6 @@
 // You can delete this file if you're not using it
 const axios = require("axios").default;
 const path = require("path");
-const { createFilePath } = require(`gatsby-source-filesystem`);
 
 require("dotenv").config({
   path: `.env`,
@@ -159,7 +158,21 @@ exports.sourceNodes = async ({
   return;
 };
 
-exports.onCreateNode = ({ node, getNode, actions }) => {};
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions
+  if (node.internal.type === `FeedNewsRSS`) {
+    const slug = node.title.toLowerCase()
+      .replace(/[^\w\s-]/g, '') // remove non-word [a-z0-9_], non-whitespace, non-hyphen characters
+      .replace(/[\s_-]+/g, '-') // swap any length of whitespace, underscore, hyphen characters with a single -
+      .replace(/^-+|-+$/g, ''); // remove leading, trailing -
+
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    })
+  }
+};
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -308,12 +321,49 @@ exports.createPages = async ({ graphql, actions }) => {
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.frontmatter.slug,
-      component: path.resolve('./src/templates/About/About.tsx'),
+      component: path.resolve("./src/templates/About/About.tsx"),
       context: {
         // additional data can be passed via context
         slug: node.frontmatter.slug,
         title: node.frontmatter.title,
-        html: node.html
+        html: node.html,
+      },
+    });
+  });
+
+  const newsResult = await graphql(`
+    {
+      allFeedNewsRss {
+        edges {
+          node {
+            fields {
+              slug
+            }
+            title
+            content
+            pubDate
+            enclosure {
+              url
+            }
+            link
+            isoDate
+          }
+        }
+      }
+    }
+  `);
+
+  newsResult.data.allFeedNewsRss.edges.forEach(({ node }) => {
+    createPage({
+      path: '/news/' + node.fields.slug,
+      component: path.resolve("./src/templates/News/News.tsx"),
+      context: {
+        // additional data can be passed via context
+        content: node.content,
+        title: node.title,
+        pubDate: node.pubDate,
+        link: node.link,
+        imageUrl: node.enclosure.url,
       },
     });
   });

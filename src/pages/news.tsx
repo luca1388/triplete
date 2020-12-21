@@ -17,6 +17,9 @@ interface NewsProps {
           };
           link: string;
           isoDate: string;
+          fields: {
+            slug: string;
+          }
         };
       }
     ];
@@ -40,12 +43,14 @@ const News: React.FC<PageProps<NewsProps>> = ({ data }) => {
       <div className="cardsGrid">
         {data.allFeedNewsRss.edges.map(edge => (
           <CardNews
+            key={edge.node.fields.slug}
             title={edge.node.title}
             description={edge.node.content}
             imageURL={edge.node.enclosure.url}
             link={edge.node.link}
             date={edge.node.pubDate}
             source={data.allFeedNewsRssMeta.edges[0].node.copyright}
+            slug={edge.node.fields.slug}
           />
         ))}
       </div>
@@ -68,6 +73,9 @@ export const query = graphql`
           }
           link
           isoDate
+          fields {
+            slug
+          }
         }
       }
     }
