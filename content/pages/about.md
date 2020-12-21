@@ -9,7 +9,7 @@ Facci sapere cosa ne pensi del servizio! Siamo sempre al lavoro per
 aggiungere nuove funzionalità al sito, ma se hai qualche suggerimento,
 qualche richiesta di feature da aggiungere, oppure semplicemente vuoi
 darci dei feedback saremo molto contenti di ascoltarti! Quindi non
-esitare a scriverci le tue domande al nostro 
+esitare a scriverci al nostro 
 <a target="_blank" href="mailto:triplete.help@gmail.com">indirizzo email</a>
 
 # Aiutaci
