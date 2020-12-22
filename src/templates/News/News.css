@@ -4,5 +4,26 @@
     justify-content: flex-start;
     align-items: center;
     width: 80%;
+    max-width: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    margin: 20px 0;
+    box-sizing: border-box;
+}
 
+.newsContainer .newsText {
+    padding: 20px;
+}
+
+.newsContainer .newsDate {
+    color: #888;
+}
+
+@media only screen and (max-width: 1024px) {
+    .newsContainer {
+        max-width: 80%;
+        margin: 0;
+    }
 }
