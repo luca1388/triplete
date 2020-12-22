@@ -7,9 +7,14 @@ import "./News.css";
 
 const News = ({ pageContext }) => {
   console.log(pageContext);
+  const parser = new DOMParser();
+  const description = parser.parseFromString(pageContext.content, 'text/html').querySelector('p').innerText;
+
+  console.log(description);
+
   return (
     <Layout>
-      <SEO title={pageContext.title} image={pageContext.imageUrl} description={pageContext.content} />
+      <SEO title={pageContext.title} image={pageContext.imageUrl} description={description} />
       <div className="newsContainer">
         <img src={pageContext.imageUrl} />
         <div className="newsText">
