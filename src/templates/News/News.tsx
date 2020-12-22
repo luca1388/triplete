@@ -1,3 +1,4 @@
+import { Link } from "gatsby";
 import React from "react";
 import Layout from "../../components/Layout/Layout";
 import SEO from "../../components/SEO/seo";
@@ -24,9 +25,12 @@ const News = ({ pageContext }) => {
           </h5>
           <h3>{pageContext.title}</h3>
           <div dangerouslySetInnerHTML={{ __html: pageContext.content }} />
-          <a href={pageContext.link} target="_blank">
-            Leggi di più
-          </a>
+          <div className="linksContainer">
+            <a href={pageContext.link} target="_blank">
+              Leggi di più
+            </a>
+            <Link to="/news" className="backLink">Leggi le altre news</Link>
+          </div>
         </div>
       </div>
     </Layout>

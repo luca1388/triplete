@@ -21,9 +21,23 @@
     color: #888;
 }
 
+.newsContainer .linksContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 @media only screen and (max-width: 1024px) {
     .newsContainer {
-        max-width: 80%;
-        margin: 0;
+        max-width: 85%;
+        width: 85%;
+        margin: 10px 0;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .newsContainer {
+        max-width: 43%;
+        margin: 15px 0;
     }
 }

@@ -1,4 +1,4 @@
-import { graphql, PageProps } from "gatsby";
+import { graphql, Link, PageProps } from "gatsby";
 import React from "react";
 import CardNews from "../components/CardNews/CardNews";
 import Layout from "../components/Layout/Layout";
