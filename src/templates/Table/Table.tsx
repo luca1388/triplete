@@ -1,10 +1,8 @@
 import React from "react";
 
-import Layout from "../../components/Layout/Layout";
-import SEO from "../../components/SEO/seo";
 import "./Table.css";
-
 import { standingPosition } from '../../types'
+import { tableConfig } from '../../constants/football';
 
 export interface TableProps {
     standings: standingPosition[];
@@ -37,13 +35,13 @@ const Table: React.FC<TableProps> = ({ standings }) => {
         <div className="standingsTeamsContainer">
           {standings.map((entry, index) => {
             let teamNameClasses = ["teamName"];
-            if (index <= 4) {
+            if (index <= tableConfig.championsLeagueTeamsCount) {
               teamNameClasses.push("championsLeague");
             }
-            if (index > 4 && index <= 6) {
+            if (index > tableConfig.championsLeagueTeamsCount && index <= tableConfig.championsLeagueTeamsCount + tableConfig.europaLeagueTeamsCount) {
               teamNameClasses.push("europaLeague");
             }
-            if (index > 16) {
+            if (index > standings.length - tableConfig.serieBTeamsCount - 1) {
               teamNameClasses.push("serieB");
             }
 
