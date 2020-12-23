@@ -99,6 +99,9 @@ span.teamName {
     .standingsContainer {
         box-shadow: none;
     }
+    .teamName {
+        margin-left: 5px;
+    }
 }
 
 @media only screen and (min-width: 1280px) {

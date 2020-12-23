@@ -59,7 +59,7 @@ const Table: React.FC<TableProps> = ({ standings }) => {
                     width={30}
                   />
                   <span className={teamNameClasses.join(" ")}>
-                    {entry.team.shortName}
+                    {entry.team.shortName.split(' ')[0]}
                   </span>
                 </span>
                 <span className="match">{entry.playedGames}</span>
