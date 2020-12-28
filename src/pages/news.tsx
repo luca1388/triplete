@@ -36,7 +36,6 @@ interface NewsProps {
 }
 
 const News: React.FC<PageProps<NewsProps>> = ({ data }) => {
-  console.log(data.allFeedNewsRss);
   return (
     <Layout>
       <SEO title="Serie A news" description="Serie A: le ultime notizie" />

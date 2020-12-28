@@ -14,7 +14,6 @@ interface ScheduleProps {
 }
 
 const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
-  console.log(pageContext);
   const [ filteredTeam, setFilteredTeam ] = useState<number>(-1);
   const [ scrollCompleted, setScrollCompleted ] = useState<boolean>(false);
   const todayRef = useRef<HTMLDivElement>();
@@ -28,7 +27,6 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
 
   useEffect(() => {
     if (todayRef.current) {
-      console.log(todayRef.current);
 
       window.scroll({ top: (todayRef.current.offsetTop - 140), left: 0 });
       setScrollCompleted(true);
@@ -48,10 +46,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
     const matches = pageContext.calendar[day];
     return matches.find(match => match.matchday === currentMatchday);
   });
-
-  console.log('currentMatchday ' + currentMatchday);
-  console.log('firstDayOfCurrentMatchday ' + firstDayOfCurrentMatchday);
-
+  
   const scheduleContainerClasses: string[] = ['scheduleContainer'].concat(!scrollCompleted ? 'hidden' : '' );
 
   return (

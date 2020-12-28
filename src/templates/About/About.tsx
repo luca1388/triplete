@@ -5,7 +5,6 @@ import SEO from '../../components/SEO/seo';
 import "./About.css";
 
 const About = ({ pageContext }) => {
-    console.log(pageContext);
     return (
         <Layout>
             <SEO title={pageContext.title} />
