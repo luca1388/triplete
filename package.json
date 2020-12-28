@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@sentry/gatsby": "^5.29.2",
     "@types/react-helmet": "^6.1.0",
     "dotenv": "^8.2.0",
     "gatsby": "^2.26.1",

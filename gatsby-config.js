@@ -153,6 +153,16 @@ if (process.env.GA_TRACKING_ID) {
   });
 }
 
+if (process.env.SENTRY_DSN && process.env.BRANCH_ENV) {
+  plugins.push({
+    resolve: "@sentry/gatsby",
+      options: {
+          dsn: process.env.SENTRY_DSN,
+          environment: process.env.BRANCH_ENV
+      },
+  });
+}
+
 module.exports = {
   siteMetadata: {
     title: `Triplete.net`,
