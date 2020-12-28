@@ -22,7 +22,6 @@ exports.sourceNodes = async ({
   actions,
   createContentDigest,
   createNodeId,
-  getNodesByType,
 }) => {
   const { createNode } = actions;
 
@@ -49,26 +48,6 @@ exports.sourceNodes = async ({
       }
     );
 
-  // let news = [];
-  // let feed = await parser.parseURL(urls.feedRssList[1]);
-  // // console.log(feed);
-  // news = feed.items.map(item => ({
-  //   title: item.title,
-  //   description: item.content,
-  //   date: new Date(item.pubDate),
-  //   imgSrc: item.enclosure.url,
-  //   link: item.link,
-  //   source: item.link
-  //   // source: getHostName(domData.querySelector("link").innerHTML),
-  // }));
-  // console.log(news);
-
-  // for (let feed of urls.feedRssList) {
-  //   news = news.concat(await fetchFeed(feed));
-  // }
-  // news.sort((a, b) => b.date - a.date);
-
-  // data.news = news;
   data.teams = (await fetchTeams()).data.teams;
   data.table = (await fetchTable()).data.standings[0].table;
   data.schedule = (await fetchSchedule()).data.matches;
