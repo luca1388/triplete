@@ -12,14 +12,18 @@ import { colors } from '../../constants/colors';
 import Link from "./Link/Link";
 import './NavigationEntries.css';
 
-const NavigationEntries = (props) => {
+interface NavigationEntriesProps {
+  mobile?: Boolean;
+}
+
+const NavigationEntries: React.FC<NavigationEntriesProps> = ({ mobile }) => {
   return (
     <>
       <Link to="/">
         <GiPodium
           className="NavigationIcon"
           color={colors.accent}
-          size={props.mobile ? 32 : 40}
+          size={mobile ? 32 : 40}
         />
         Classifica
       </Link>
@@ -27,7 +31,7 @@ const NavigationEntries = (props) => {
         <GiSoccerBall
           className="NavigationIcon"
           color={colors.accent}
-          size={props.mobile ? 32 : 40}
+          size={mobile ? 32 : 40}
         />
         Marcatori
       </Link>
@@ -35,7 +39,7 @@ const NavigationEntries = (props) => {
         <GiSoccerField
           className="NavigationIcon"
           color={colors.accent}
-          size={props.mobile ? 32 : 40}
+          size={mobile ? 32 : 40}
         />
         Partite
       </Link>
@@ -43,7 +47,7 @@ const NavigationEntries = (props) => {
         <GiRss
           className="NavigationIcon"
           color={colors.accent}
-          size={props.mobile ? 32 : 40}
+          size={mobile ? 32 : 40}
         />
         News
       </Link>
@@ -51,7 +55,7 @@ const NavigationEntries = (props) => {
         <BsInfoCircle
           className="NavigationIcon"
           color={colors.accent}
-          size={props.mobile ? 32 : 40}
+          size={mobile ? 32 : 40}
         />
         Altro
       </Link>
