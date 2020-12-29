@@ -4,7 +4,15 @@ import SEO from '../../components/SEO/seo';
 
 import "./About.css";
 
-const About = ({ pageContext }) => {
+interface AboutProps {
+    pageContext: {
+        slug?: string;
+        title: string;
+        html: string;
+    }
+}
+
+const About: React.FC<AboutProps> = ({ pageContext }) => {
     return (
         <Layout>
             <SEO title={pageContext.title} />

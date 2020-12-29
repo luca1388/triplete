@@ -5,7 +5,17 @@ import SEO from "../../components/SEO/seo";
 
 import "./News.css";
 
-const News = ({ pageContext }) => {
+interface NewsProps {
+  pageContext: {
+    content: string;
+    pubDate: string;
+    title: string;
+    link: string;
+    imageUrl: string;
+  }
+}
+
+const News: React.FC<NewsProps> = ({ pageContext }) => {
   return (
     <Layout>
       <SEO title={pageContext.title} image={pageContext.imageUrl} />

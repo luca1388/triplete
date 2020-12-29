@@ -1,4 +1,4 @@
-import { Link, navigate } from "gatsby";
+import { navigate } from "gatsby";
 import React from "react";
 import { getHostName } from "../../utils/stringUtils";
 
@@ -17,8 +17,6 @@ interface CardNewsProps {
 const CardNews: React.FC<CardNewsProps> = ({
   title,
   link,
-  source,
-  description,
   imageURL,
   date,
   slug,
