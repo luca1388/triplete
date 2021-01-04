@@ -48,6 +48,64 @@ let plugins = [
       theme_color: `#1482d2`,
       display: `standalone`,
       icon: "content/icon.png",
+      icons: [
+        {
+          src: "content/images/icons/icon-48x48.png",
+          type: "image/png",
+          sizes: "48x48",
+        },
+        {
+          src: "content/images/icons/icon-72x72.png",
+          sizes: "72x72",
+          type: "image/png",
+        },
+        {
+          src: "content/images/icons/icon-96x96.png",
+          sizes: "96x96",
+          type: "image/png",
+        },
+        {
+          src: "content/images/icons/icon-128x128.png",
+          sizes: "128x128",
+          type: "image/png",
+        },
+        {
+          src: "content/images/icons/icon-144x144.png",
+          sizes: "144x144",
+          type: "image/png",
+        },
+        {
+          src: "content/images/icons/icon-152x152.png",
+          sizes: "152x152",
+          type: "image/png",
+        },
+        {
+          src: "content/images/icons/icon-192x192.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          src: "content/images/icons/icon-256x256.png",
+          type: "image/png",
+          sizes: "256x256",
+        },
+        {
+          src: "content/images/icons/icon-384x384.png",
+          sizes: "384x384",
+          type: "image/png",
+        },
+        {
+          src: "content/images/icons/icon-512x512.png",
+          sizes: "512x512",
+          type: "image/png",
+        },
+        {
+          src: "content/images/icons/icon-512x512-maskable.png",
+          sizes: "512x512",
+          type: "image/png",
+          purpose: "any",
+        },
+      ],
       description:
         "Con Triplete.net il campionato di calcio italiano non avrà più segreti per te: controlla i risultati della Serie A quando vuoi, ovunque ti trovi. La tua squadra riuscirà a fare il triplete?",
       dir: "ltr",
@@ -83,13 +141,13 @@ let plugins = [
   {
     resolve: `gatsby-plugin-sitemap`,
     options: {
-      exclude: ['/news/*']
-    }
-  }
+      exclude: ["/news/*"],
+    },
+  },
 ];
 
 if (process.env.GA_TRACKING_ID) {
-  console.log('Installing GA plugin...');
+  console.log("Installing GA plugin...");
   plugins.push({
     resolve: `gatsby-plugin-google-analytics`,
     options: {
@@ -103,13 +161,13 @@ if (process.env.GA_TRACKING_ID) {
 }
 
 if (process.env.SENTRY_DSN && process.env.BRANCH_ENV) {
-  console.log('Installing Sentry plugin...');
+  console.log("Installing Sentry plugin...");
   plugins.push({
     resolve: "@sentry/gatsby",
-      options: {
-          dsn: process.env.SENTRY_DSN,
-          environment: process.env.BRANCH_ENV
-      },
+    options: {
+      dsn: process.env.SENTRY_DSN,
+      environment: process.env.BRANCH_ENV,
+    },
   });
 }
 
@@ -120,7 +178,7 @@ module.exports = {
     author: `@luca1388`,
     image: "https://triplete.net/preview.png",
     url: "https://triplete.net",
-    siteUrl: "https://triplete.net"
+    siteUrl: "https://triplete.net",
   },
   plugins: plugins,
 };
