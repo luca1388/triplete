@@ -166,7 +166,6 @@ let plugins = [
 ];
 
 if (process.env.GA_TRACKING_ID) {
-  console.log("Installing GA plugin...");
   plugins.push({
     resolve: `gatsby-plugin-gtag`,
     options: {
@@ -181,7 +180,6 @@ if (process.env.GA_TRACKING_ID) {
 }
 
 if (process.env.SENTRY_DSN && process.env.BRANCH_ENV) {
-  console.log("Installing Sentry plugin...");
   plugins.push({
     resolve: "@sentry/gatsby",
     options: {
