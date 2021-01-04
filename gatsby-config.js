@@ -144,6 +144,25 @@ let plugins = [
       exclude: ["/news/*"],
     },
   },
+  {
+    resolve: "gatsby-plugin-robots-txt",
+    options: {
+      host: "https://www.triplete.net",
+      sitemap: "https://www.triplete.net/sitemap.xml",
+      resolveEnv: () => process.env.BRANCH_ENV,
+      env: {
+        development: {
+          policy: [{ userAgent: "*", disallow: ["/"] }],
+        },
+        production: {
+          policy: [
+            { userAgent: "*", allow: "/" },
+            { userAgent: "Googlebot-Image", disallow: ["/"] },
+          ],
+        },
+      },
+    },
+  },
 ];
 
 if (process.env.GA_TRACKING_ID) {
