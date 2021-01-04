@@ -137,6 +137,12 @@ let plugins = [
   // this (optional) plugin enables Progressive Web App + Offline functionality
   // To learn more, visit: https://gatsby.dev/offline
   `gatsby-plugin-offline`,
+  {
+    resolve: `gatsby-plugin-sitemap`,
+    options: {
+      exclude: ['/news/*']
+    }
+  }
 ];
 
 if (process.env.GA_TRACKING_ID) {
@@ -171,6 +177,7 @@ module.exports = {
     author: `@luca1388`,
     image: "https://triplete.net/preview.png",
     url: "https://triplete.net",
+    siteUrl: "https://triplete.net"
   },
   plugins: plugins,
 };
