@@ -47,6 +47,7 @@ let plugins = [
       background_color: `#ffffff`,
       theme_color: `#1482d2`,
       display: `standalone`,
+      icon: "content/images/icons/icon-512x512.png",
       icons: [
         {
           src: "content/images/icons/icon-48x48.png",
