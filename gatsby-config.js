@@ -177,9 +177,9 @@ module.exports = {
     title: `Triplete.net`,
     description: `Con Triplete.net il campionato di calcio italiano non avrà più segreti per te: controlla i risultati della Serie A quando vuoi, ovunque ti trovi. La tua squadra riuscirà a fare il triplete?`,
     author: `@luca1388`,
-    image: "https://triplete.net/preview.png",
-    url: "https://triplete.net",
-    siteUrl: "https://triplete.net",
+    image: "https://www.triplete.net/preview.png",
+    url: "https://www.triplete.net",
+    siteUrl: "https://www.triplete.net",
   },
   plugins: plugins,
 };
