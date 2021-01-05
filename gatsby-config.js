@@ -107,7 +107,7 @@ let plugins = [
         },
       ],
       description:
-        "Con Triplete.net il campionato di calcio italiano non avrà più segreti per te: controlla i risultati della Serie A quando vuoi, ovunque ti trovi. La tua squadra riuscirà a fare il triplete?",
+        "Con Triplete.net il campionato di calcio italiano non avrà più segreti per te: controlla i risultati e la classifica della Serie A quando vuoi, ovunque ti trovi. La tua squadra riuscirà a fare il triplete?",
       dir: "ltr",
       lang: "it-IT",
       scope: ".",
@@ -192,7 +192,7 @@ if (process.env.SENTRY_DSN && process.env.BRANCH_ENV) {
 module.exports = {
   siteMetadata: {
     title: `Triplete.net`,
-    description: `Con Triplete.net il campionato di calcio italiano non avrà più segreti per te: controlla i risultati della Serie A quando vuoi, ovunque ti trovi. La tua squadra riuscirà a fare il triplete?`,
+    description: `Con Triplete.net il campionato di calcio italiano non avrà più segreti per te: controlla i risultati e la classifica della Serie A quando vuoi, ovunque ti trovi. La tua squadra riuscirà a fare il triplete?`,
     author: `@luca1388`,
     image: "https://www.triplete.net/preview.png",
     url: "https://www.triplete.net",
