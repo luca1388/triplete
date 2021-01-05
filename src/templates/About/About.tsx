@@ -15,7 +15,7 @@ interface AboutProps {
 const About: React.FC<AboutProps> = ({ pageContext }) => {
     return (
         <Layout>
-            <SEO title={pageContext.title} />
+            <SEO title={pageContext.title} description="triplete: Contattaci e contribuisci anche tu al miglioramento del nostro servizio sulle partite della serie A. Consulta la nostra Privacy Policy e altro." />
             <div className="aboutContainer" dangerouslySetInnerHTML={{__html: pageContext.html}}></div>
         </Layout>
     );

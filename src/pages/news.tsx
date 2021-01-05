@@ -38,7 +38,7 @@ interface NewsProps {
 const News: React.FC<PageProps<NewsProps>> = ({ data }) => {
   return (
     <Layout>
-      <SEO title="Serie A news" description="Serie A: le ultime notizie" />
+      <SEO title="Serie A news" description="Serie A: le ultime notizie del campionato di calcio italiano. Leggi le motizie della tua squadra del cuore." />
       <div className="cardsGrid">
         {data.allFeedNewsRss.edges.map(edge => (
           <CardNews
