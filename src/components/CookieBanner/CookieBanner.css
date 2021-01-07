@@ -1,0 +1,40 @@
+.bannerContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 0px;     
+    background-color: #000000;
+    color: #ffffff;
+    padding: 15px;
+    line-height: 23px;
+    box-sizing: border-box;
+}
+
+.bannerContainer .Link {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.button {
+    font: inherit;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    background: #fff;
+    color: #000000;
+    cursor: pointer;
+    margin: 10px;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .button:focus {
+    outline: none;
+  }
+  
+  .button:hover,
+  .button:active {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
