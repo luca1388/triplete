@@ -1,0 +1,21 @@
+.leagueSelector-container {
+    font-size: 14px;
+    padding: 5px;
+    margin: 0 0 20px 0;
+}
+
+.leagueSelectorRadio-container {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.leagueSelectorRadio-container label {
+    width: 75%;
+    line-height: 14px;
+}
+
+.leagueSelectorRadio-container input {
+    width: 25%;
+}
