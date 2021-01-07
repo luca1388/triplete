@@ -16,6 +16,8 @@ esitare a scriverci al nostro
 Se ti piace il nostro servizio aiutaci a migliorarlo! Anche tu puoi contribuire al miglioramento
 di triplete con un piccolo gesto. 
 
+<a href="https://ko-fi.com/G2G32Z0BB" target="_blank"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="Offrici un caffè su ko-fi" /></a>
+
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G32Z0BB)
 
 # Privacy policy
