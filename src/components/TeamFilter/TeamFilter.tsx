@@ -3,12 +3,14 @@ import { useStaticQuery, graphql } from "gatsby";
 import { team } from "../../types";
 
 import './TeamFilter.css';
+import { useGoogleAnalytics } from "../../hooks/useGoogleAnalytics";
 
 interface TeamFilterProps {
   onType: (team: number) => void;
 }
 
 const TeamFilter: React.FC<TeamFilterProps> = ({ onType }) => {
+  const { fireEvent } = useGoogleAnalytics();
   let teams: team[] = useStaticQuery(graphql`
     query TeamsQuery {
       allTeam {
@@ -24,6 +26,10 @@ const TeamFilter: React.FC<TeamFilterProps> = ({ onType }) => {
 
   const onChangeInputHandler = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
+      fireEvent("TeamSelected", {
+        "event_category": "TeamFilter",
+        "event_label": "Team filtered"
+      });
       onType(+event.target.value);
     },
     []
