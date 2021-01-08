@@ -10,9 +10,10 @@
     padding: 15px;
     line-height: 23px;
     box-sizing: border-box;
+    z-index: 3;
 }
 
-.bannerContainer .Link {
+.bannerContainer .cookiesLink {
     color: #ffffff;
     text-decoration: underline;
 }
