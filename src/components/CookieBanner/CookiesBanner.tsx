@@ -1,18 +1,20 @@
 import React from "react";
-
 import { Link } from 'gatsby';
 
 import "./CookiesBanner.css";
+import { useGoogleAnalytics } from "../../hooks/useGoogleAnalytics";
+
 interface CookiesBannerProps {
   onAcceptCookies: () => void
 };
 
 const CookiesBanner: React.FC<CookiesBannerProps> = ({ onAcceptCookies }) => {
+  const { fireEvent } = useGoogleAnalytics();
   const accpetCookiesHandler = () => {
-    // gtag('event', 'Accept', {
-    //   'event_category': 'CookieBanner',
-    //   'event_label': 'Dismiss cookie banner',
-    // });
+    fireEvent('AcceptCookies', {
+      'event_category': 'CookieBanner',
+      'event_label': 'Dismiss cookie banner',
+    });
     onAcceptCookies();
   };
   
