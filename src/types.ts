@@ -1,4 +1,8 @@
-import { string } from "prop-types";
+declare global {
+  interface Window {
+    gtag: (type: string, eventName: string, eventObject: {[key in string]: any}) => void
+  }
+}
 
 export interface SiteData {
   siteMetadata: {
