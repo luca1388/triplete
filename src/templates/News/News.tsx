@@ -2,6 +2,7 @@ import { Link } from "gatsby";
 import React from "react";
 import Layout from "../../components/Layout/Layout";
 import SEO from "../../components/SEO/seo";
+import { OutboundLink } from 'gatsby-plugin-gtag';
 
 import "./News.css";
 
@@ -35,9 +36,9 @@ const News: React.FC<NewsProps> = ({ pageContext }) => {
           <h3>{pageContext.title}</h3>
           <div dangerouslySetInnerHTML={{ __html: pageContext.content }} />
           <div className="linksContainer">
-            <a href={pageContext.link} target="_blank">
+            <OutboundLink href={pageContext.link} target="_blank">
               Leggi di più
-            </a>
+            </OutboundLink>
             <Link to="/news" className="backLink">Leggi le altre news</Link>
           </div>
         </div>
