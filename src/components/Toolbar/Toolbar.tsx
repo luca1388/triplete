@@ -20,7 +20,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ site }) => {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    /* margin: 10px 0 0 0; */
     margin: 0 0 1rem 0;
     font-size: 22px;
   `;
@@ -46,7 +45,7 @@ const data: {
 
   const shareHandler = useCallback(async () => {
     console.log(data.site);
-    if (navigator.share) {
+    if (typeof navigator !== "undefined" && navigator.share) {
       try {
         await navigator.share({
           title: data.site.siteMetadata.title,
