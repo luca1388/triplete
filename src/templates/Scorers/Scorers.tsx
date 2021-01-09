@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout/Layout";
 import SEO from "../../components/SEO/seo";
+import Toolbar from "../../components/Toolbar/Toolbar";
 import { scorers } from "../../types";
 
 import './Scorers.css';
@@ -17,6 +18,7 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
     <Layout>
       <SEO title="Classifica marcatori Serie A" />
       <div className="scorersContainer">
+        <Toolbar />
         {pageContext.scorers.map((entry, index) => {
           const scorerClasses = ["scorer"];
           if (index === 0) {

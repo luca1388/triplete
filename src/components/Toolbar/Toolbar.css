@@ -1,0 +1,8 @@
+.shareIcon {
+    padding: 4px;
+}
+.shareIcon:hover {
+    background-color: #e6e6e6;
+    border-radius: 50px;
+    cursor: pointer;
+}
