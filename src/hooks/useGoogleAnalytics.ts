@@ -7,9 +7,7 @@ export const useGoogleAnalytics = () => {
       [key: string]: any;
     }
   ) => {
-    console.log(process.env.GA_TRACKING_ID?.length);
-    console.log(typeof window.gtag);
-    if (process.env.GA_TRACKING_ID && 'gtag' in window) {
+    if (process.env.GATSBY_GA_TRACKING_ID && 'gtag' in window) {
         console.log('firing event');
       window.gtag("event", eventName, eventObject);
     }

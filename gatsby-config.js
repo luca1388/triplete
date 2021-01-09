@@ -165,12 +165,12 @@ let plugins = [
   },
 ];
 
-if (process.env.GA_TRACKING_ID) {
+if (process.env.GATSBY_GA_TRACKING_ID) {
   plugins.push({
     resolve: `gatsby-plugin-gtag`,
     options: {
       // your google analytics tracking id
-      trackingId: process.env.GA_TRACKING_ID,
+      trackingId: process.env.GATSBY_GA_TRACKING_ID,
       // Puts tracking script in the head instead of the body
       head: false,
       // enable ip anonymization
