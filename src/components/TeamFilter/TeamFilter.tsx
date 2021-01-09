@@ -28,7 +28,7 @@ const TeamFilter: React.FC<TeamFilterProps> = ({ onType }) => {
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       fireEvent("TeamSelected", {
         "event_category": "TeamFilter",
-        "event_label": "Team filtered"
+        "event_label": `Team ${teams.find(team => team.teamId === +event.target.value)?.shortName}`
       });
       onType(+event.target.value);
     },
