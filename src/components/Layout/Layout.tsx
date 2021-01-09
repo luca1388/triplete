@@ -23,7 +23,7 @@ const Layout: React.FC = ({ children }) => {
   // const CookiesHandler = loadable.lib(() => import("../../utils/cookiesHandler"));
 
   const [cookiesAccepted, setCookiesAccepted] = useState(
-     readCookie("ac") || false
+     readCookie("ac") || true
   );
 
   const acceptCookiesHandler = useCallback(() => {
