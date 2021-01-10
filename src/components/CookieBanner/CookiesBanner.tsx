@@ -11,11 +11,11 @@ interface CookiesBannerProps {
 const CookiesBanner: React.FC<CookiesBannerProps> = ({ onAcceptCookies }) => {
   const { fireEvent } = useGoogleAnalytics();
   const accpetCookiesHandler = () => {
+    onAcceptCookies();
     fireEvent('AcceptCookies', {
       'event_category': 'CookieBanner',
       'event_label': 'Dismiss cookie banner',
     });
-    onAcceptCookies();
   };
   
   return (
