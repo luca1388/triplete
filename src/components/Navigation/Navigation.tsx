@@ -13,9 +13,6 @@ const Navigation: React.FC<NavigationProps> = ({ siteTitle }) => {
         <div className="LeagueContainer">
             <img className="imageLogo" src={Logo} alt={siteTitle} width={64} height={64} />
             <div className="Links">
-                <div className="leagueName">
-                    <h3>Serie A</h3>
-                </div>
                 <ul className="NavigationList">
                     <NavigationEntries />
                 </ul>
