@@ -55,7 +55,9 @@ const data: {
         console.log("error");
       }
     } else {
-      console.log("error");
+        if (typeof document !== "undefined") {
+            document.execCommand("copy");
+        }
     }
   }, []);
 
