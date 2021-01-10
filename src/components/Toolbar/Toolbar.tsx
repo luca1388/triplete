@@ -6,6 +6,7 @@ import { colors } from "../../constants/colors";
 import "./Toolbar.css";
 import { graphql, useStaticQuery } from "gatsby";
 import { SiteData } from "../../types";
+import { useGoogleAnalytics } from '../../hooks/useGoogleAnalytics';
 
 interface ToolbarProps {
   site: SiteData;
@@ -14,6 +15,7 @@ interface ToolbarProps {
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({ site }) => {
+  const { fireEvent } = useGoogleAnalytics();
   const ActionsBar = styled.div`
     display: flex;
     flex-direction: row;
@@ -49,6 +51,11 @@ const Toolbar: React.FC<ToolbarProps> = ({ site }) => {
         await navigator.share({
           title: data.site.siteMetadata.title,
           url: location.href,
+        });
+        fireEvent("Share", {
+          event_category: "Sharing",
+          event_label: "Share site URL",
+          siteURL: location.href
         });
       } catch (e) {
         console.log(e);
