@@ -40,6 +40,20 @@ import "./src/global.css";
 //   console.log(relatedApps);
 // });
 
+// document.onvisibilitychange(event => {
+//   console.log(event);
+//   let displayMode = "browser tab";
+//   if (navigator.standalone) {
+//     displayMode = "standalone-ios";
+//   }
+//   if (window.matchMedia("(display-mode: standalone)").matches) {
+//     displayMode = "standalone";
+//   }
+//   // Log launch display mode to analytics
+//   console.log("DISPLAY_MODE_LAUNCH:", displayMode);
+//   alert("DISPLAY_MODE_LAUNCH:", displayMode);
+// });
+
 window.addEventListener("appinstalled", evt => {
   const { fireEvent } = useGoogleAnalytics();
   fireEvent("Install", {
