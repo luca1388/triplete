@@ -3,7 +3,7 @@
  *
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
-
+import { useGoogleAnalytics } from './src/hooks/useGoogleAnalytics';
 import "./src/global.css";
 
 // export const onServiceWorkerUpdateReady = () => {
@@ -21,20 +21,30 @@ import "./src/global.css";
 //     return <Element {...props} />;
 //   }
 
-window.addEventListener("DOMContentLoaded", () => {
-  let displayMode = "browser tab";
-  if (navigator.standalone) {
-    displayMode = "standalone-ios";
-  }
-  if (window.matchMedia("(display-mode: standalone)").matches) {
-    displayMode = "standalone";
-  }
-  // Log launch display mode to analytics
-  console.log("DISPLAY_MODE_LAUNCH:", displayMode);
-  alert("DISPLAY_MODE_LAUNCH:", displayMode);
+// window.addEventListener("DOMContentLoaded", () => {
+//   let displayMode = "browser tab";
+//   if (navigator.standalone) {
+//     displayMode = "standalone-ios";
+//   }
+//   if (window.matchMedia("(display-mode: standalone)").matches) {
+//     displayMode = "standalone";
+//   }
+//   // Log launch display mode to analytics
+//   console.log("DISPLAY_MODE_LAUNCH:", displayMode);
+//   alert("DISPLAY_MODE_LAUNCH:", displayMode);
+// });
+
+window.addEventListener("load", async () => {
+  const relatedApps = await navigator.getInstalledRelatedApps();
+  console.log("installed");
+  console.log(relatedApps);
+
 });
 
 window.addEventListener("appinstalled", evt => {
-  console.log("PWA installed");
-  alert("PWA installed");
+  const { fireEvent } = useGoogleAnalytics();
+  fireEvent("Install", {
+    event_category: "PWA",
+    event_label: "PWA installed"
+  });
 });
