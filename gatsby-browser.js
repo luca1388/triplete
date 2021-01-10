@@ -34,12 +34,11 @@ import "./src/global.css";
 //   alert("DISPLAY_MODE_LAUNCH:", displayMode);
 // });
 
-window.addEventListener("load", async () => {
-  const relatedApps = await navigator.getInstalledRelatedApps();
-  console.log("installed");
-  console.log(relatedApps);
-
-});
+// window.addEventListener("load", async () => {
+//   const relatedApps = await navigator.getInstalledRelatedApps();
+//   console.log("installed");
+//   console.log(relatedApps);
+// });
 
 window.addEventListener("appinstalled", evt => {
   const { fireEvent } = useGoogleAnalytics();

@@ -48,10 +48,6 @@ let plugins = [
       background_color: `#ffffff`,
       theme_color: `#1482d2`,
       display: `standalone`,
-      related_applications: [{
-        "platform": "webapp",
-        "url": "https://www.triplete.net/manifest.json",
-      }],
       icon: "content/icon.png",
       icons: [
         {
