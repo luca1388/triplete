@@ -8,7 +8,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import { SiteData } from "../../types";
 
 interface ToolbarProps {
-site: SiteData;
+  site: SiteData;
   shareUrl?: string;
   shareTitle?: string;
 }
@@ -27,7 +27,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ site }) => {
     margin: 0;
   `;
 
-const data: {
+  const data: {
     site: SiteData;
   } = useStaticQuery(graphql`
     query SiteMetadataQuery {
@@ -44,7 +44,6 @@ const data: {
   `);
 
   const shareHandler = useCallback(async () => {
-    console.log(data.site);
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
         await navigator.share({
@@ -52,24 +51,22 @@ const data: {
           url: location.href,
         });
       } catch (e) {
-        console.log("error");
+        console.log(e);
       }
-    } else {
-        if (typeof document !== "undefined") {
-            document.execCommand("copy");
-        }
     }
   }, []);
 
   return (
     <ActionsBar>
       <LeagueTitle>Serie A</LeagueTitle>
-      <GiShare
-        className="shareIcon"
-        color={colors.primary}
-        size={32}
-        onClick={shareHandler}
-      ></GiShare>
+      {
+        typeof navigator !== "undefined" && navigator.share && <GiShare
+          className="shareIcon"
+          color={colors.primary}
+          size={32}
+          onClick={shareHandler}
+        />
+      }
     </ActionsBar>
   );
 };
