@@ -6,15 +6,15 @@
 import { useGoogleAnalytics } from './src/hooks/useGoogleAnalytics';
 import "./src/global.css";
 
-// export const onServiceWorkerUpdateReady = () => {
-//   const answer = window.confirm(
-//     `This application has been updated. ` +
-//       `Reload to display the latest version?`
-//   );
-//   if (answer === true) {
-//     window.location.reload();
-//   }
-// };
+export const onServiceWorkerUpdateReady = () => {
+  const answer = window.confirm(
+    `This application has been updated. ` +
+      `Reload to display the latest version?`
+  );
+  if (answer === true) {
+    window.location.reload();
+  }
+};
 
 // // Wraps every page in a component
 // exports.wrapPageElement = ({ Element, props }) => {
