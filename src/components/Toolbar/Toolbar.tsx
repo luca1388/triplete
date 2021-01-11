@@ -1,5 +1,4 @@
 import React, { useCallback } from "react";
-// import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import { GiShare } from "react-icons/gi";
 import { colors } from "../../constants/colors";
@@ -7,7 +6,7 @@ import { colors } from "../../constants/colors";
 import "./Toolbar.css";
 import { graphql, useStaticQuery } from "gatsby";
 import { SiteData } from "../../types";
-import { useGoogleAnalytics } from '../../hooks/useGoogleAnalytics';
+import { useGoogleAnalytics } from "../../hooks/useGoogleAnalytics";
 
 interface ToolbarProps {
   site: SiteData;
@@ -56,11 +55,10 @@ const Toolbar: React.FC = () => {
         fireEvent("Share", {
           event_category: "Sharing",
           event_label: "Share site URL",
-          siteURL: location.href
+          siteURL: location.href,
         });
       } catch (e) {
         console.log(e);
-        // ReactDOM.createPortal(<Modal />, document.getElementById('modal-portal') as Element);
       }
     }
   }, []);
@@ -68,14 +66,14 @@ const Toolbar: React.FC = () => {
   return (
     <ActionsBar>
       <LeagueTitle>Serie A</LeagueTitle>
-      {
-        typeof navigator !== "undefined" && navigator.share && <GiShare
+      {typeof navigator !== "undefined" && navigator.share && (
+        <GiShare
           className="shareIcon"
           color={colors.primary}
           size={32}
           onClick={shareHandler}
         />
-      }
+      )}
     </ActionsBar>
   );
 };
