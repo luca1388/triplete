@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+// import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import { GiShare } from "react-icons/gi";
 import { colors } from "../../constants/colors";
@@ -59,6 +60,7 @@ const Toolbar: React.FC = () => {
         });
       } catch (e) {
         console.log(e);
+        // ReactDOM.createPortal(<Modal />, document.getElementById('modal-portal') as Element);
       }
     }
   }, []);
