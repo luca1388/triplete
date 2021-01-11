@@ -14,7 +14,7 @@ interface ToolbarProps {
   shareTitle?: string;
 }
 
-const Toolbar: React.FC<ToolbarProps> = ({ site }) => {
+const Toolbar: React.FC = () => {
   const { fireEvent } = useGoogleAnalytics();
   const ActionsBar = styled.div`
     display: flex;

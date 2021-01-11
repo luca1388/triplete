@@ -19,7 +19,7 @@ interface NewsProps {
 const News: React.FC<NewsProps> = ({ pageContext }) => {
   return (
     <Layout>
-      <SEO title={pageContext.title} image={pageContext.imageUrl} />
+      <SEO title={pageContext.title} image={pageContext.imageUrl} description="Leggi le ultime news della serie A: notizie di calcio mercato e molto altro sulla tua squadra del cuore." />
       <div className="newsContainer">
         <img src={pageContext.imageUrl} />
         <div className="newsText">
