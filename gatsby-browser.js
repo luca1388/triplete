@@ -6,6 +6,8 @@
 import { useGoogleAnalytics } from './src/hooks/useGoogleAnalytics';
 import "./src/global.css";
 
+export const onServiceWorkerUpdateReady = () => window.location.reload();
+
 // export const onServiceWorkerUpdateReady = () => {
 //   const answer = window.confirm(
 //     `This application has been updated. ` +
