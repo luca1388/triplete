@@ -1,5 +1,6 @@
 .shareIcon {
     padding: 4px;
+    width: 15%;
 }
 .shareIcon:hover {
     background-color: #e6e6e6;
