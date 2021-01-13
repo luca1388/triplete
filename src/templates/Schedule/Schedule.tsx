@@ -51,7 +51,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
 
   return (
     <Layout>
-      <SEO title={"Calendario Serie A"} description="Serie A: Il calendario delle partite di calcio del campionato italiano. Guarda i risultati della tua squadra e controlla quando giocherà la prossima partita!"></SEO>
+      <SEO title={"Calendario e risultati delle partite"} description="Serie A: Il calendario delle partite di calcio del campionato italiano. Guarda i risultati della tua squadra e controlla quando giocherà la prossima partita!"></SEO>
       <TeamFilter onType={onFilterTeams} />
       <div className={scheduleContainerClasses.join(' ')}>
         {days.map(day => {
