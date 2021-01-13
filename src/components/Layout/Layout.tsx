@@ -42,6 +42,7 @@ const Layout: React.FC = ({ children }) => {
           author
           image
           url
+          displayTitle
         }
       }
     }
@@ -49,9 +50,9 @@ const Layout: React.FC = ({ children }) => {
 
   return (
     <div className="app">
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <Header siteTitle={data.site.siteMetadata?.displayTitle || `Triplete.net`} />
       <div className="header-container">
-        <Navigation siteTitle={data.site.siteMetadata?.title || `Title`} />
+        <Navigation siteTitle={data.site.siteMetadata?.displayTitle || `Triplete.net`} />
         <main className="main-container">
           {children}
           <BottomNavigation />

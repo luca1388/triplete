@@ -11,6 +11,7 @@ export interface SiteData {
     author?: string;
     image?: string;
     url?: string;
+    displayTitle?: string;
   };
 }
 

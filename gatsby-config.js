@@ -192,12 +192,13 @@ if (process.env.SENTRY_DSN && process.env.BRANCH_ENV && process.env.SENTRY_DSN !
 
 module.exports = {
   siteMetadata: {
-    title: `Triplete.net: Classifica Serie A`,
+    title: `Triplete - Classifica Serie A`,
     description: `Con Triplete il campionato di calcio non avrà più segreti per te: controlla la classifica e i risultati della Serie A quando vuoi, ovunque ti trovi. La tua squadra riuscirà a fare il triplete?`,
     author: `@luca1388`,
     image: "https://www.triplete.net/preview.png",
     url: "https://www.triplete.net",
     siteUrl: "https://www.triplete.net",
+    displayTitle: "Triplete.net"
   },
   plugins: plugins,
 };
