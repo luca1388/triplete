@@ -1,12 +1,10 @@
-import React, { useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
-import { GiShare } from "react-icons/gi";
-import { colors } from "../../constants/colors";
 
 import "./Toolbar.css";
 import { graphql, useStaticQuery } from "gatsby";
 import { SiteData } from "../../types";
-import { useGoogleAnalytics } from "../../hooks/useGoogleAnalytics";
+import ShareIcon from "../ShareIcon/ShareIcon";
 
 interface ToolbarProps {
   site: SiteData;
@@ -15,7 +13,6 @@ interface ToolbarProps {
 }
 
 const Toolbar: React.FC = () => {
-  const { fireEvent } = useGoogleAnalytics();
   const ActionsBar = styled.div`
     display: flex;
     flex-direction: row;
@@ -45,34 +42,11 @@ const Toolbar: React.FC = () => {
     }
   `);
 
-  const shareHandler = useCallback(async () => {
-    if (typeof navigator !== "undefined" && navigator.share) {
-      try {
-        await navigator.share({
-          title: data.site.siteMetadata.title,
-          url: location.href,
-        });
-        fireEvent("Share", {
-          event_category: "Sharing",
-          event_label: "Share site URL",
-          siteURL: location.href,
-        });
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }, []);
-
   return (
     <ActionsBar>
       <LeagueTitle>Serie A</LeagueTitle>
       {typeof navigator !== "undefined" && navigator.share && (
-        <GiShare
-          className="shareIcon"
-          color={colors.primary}
-          size={32}
-          onClick={shareHandler}
-        />
+        <ShareIcon title={data.site.siteMetadata.title} />
       )}
     </ActionsBar>
   );
