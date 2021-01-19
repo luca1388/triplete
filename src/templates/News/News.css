@@ -51,11 +51,17 @@
         width: 85%;
         margin: 20px 0;
     }
+    .newsContainer .cover {
+        min-height: 350px;
+    }
 }
 
 @media only screen and (min-width: 1025px) {
     .newsContainer {
         max-width: 43%;
         margin: 15px 0;
+    }
+    .newsContainer .cover {
+        min-height: 450px;
     }
 }
