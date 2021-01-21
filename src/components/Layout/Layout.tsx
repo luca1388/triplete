@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React, { useCallback, useState, useRef } from "react";
+import React, { useCallback, useState } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 
 import Header from "../Header/header";
@@ -19,11 +19,10 @@ import CookiesBanner from "../CookieBanner/CookiesBanner";
 import { readCookie, setCookie } from '../../utils/cookiesHandler';
 
 const Layout: React.FC = ({ children }) => {
-  const cookiesRef = useRef(null);
   // const CookiesHandler = loadable.lib(() => import("../../utils/cookiesHandler"));
 
   const [cookiesAccepted, setCookiesAccepted] = useState(
-     readCookie("ac") || false
+     readCookie("ac") || true
   );
 
   const acceptCookiesHandler = useCallback(() => {
