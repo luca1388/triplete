@@ -6,15 +6,15 @@
 import { useGoogleAnalytics } from "./src/hooks/useGoogleAnalytics";
 import "./src/global.css";
 
-// export const onServiceWorkerUpdateReady = () => {
-//   const answer = window.confirm(
-//     `This application has been updated. ` +
-//       `Reload to display the latest version?`
-//   );
-//   if (answer === true) {
-//     window.location.reload();
-//   }
-// };
+export const onServiceWorkerUpdateReady = () => {
+  const answer = window.confirm(
+    `Abbiamo trovato una versione più recente di Triplete. ` +
+      `Vuoi aggiornare la pagina?`
+  );
+  if (answer === true) {
+    window.location.reload();
+  }
+};
 
 window.addEventListener("appinstalled", evt => {
   const { fireEvent } = useGoogleAnalytics();
