@@ -9,18 +9,20 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 
 import Header from "../Header/header";
-import BottomNavigation from '../Navigation/BottomNavigation/BottomNavigation';
+import BottomNavigation from "../Navigation/BottomNavigation/BottomNavigation";
 import "./Layout.css";
 
 import { SiteData } from "../../types";
 import Navigation from "../Navigation/Navigation";
 import CookiesBanner from "../CookieBanner/CookiesBanner";
 // import loadable from "@loadable/component";
-import { readCookie, setCookie } from '../../utils/cookiesHandler';
+import { readCookie, setCookie } from "../../utils/cookiesHandler";
+import { useServiceWorkerUpdater } from "../../hooks/useServiceWorkerUpdater";
+import Modal from "../Modal/Modal";
 
 const Layout: React.FC = ({ children }) => {
   // const CookiesHandler = loadable.lib(() => import("../../utils/cookiesHandler"));
-
+  const { updateFound } = useServiceWorkerUpdater();
   const [cookiesAccepted, setCookiesAccepted] = useState<boolean>(true);
 
   useEffect(() => {
@@ -53,14 +55,28 @@ const Layout: React.FC = ({ children }) => {
 
   return (
     <div className="app">
-      <Header siteTitle={data.site.siteMetadata?.displayTitle || `Triplete.net`} />
+      <Header
+        siteTitle={data.site.siteMetadata?.displayTitle || `Triplete.net`}
+      />
       <div className="header-container">
-        <Navigation siteTitle={data.site.siteMetadata?.displayTitle || `Triplete.net`} />
+        <Navigation
+          siteTitle={data.site.siteMetadata?.displayTitle || `Triplete.net`}
+        />
         <main className="main-container">
           {children}
           <BottomNavigation />
         </main>
-        { !cookiesAccepted && <CookiesBanner onAcceptCookies={acceptCookiesHandler} /> }
+        {updateFound && (
+          <Modal title="New App version!">
+            We found an update! Do you want to update?
+            <div>
+              <button onClick={() => window.location.reload()}>Yes</button>
+            </div>
+          </Modal>
+        )}
+        {!cookiesAccepted && (
+          <CookiesBanner onAcceptCookies={acceptCookiesHandler} />
+        )}
       </div>
     </div>
   );

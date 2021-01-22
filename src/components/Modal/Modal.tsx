@@ -51,17 +51,22 @@ const ModalContent = styled.div`
     animation-duration: 0.4s;
 `;
 
-const Modal = () => {
+interface ModalProps {
+  title: string;
+  // body: string;
+  // buttons?: any[]
+}
+
+const Modal: React.FC<ModalProps> = ({ title, children}) => {
   return (
     <Container>
       <ModalContent>
         <Header>
           <CloseButton>&times;</CloseButton>
-          <h2>Title</h2>
+          <h2>{ title }</h2>
         </Header>
         <Body>
-          <p>Some text in the Modal Body</p>
-          <p>Some other text...</p>
+          <p>{ children }</p>
         </Body>
       </ModalContent>
     </Container>
