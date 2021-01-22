@@ -53,6 +53,10 @@ const Layout: React.FC = ({ children }) => {
     }
   `);
 
+  if (updateFound) {
+    console.log("update found!");
+  }
+
   return (
     <div className="app">
       <Header
@@ -67,11 +71,8 @@ const Layout: React.FC = ({ children }) => {
           <BottomNavigation />
         </main>
         {updateFound && (
-          <Modal title="New App version!">
+          <Modal title="New App version!" buttonConfirm={() => <button onClick={() => window.location.reload()}>Yes</button>}>
             We found an update! Do you want to update?
-            <div>
-              <button onClick={() => window.location.reload()}>Yes</button>
-            </div>
           </Modal>
         )}
         {!cookiesAccepted && (
