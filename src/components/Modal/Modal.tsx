@@ -53,11 +53,13 @@ const ModalContent = styled.div`
 
 interface ModalProps {
   title: string;
+  buttonConfirm?: React.Component,
+  buttonCancel?: React.Component
   // body: string;
   // buttons?: any[]
 }
 
-const Modal: React.FC<ModalProps> = ({ title, children}) => {
+const Modal: React.FC<ModalProps> = ({ title, children, buttonCancel, buttonConfirm}) => {
   return (
     <Container>
       <ModalContent>
@@ -67,6 +69,8 @@ const Modal: React.FC<ModalProps> = ({ title, children}) => {
         </Header>
         <Body>
           <p>{ children }</p>
+          { buttonConfirm && buttonConfirm }
+          { buttonCancel && buttonCancel }
         </Body>
       </ModalContent>
     </Container>

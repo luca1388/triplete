@@ -23,8 +23,3 @@ window.addEventListener("appinstalled", evt => {
     event_label: "PWA installed",
   });
 });
-
-// navigator.serviceWorker.register("/sw.js").then(reg => {
-
-//   reg.update()
-// })
