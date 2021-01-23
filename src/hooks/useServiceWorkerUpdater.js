@@ -5,6 +5,7 @@ export const useServiceWorkerUpdater = () => {
 
   const updateWorker = useCallback((worker) => {
     // Tell the service worker to skipWaiting
+    console.log("setting state update found");
     worker.postMessage({ type: "SKIP_WAITING" });
     setUpdateFound(true);
  }, []);
@@ -21,13 +22,17 @@ export const useServiceWorkerUpdater = () => {
     reg.update();
 
     if (reg.waiting) {
+        console.log("worker waiting");
         updateWorker(reg.waiting);
     }
     // If "updatefound" event is fired, it means that there's
     // a new service worker being installed.
     reg.addEventListener("updatefound", () => {
+      console.log("update found");
       if (reg.installing) {
+        console.log("worker installing");
         reg.installing.addEventListener("statechange", () => {
+          console.log(reg.installing.state);
           if (reg.installing && ["installed", "waiting"].includes(reg.installing.state)) {
             updateWorker(reg.installing);
           }
