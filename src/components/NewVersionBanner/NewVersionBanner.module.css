@@ -1,62 +1,85 @@
 @-webkit-keyframes animation {
-    from {right:-5rem; opacity:0} 
-    to {right:5rem; opacity:1}
+  from {
+    right: -5rem;
+    opacity: 0;
   }
-  @-moz-keyframes animation {
-    from {right:-5rem; opacity:0} 
-    to {right:5rem; opacity:1}
+  to {
+    right: 5rem;
+    opacity: 1;
   }
-  @-o-keyframes animation {
-    from {right:-5rem; opacity:0} 
-    to {right:5rem; opacity:1}
+}
+@-moz-keyframes animation {
+  from {
+    right: -5rem;
+    opacity: 0;
   }
-  @keyframes animation {
-    from {right:-5rem; opacity:0} 
-    to {right:5rem; opacity:1}
+  to {
+    right: 5rem;
+    opacity: 1;
   }
+}
+@-o-keyframes animation {
+  from {
+    right: -5rem;
+    opacity: 0;
+  }
+  to {
+    right: 5rem;
+    opacity: 1;
+  }
+}
+@keyframes animation {
+  from {
+    right: -5rem;
+    opacity: 0;
+  }
+  to {
+    right: 5rem;
+    opacity: 1;
+  }
+}
 
 .Banner {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    background: white;
-    position: fixed;
-    top: 5rem;
-    right: 5rem;
-    z-index: 5;
-    border-radius: 20px;
-    padding: 10px;
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.9s;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  background: white;
+  position: fixed;
+  top: 5rem;
+  right: 5rem;
+  z-index: 5;
+  border-radius: 20px;
+  padding: 10px;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.9s;
 }
 
 .Button {
-    font: inherit;
-    padding: 0.5rem 1.5rem;
-    border: 1px solid #000000;
-    border-radius: 4px;
-    background: #1187d4;
-    color: #fff;
-    cursor: pointer;
-    margin: 10px;
-    text-decoration: none;
-    display: inline-block;
+  font: inherit;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  background: #1187d4;
+  color: #fff;
+  cursor: pointer;
+  margin: 10px;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .Button:hover {
-    background-color: rgba(17, 134, 212, 0.74);
+  background-color: rgba(17, 134, 212, 0.74);
 }
 
 .Text {
-    width: 200px;
-    padding: 10px;
-    margin: 0;
+  width: 200px;
+  padding: 10px;
+  margin: 0;
 }
 
 @media only screen and (max-width: 480px) {
-
 }
