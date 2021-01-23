@@ -53,8 +53,8 @@ const ModalContent = styled.div`
 
 interface ModalProps {
   title: string;
-  buttonConfirm?: React.Component,
-  buttonCancel?: React.Component
+  buttonConfirm?: React.FC,
+  buttonCancel?: React.FC
   // body: string;
   // buttons?: any[]
 }
