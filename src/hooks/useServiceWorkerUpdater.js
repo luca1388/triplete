@@ -10,13 +10,16 @@ export const useServiceWorkerUpdater = () => {
  }, []);
 
   const registerServiceWorker = useCallback(async () => {
-    if (!window || !navigator || !("serviceWorker" in navigator)) {
+    if (!window || !navigator || !navigator.serviceWorker) {
       return;
     }
     const reg = await navigator.serviceWorker.register("/sw.js");
     if (!reg) {
       return;
     }
+
+    reg.update();
+
     if (reg.waiting) {
         updateWorker(reg.waiting);
     }
@@ -36,6 +39,20 @@ export const useServiceWorkerUpdater = () => {
   useEffect(() => {
     registerServiceWorker();
   }, [registerServiceWorker]);
+
+  const handleVisibilityChange = useCallback(() => {
+    if (!document.hidden) {
+      registerServiceWorker();
+    }
+  }, [registerServiceWorker]);
+
+  useEffect(() => {
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    }
+  }, [handleVisibilityChange]);
 
   return { updateFound };
 };
