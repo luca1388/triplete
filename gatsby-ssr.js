@@ -5,6 +5,7 @@
  */
 
 const React = require("react");
+// const NewVersionBanner = require('./src/components/NewVersionBanner/NewVersionBanner');
 
 let HeadComponents = [];
 
@@ -23,9 +24,18 @@ if (
 }
 
 exports.onRenderBody = (
-  { setHeadComponents, setPostBodyComponents },
+  { setHeadComponents, setPostBodyComponents, setPreBodyComponents },
   pluginOptions
 ) => {
   setPostBodyComponents([<div key="modal" id="modal-portal" />]);
   setHeadComponents(HeadComponents);
 };
+
+// exports.wrapPageElement = ({ element, props }) => {
+//   return (
+//     <div {...props}>
+//       <NewVersionBanner />
+//       {element}
+//     </div>
+//   );
+// };

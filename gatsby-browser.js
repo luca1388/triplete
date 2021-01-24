@@ -5,8 +5,8 @@
  */
 import { useGoogleAnalytics } from "./src/hooks/useGoogleAnalytics";
 import "./src/global.css";
-import React from 'react';
-import NewVersionBanner from "./src/components/NewVersionBanner/NewVersionBanner";
+
+export const onServiceWorkerUpdateReady = () => window.location.reload();
 
 // export const onServiceWorkerUpdateReady = () => {
 //   const answer = window.confirm(
@@ -26,11 +26,11 @@ window.addEventListener("appinstalled", evt => {
   });
 });
 
-export const wrapPageElement = ({ element, props }) => {
-  return (
-    <div {...props}>
-      <NewVersionBanner />
-      {element}
-    </div>
-  );
-};
+// export const wrapPageElement = ({ element, props }) => {
+//   return (
+//     <div {...props}>
+//       <NewVersionBanner />
+//       {element}
+//     </div>
+//   );
+// };
