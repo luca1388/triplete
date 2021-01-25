@@ -5,8 +5,6 @@
  */
 
 const React = require("react");
-// const NewVersionBanner = require('./src/components/NewVersionBanner/NewVersionBanner');
-
 let HeadComponents = [];
 
 if (
