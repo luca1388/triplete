@@ -1,5 +1,6 @@
-import React from "react";
-import { useServiceWorkerUpdater } from "../../hooks/useServiceWorkerUpdater";
+import React, { useCallback, useEffect } from "react";
+// import { useServiceWorkerUpdater } from "../../hooks/useServiceWorkerUpdater";
+import { useInterval } from '../../hooks/useInterval';
 // import styled, { keyframes } from "styled-components";
 import styles from './NewVersionBanner.module.css';
 
@@ -50,17 +51,40 @@ import styles from './NewVersionBanner.module.css';
 // `;
 
 const NewVersionBanner: React.FC = ({}) => {
-  const { updateFound } = useServiceWorkerUpdater();
+  // const { updateFound } = useServiceWorkerUpdater();
 
-  if (updateFound) {
-    console.log('updateFound');
-  }
+  
+  const checkSWUpdate = useCallback(() => {
+    if (navigator && navigator.serviceWorker) {
+      console.log('serviceWorker enabled');
+      navigator.serviceWorker.register('/sw.js').then(reg => {
+        // sometime later…
+        console.log('serviceWorker registered');
+        useInterval(() => {
+          console.log('serviceWorker trying to update...');
+          reg.update();
+        }, 10000);
+      });
+    }
+  }, []);
+  
+  useEffect(() => {
+    checkSWUpdate();
+  }, [checkSWUpdate]);
 
-  return updateFound ?
-    <div className={styles.Banner}>
-      <p className={styles.Text}>Nuova versione di <strong>Triplete</strong> disponibile!</p>
-      <button className={styles.Button} onClick={() => window.location.reload()}>Aggiorna!</button>
-    </div> : null;
+  // if (updateFound) {
+  //   console.log('updateFound');
+  // }
+
+  console.log('NewVersionBanner');
+
+  return null;
+
+  // return updateFound ?
+  //   <div className={styles.Banner}>
+  //     <p className={styles.Text}>Nuova versione di <strong>Triplete</strong> disponibile!</p>
+  //     <button className={styles.Button} onClick={() => window.location.reload()}>Aggiorna!</button>
+  //   </div> : null;
 };
 
 export default NewVersionBanner;
