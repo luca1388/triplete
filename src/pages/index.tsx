@@ -20,6 +20,7 @@ type IndexPageProps = {
             tla: string;
             shortName: string;
             name: string;
+            teamId: number;
           };
           points: number;
           playedGames: number;
@@ -38,6 +39,13 @@ type IndexPageProps = {
 
 const IndexPage: React.FC<PageProps<IndexPageProps>> = ({ data }) => {
   const standings: standingPosition[] = data.allPosition.edges.map(entry => ({...entry.node}));
+
+    // const description = standings
+  //   .map(
+  //     entry =>
+  //       entry.position + " " + entry.team.shortName + "(" + entry.points + ")"
+  //   )
+  //   .join("\n");
 
   return (
     <Layout>

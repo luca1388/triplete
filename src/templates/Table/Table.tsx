@@ -11,13 +11,6 @@ export interface TableProps {
   
 
 const Table: React.FC<TableProps> = ({ standings }) => {
-  // const description = standings
-  //   .map(
-  //     entry =>
-  //       entry.position + " " + entry.team.shortName + "(" + entry.points + ")"
-  //   )
-  //   .join("\n");
-
   return (      
       <div className="standingsContainer">
         <Toolbar />
