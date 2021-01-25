@@ -32,7 +32,7 @@ export const useServiceWorkerUpdater = () => {
       if (reg.installing) {
         console.log("worker installing");
         reg.installing.addEventListener("statechange", () => {
-          console.log(reg.installing.state);
+          console.log(reg.installing);
           if (reg.installing && ["installed", "waiting"].includes(reg.installing.state)) {
             updateWorker(reg.installing);
           }
