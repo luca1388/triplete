@@ -140,12 +140,6 @@ let plugins = [
   // To learn more, visit: https://gatsby.dev/offline
   {
     resolve: `gatsby-plugin-offline`,
-    options: {
-      workboxConfig: {
-        skipWaiting: true,
-        clientsClaim: true
-      }
-    }
   },
   
   {

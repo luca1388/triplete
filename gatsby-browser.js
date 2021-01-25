@@ -4,6 +4,8 @@
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
 import { useGoogleAnalytics } from "./src/hooks/useGoogleAnalytics";
+import { Workbox, messageSW } from 'https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-window.prod.mjs';
+
 import "./src/global.css";
 
 // export const onServiceWorkerUpdateReady = () => window.location.reload();
@@ -26,14 +28,32 @@ window.addEventListener("appinstalled", evt => {
   });
 });
 
+
+
 if (navigator && navigator.serviceWorker) {
-  console.log('serviceWorker enabled');
-  navigator.serviceWorker.register('/sw.js').then(reg => {
-    // sometime later…
-    console.log('serviceWorker registered');
-    setInterval(() => {
-      console.log('serviceWorker trying to update...');
-      reg.update();
-    }, 10000);
-  });
+  const wb = new Workbox('/sw.js');
+  let registration;
+
+  const showSkipWaitingPrompt = (event) => {
+    console.log(event);
+    alert('skip waiting');
+  };
+
+  // Add an event listener to detect when the registered
+  // service worker has installed but is waiting to activate.
+  wb.addEventListener('waiting', showSkipWaitingPrompt);
+  wb.addEventListener('externalwaiting', showSkipWaitingPrompt);
+
+  wb.register().then((r) => registration = r);
+
+
+  // console.log('serviceWorker enabled');
+  // navigator.serviceWorker.register('/sw.js').then(reg => {
+  //   // sometime later…
+  //   console.log('serviceWorker registered');
+  //   setInterval(() => {
+  //     console.log('serviceWorker trying to update...');
+  //     reg.update();
+  //   }, 10000);
+  // });
 }
