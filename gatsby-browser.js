@@ -49,7 +49,7 @@ const alertNewUpdateFound = registration => {
   //   document.getElementById("banner-portal")
   // );
   document.getElementById('banner-portal').innerHTML = "<p>Update? <button id='update-btn'>update</button></p>";
-  document.getElementById('update-btn').addEventListener('click', () => acceptNewVersionHandler);
+  document.getElementById('update-btn').addEventListener('click', acceptNewVersionHandler);
 };
 
 if (navigator && navigator.serviceWorker) {
