@@ -47,7 +47,7 @@ const alertNewUpdateFound = registration => {
     <NewVersionBanner onAccept={() => acceptNewVersionHandler(registration)} />,
     document.getElementById("banner-portal")
   );
-  document.getElementById('modal-portal').innerHTML = "test";
+  document.getElementById('modal-portal').innerHTML = "test333";
 };
 
 if (navigator && navigator.serviceWorker) {
