@@ -9,7 +9,7 @@ import ReactDOM from "react-dom";
 // import { Workbox, messageSW } from 'workbox-window';
 
 import "./src/global.css";
-// import NewVersionBanner from "./src/components/NewVersionBanner/NewVersionBanner";
+import NewVersionBanner from "./src/components/NewVersionBanner/NewVersionBanner";
 
 // export const onServiceWorkerUpdateReady = () => window.location.reload();
 
