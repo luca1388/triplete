@@ -27,6 +27,7 @@ exports.onRenderBody = (
   pluginOptions
 ) => {
   setPostBodyComponents([<div key="modal" id="modal-portal" />]);
+  setPreBodyComponents([<div key="banner" id="banner-portal"></div>])
   setHeadComponents(HeadComponents);
 };
 

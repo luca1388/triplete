@@ -52,6 +52,12 @@ const Layout: React.FC = ({ children }) => {
     }
   `);
 
+  useEffect(() => {
+    if (updateFound) {
+      alert("updateFound");
+    }
+  }, [updateFound]);
+
   return (
     <div className="app">
       <Header
