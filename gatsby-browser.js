@@ -4,7 +4,7 @@
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
 import { useGoogleAnalytics } from "./src/hooks/useGoogleAnalytics";
-import { Workbox, messageSW } from 'workbox-window';
+// import { Workbox, messageSW } from 'workbox-window';
 
 import "./src/global.css";
 
@@ -28,33 +28,42 @@ window.addEventListener("appinstalled", evt => {
   });
 });
 
-
+const alertNewUpdateFound = registration => {
+  console.log(registration);
+  alert("new update found!");
+};
 
 if (navigator && navigator.serviceWorker) {
-  const wb = new Workbox('/sw.js');
-  let registration;
-
-  const showSkipWaitingPrompt = (event) => {
-    console.log(event);
-    alert('skip waiting');
-  };
-
-  // Add an event listener to detect when the registered
-  // service worker has installed but is waiting to activate.
-  wb.addEventListener('waiting', showSkipWaitingPrompt);
-  wb.addEventListener('externalwaiting', showSkipWaitingPrompt);
-
-  wb.register().then((r) => registration = r);
-
-  navigator.serviceWorker.register('/sw.js').then(reg => {
+  navigator.serviceWorker.register("/sw.js").then(reg => {
     // sometime later…
-    console.log('serviceWorker registered');
+    console.log("serviceWorker registered");
+    if (reg.waiting) {
+      alertNewUpdateFound(reg);
+    }
+
+    // detect Service Worker update available and wait for it to become installed
+    reg.addEventListener("updatefound", () => {
+      if (reg.installing) {
+        // wait until the new Service worker is actually installed (ready to take over)
+        reg.installing.addEventListener("statechange", () => {
+          if (reg.waiting) {
+            // if there's an existing controller (previous Service Worker), show the prompt
+            if (navigator.serviceWorker.controller) {
+              alertNewUpdateFound(reg);
+            } else {
+              // otherwise it's the first install, nothing to do
+              console.log("Service Worker initialized for the first time");
+            }
+          }
+        });
+      }
+    });
+
     setInterval(() => {
-      console.log('serviceWorker trying to update...');
+      console.log("serviceWorker trying to update with periodic check...");
       reg.update();
     }, 20000);
   });
-
 
   // console.log('serviceWorker enabled');
   // navigator.serviceWorker.register('/sw.js').then(reg => {
