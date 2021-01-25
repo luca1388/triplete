@@ -4,12 +4,12 @@
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
 import { useGoogleAnalytics } from "./src/hooks/useGoogleAnalytics";
-import React from 'react-dom';
+import React from 'react';
 import ReactDOM from "react-dom";
 // import { Workbox, messageSW } from 'workbox-window';
 
 import "./src/global.css";
-import NewVersionBanner from "./src/components/NewVersionBanner/NewVersionBanner";
+// import NewVersionBanner from "./src/components/NewVersionBanner/NewVersionBanner";
 
 // export const onServiceWorkerUpdateReady = () => window.location.reload();
 
@@ -86,7 +86,8 @@ if (navigator && navigator.serviceWorker) {
       console.debug();
       console.log('controllerchange', refreshing);
       if (!refreshing) {
-        window.location.reload();
+        // window.location.reload();
+        console.log('reloading...');
         refreshing = true;
       }
     });
