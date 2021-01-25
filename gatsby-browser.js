@@ -25,3 +25,15 @@ window.addEventListener("appinstalled", evt => {
     event_label: "PWA installed",
   });
 });
+
+if (navigator && navigator.serviceWorker) {
+  console.log('serviceWorker enabled');
+  navigator.serviceWorker.register('/sw.js').then(reg => {
+    // sometime later…
+    console.log('serviceWorker registered');
+    setInterval(() => {
+      console.log('serviceWorker trying to update...');
+      reg.update();
+    }, 10000);
+  });
+}
