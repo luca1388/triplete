@@ -4,7 +4,7 @@
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
 import { useGoogleAnalytics } from "./src/hooks/useGoogleAnalytics";
-import { Workbox, messageSW } from 'https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-window.prod.mjs';
+import { Workbox, messageSW } from 'workbox-window';
 
 import "./src/global.css";
 
@@ -45,6 +45,15 @@ if (navigator && navigator.serviceWorker) {
   wb.addEventListener('externalwaiting', showSkipWaitingPrompt);
 
   wb.register().then((r) => registration = r);
+
+  navigator.serviceWorker.register('/sw.js').then(reg => {
+    // sometime later…
+    console.log('serviceWorker registered');
+    setInterval(() => {
+      console.log('serviceWorker trying to update...');
+      reg.update();
+    }, 20000);
+  });
 
 
   // console.log('serviceWorker enabled');
