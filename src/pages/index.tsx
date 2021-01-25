@@ -59,7 +59,7 @@ const IndexPage: React.FC<PageProps<IndexPageProps>> = ({ data }) => {
           alignItems: "center",
           flexDirection: "column",
           width: '100%',
-          backgroundColor: 'yellow'
+          backgroundColor: 'blue'
         }}
       >
         <Table standings={standings} />
