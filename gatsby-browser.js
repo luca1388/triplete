@@ -4,6 +4,7 @@
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
 import { useGoogleAnalytics } from "./src/hooks/useGoogleAnalytics";
+import ReactDOM from 'react-dom';
 // import { Workbox, messageSW } from 'workbox-window';
 
 import "./src/global.css";
