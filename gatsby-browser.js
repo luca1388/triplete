@@ -44,11 +44,12 @@ const acceptNewVersionHandler = registration => {
 const alertNewUpdateFound = registration => {
   console.log(registration);
   // alert("new update found!");
-  ReactDOM.createPortal(
-    <NewVersionBanner onAccept={() => acceptNewVersionHandler(registration)} />,
-    document.getElementById("banner-portal")
-  );
-  document.getElementById('modal-portal').innerHTML = "test333";
+  // ReactDOM.createPortal(
+  //   <NewVersionBanner onAccept={() => acceptNewVersionHandler(registration)} />,
+  //   document.getElementById("banner-portal")
+  // );
+  document.getElementById('banner-portal').innerHTML = "<p>Update? <button id='update-btn'>update</button></p>";
+  document.getElementById('update-btn').addEventListener('click', () => acceptNewVersionHandler);
 };
 
 if (navigator && navigator.serviceWorker) {
