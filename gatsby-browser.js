@@ -7,6 +7,7 @@ import { useGoogleAnalytics } from "./src/hooks/useGoogleAnalytics";
 // import { Workbox, messageSW } from 'workbox-window';
 
 import "./src/global.css";
+import NewVersionBanner from "./src/components/NewVersionBanner/NewVersionBanner";
 
 // export const onServiceWorkerUpdateReady = () => window.location.reload();
 
@@ -28,9 +29,23 @@ window.addEventListener("appinstalled", evt => {
   });
 });
 
+const acceptNewVersionHandler = (registration) => {
+  console.log('button click');
+  console.log(registration.waiting);
+  if (registration.waiting) {
+    console.log('registration.waiting');
+    // let waiting Service Worker know it should became active
+    registration.waiting.postMessage("SKIP_WAITING");
+  }
+};
+
 const alertNewUpdateFound = registration => {
   console.log(registration);
-  alert("new update found!");
+  // alert("new update found!");
+  ReactDOM.createPortal(
+    <NewVersionBanner onAccept={() => acceptNewVersionHandler(registration)} />,
+    document.getElementById("banner-portal")
+  );
 };
 
 if (navigator && navigator.serviceWorker) {
