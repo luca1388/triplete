@@ -89,10 +89,10 @@ if (navigator && navigator.serviceWorker) {
       }
     });
 
-    setInterval(() => {
-      console.log("serviceWorker trying to update with periodic check...");
-      reg.update();
-    }, 20000);
+    // setInterval(() => {
+    //   console.log("serviceWorker trying to update with periodic check...");
+    //   reg.update();
+    // }, 20000);
   });
 
   // console.log('serviceWorker enabled');
