@@ -44,7 +44,7 @@ const acceptNewVersionHandler = registration => {
 const alertNewUpdateFound = registration => {
   console.log(registration);
   // alert("new update found!");
-  ReactDOM.createPortal(
+  ReactDOM.render(
     <NewVersionBanner onAccept={() => acceptNewVersionHandler(registration)} />,
     document.getElementById("banner-portal")
   );
