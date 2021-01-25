@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect } from "react";
 // import { useServiceWorkerUpdater } from "../../hooks/useServiceWorkerUpdater";
-import { useInterval } from '../../hooks/useInterval';
 // import styled, { keyframes } from "styled-components";
-import styles from './NewVersionBanner.module.css';
+import styles from "./NewVersionBanner.module.css";
 
 // const animatetop = keyframes`
-//     from {right:-5rem; opacity:0} 
+//     from {right:-5rem; opacity:0}
 //     to {right:5rem; opacity:1}
 // `;
 
@@ -50,41 +49,21 @@ import styles from './NewVersionBanner.module.css';
 //     margin: 0;
 // `;
 
-const NewVersionBanner: React.FC = ({}) => {
-  // const { updateFound } = useServiceWorkerUpdater();
+interface NewVersionBannerProps {
+  onAccept: () => void;
+}
 
-  
-  const checkSWUpdate = useCallback(() => {
-    if (navigator && navigator.serviceWorker) {
-      console.log('serviceWorker enabled');
-      navigator.serviceWorker.register('/sw.js').then(reg => {
-        // sometime later…
-        console.log('serviceWorker registered');
-        useInterval(() => {
-          console.log('serviceWorker trying to update...');
-          reg.update();
-        }, 10000);
-      });
-    }
-  }, []);
-  
-  useEffect(() => {
-    checkSWUpdate();
-  }, [checkSWUpdate]);
-
-  // if (updateFound) {
-  //   console.log('updateFound');
-  // }
-
-  console.log('NewVersionBanner');
-
-  return null;
-
-  // return updateFound ?
-  //   <div className={styles.Banner}>
-  //     <p className={styles.Text}>Nuova versione di <strong>Triplete</strong> disponibile!</p>
-  //     <button className={styles.Button} onClick={() => window.location.reload()}>Aggiorna!</button>
-  //   </div> : null;
+const NewVersionBanner: React.FC<NewVersionBannerProps> = ({ onAccept }) => {
+  return (
+    <div className={styles.Banner}>
+      <p className={styles.Text}>
+        Nuova versione di <strong>Triplete</strong> disponibile!
+      </p>
+      <button className={styles.Button} onClick={() => onAccept()}>
+        Aggiorna!
+      </button>
+    </div>
+  );
 };
 
 export default NewVersionBanner;
