@@ -81,7 +81,9 @@ if (navigator && navigator.serviceWorker) {
     let refreshing = false;
 
     // detect controller change and refresh the page
-    navigator.serviceWorker.addEventListener("controllerchange", () => {
+    navigator.serviceWorker.addEventListener("controllerchange", (event) => {
+      console.log(event);
+      console.debug();
       console.log('controllerchange', refreshing);
       if (!refreshing) {
         window.location.reload();
@@ -89,10 +91,10 @@ if (navigator && navigator.serviceWorker) {
       }
     });
 
-    // setInterval(() => {
-    //   console.log("serviceWorker trying to update with periodic check...");
-    //   reg.update();
-    // }, 20000);
+    setInterval(() => {
+      console.log("serviceWorker trying to update with periodic check...");
+      reg.update();
+    }, 10000);
   });
 
   // console.log('serviceWorker enabled');
