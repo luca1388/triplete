@@ -50,8 +50,7 @@ const IndexPage: React.FC<PageProps<IndexPageProps>> = ({ data }) => {
           justifyContent: "flex-start",
           alignItems: "center",
           flexDirection: "column",
-          width: '100%',
-          backgroundColor: 'red'
+          width: '100%'
         }}
       >
         <Table standings={standings} />
