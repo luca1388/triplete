@@ -4,7 +4,7 @@
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
 import { useGoogleAnalytics } from "./src/hooks/useGoogleAnalytics";
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 // import { Workbox, messageSW } from 'workbox-window';
 
 import "./src/global.css";
@@ -30,11 +30,11 @@ window.addEventListener("appinstalled", evt => {
   });
 });
 
-const acceptNewVersionHandler = (registration) => {
-  console.log('button click');
+const acceptNewVersionHandler = registration => {
+  console.log("button click");
   console.log(registration.waiting);
   if (registration.waiting) {
-    console.log('registration.waiting');
+    console.log("registration.waiting");
     // let waiting Service Worker know it should became active
     registration.waiting.postMessage("SKIP_WAITING");
   }
@@ -47,6 +47,7 @@ const alertNewUpdateFound = registration => {
     <NewVersionBanner onAccept={() => acceptNewVersionHandler(registration)} />,
     document.getElementById("banner-portal")
   );
+  document.getElementById('modal-portal').innerHTML = "test";
 };
 
 if (navigator && navigator.serviceWorker) {
@@ -72,6 +73,17 @@ if (navigator && navigator.serviceWorker) {
             }
           }
         });
+      }
+    });
+
+    let refreshing = false;
+
+    // detect controller change and refresh the page
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      console.log('controllerchange', refreshing);
+      if (!refreshing) {
+        window.location.reload();
+        refreshing = true;
       }
     });
 
