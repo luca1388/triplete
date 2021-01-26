@@ -35,8 +35,8 @@ const acceptNewVersionHandler = registration => {
   if (registration.waiting) {
     // let waiting Service Worker know it should became active
     registration.waiting.postMessage("SKIP_WAITING");
-    window.location.reload();
   }
+  window.location.reload();
 };
 
 const alertNewUpdateFound = registration => {
