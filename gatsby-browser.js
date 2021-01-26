@@ -78,6 +78,6 @@ if (navigator && navigator.serviceWorker) {
     setInterval(() => {
       console.log("serviceWorker trying to update with periodic check...");
       reg.update();
-    }, 60000);
+    }, 20000);
   });
 }
