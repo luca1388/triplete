@@ -15,7 +15,7 @@ const Table: React.FC<TableProps> = ({ standings }) => {
       <div className="standingsContainer">
         <Toolbar />
         <div className="standingsHeader">
-          <span className="rank"></span>
+          <span className="rank" style={{ display: "none"}}></span>
           <span className="imageWrapper"></span>
           <span className="match">G</span>
           <span className="match">V</span>
