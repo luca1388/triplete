@@ -4,6 +4,7 @@ import "./Table.css";
 import { standingPosition } from '../../types'
 import { tableConfig } from '../../constants/football';
 import Toolbar from "../../components/Toolbar/Toolbar";
+import { node } from "prop-types";
 
 export interface TableProps {
     standings: standingPosition[];
@@ -15,7 +16,7 @@ const Table: React.FC<TableProps> = ({ standings }) => {
       <div className="standingsContainer">
         <Toolbar />
         <div className="standingsHeader">
-          <span className="rank" style={{ display: "none"}}></span>
+          <span className="rank"></span>
           <span className="imageWrapper"></span>
           <span className="match">G</span>
           <span className="match">V</span>
@@ -42,7 +43,7 @@ const Table: React.FC<TableProps> = ({ standings }) => {
 
             return (
               <div className="standingsTeam" key={entry.id}>
-                <span className="rank">{index + 1}</span>
+                <span className="rank" style={{display: "none"}}>{index + 1}</span>
                 <span className="imageWrapper">
                   <img
                     src={entry.team.crestUrl}
