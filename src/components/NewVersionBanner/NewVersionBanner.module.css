@@ -115,6 +115,7 @@
 
 .Button:hover {
   background-color: rgba(17, 134, 212, 0.74);
+  cursor: pointer;
 }
 
 .Text {
