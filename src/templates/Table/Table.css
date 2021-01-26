@@ -81,6 +81,7 @@ span.teamName {
 
 .points {
     width: 8%;
+    color: #1187d4;
 }
 
 @media only screen and (max-width: 960px) {

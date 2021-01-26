@@ -43,7 +43,7 @@ const Table: React.FC<TableProps> = ({ standings }) => {
 
             return (
               <div className="standingsTeam" key={entry.id}>
-                <span className="rank" style={{display: "none"}}>{index + 1}</span>
+                <span className="rank">{index + 1}</span>
                 <span className="imageWrapper">
                   <img
                     src={entry.team.crestUrl}
