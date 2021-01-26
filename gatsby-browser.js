@@ -32,31 +32,22 @@ window.addEventListener("appinstalled", evt => {
 });
 
 const acceptNewVersionHandler = registration => {
-  console.log("button click");
-  console.log(registration.waiting);
   if (registration.waiting) {
-    console.log("registration.waiting");
     // let waiting Service Worker know it should became active
     registration.waiting.postMessage("SKIP_WAITING");
+    window.location.reload();
   }
 };
 
 const alertNewUpdateFound = registration => {
-  console.log(registration);
-  // alert("new update found!");
   ReactDOM.render(
     <NewVersionBanner onAccept={() => acceptNewVersionHandler(registration)} />,
     document.getElementById("banner-portal")
   );
-  // document.getElementById('banner-portal').innerHTML = "<p>Update? <button id='update-btn'>update</button></p>";
-  // document.getElementById('update-btn').addEventListener('click', acceptNewVersionHandler);
-
 };
 
 if (navigator && navigator.serviceWorker) {
   navigator.serviceWorker.register("/sw.js").then(reg => {
-    // sometime later…
-    console.log("serviceWorker registered");
     if (reg.waiting) {
       alertNewUpdateFound(reg);
     }
@@ -72,40 +63,21 @@ if (navigator && navigator.serviceWorker) {
               alertNewUpdateFound(reg);
             } else {
               // otherwise it's the first install, nothing to do
-              console.log("Service Worker initialized for the first time");
             }
           }
         });
       }
     });
 
-    let refreshing = false;
-
     // detect controller change and refresh the page
     navigator.serviceWorker.addEventListener("controllerchange", (event) => {
-      console.log(event);
-      console.debug();
-      console.log('controllerchange', refreshing);
-      if (!refreshing) {
-        // window.location.reload();
-        console.log('reloading...');
-        refreshing = true;
-      }
+      console.log('controllerchange');
+      // window.location.reload();
     });
 
     setInterval(() => {
       console.log("serviceWorker trying to update with periodic check...");
       reg.update();
-    }, 10000);
+    }, 60000);
   });
-
-  // console.log('serviceWorker enabled');
-  // navigator.serviceWorker.register('/sw.js').then(reg => {
-  //   // sometime later…
-  //   console.log('serviceWorker registered');
-  //   setInterval(() => {
-  //     console.log('serviceWorker trying to update...');
-  //     reg.update();
-  //   }, 10000);
-  // });
 }
