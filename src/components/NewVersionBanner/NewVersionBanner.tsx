@@ -1,5 +1,4 @@
 import React from "react";
-// import { useServiceWorkerUpdater } from "../../hooks/useServiceWorkerUpdater";
 // import styled, { keyframes } from "styled-components";
 import styles from "./NewVersionBanner.module.css";
 

@@ -17,11 +17,9 @@ import Navigation from "../Navigation/Navigation";
 import CookiesBanner from "../CookieBanner/CookiesBanner";
 // import loadable from "@loadable/component";
 import { readCookie, setCookie } from "../../utils/cookiesHandler";
-// import { useServiceWorkerUpdater } from "../../hooks/useServiceWorkerUpdater";
 
 const Layout: React.FC = ({ children }) => {
   // const CookiesHandler = loadable.lib(() => import("../../utils/cookiesHandler"));
-  // const { updateFound } = useServiceWorkerUpdater();
   const [cookiesAccepted, setCookiesAccepted] = useState<boolean>(true);
 
   useEffect(() => {
