@@ -43,14 +43,14 @@ const NavigationEntries: React.FC<NavigationEntriesProps> = ({ mobile }) => {
         />
         Partite
       </Link>
-      {/* <Link to="/news">
+      <Link to="/news">
         <GiRss
           className="NavigationIcon"
           color={colors.accent}
           size={mobile ? 32 : 40}
         />
         News
-      </Link> */}
+      </Link>
       <Link to="/about">
         <BsInfoCircle
           className="NavigationIcon"
