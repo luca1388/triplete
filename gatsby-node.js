@@ -17,6 +17,7 @@ const POST_NODE_TYPE = `Team`;
 const TABLE_POSITION_NODE_TYPE = `Position`;
 const MATCH_NODE_TYPE = `Match`;
 const SCORER_NODE_TYPE = "Scorer";
+const UCL_STANDING_NODE_TYPE = "Group";
 
 exports.sourceNodes = async ({
   actions,
@@ -25,7 +26,9 @@ exports.sourceNodes = async ({
 }) => {
   const { createNode } = actions;
 
-  const data = {};
+  const data = {
+    ucl: {},
+  };
 
   const fetchTeams = async () =>
     axios.get("https://api.football-data.org/v2/competitions/SA/teams", {
@@ -48,10 +51,18 @@ exports.sourceNodes = async ({
       }
     );
 
+  const fetchStandingsUCL = async () =>
+    axios.get("https://api.football-data.org/v2/competitions/CL/standings", {
+      headers: { "X-Auth-Token": process.env.API_TOKEN },
+    });
+
   data.teams = (await fetchTeams()).data.teams;
   data.table = (await fetchTable()).data.standings[0].table;
   data.schedule = (await fetchSchedule()).data.matches;
   data.scorers = (await fetchScorers()).data.scorers;
+  data.ucl.standings = (await fetchStandingsUCL()).data.standings.filter(
+    standing => standing.type === "TOTAL"
+  );
 
   // loop through data and create Gatsby nodes
   data.teams.forEach(team => {
@@ -85,6 +96,19 @@ exports.sourceNodes = async ({
         type: TABLE_POSITION_NODE_TYPE,
         content: JSON.stringify(position),
         contentDigest: createContentDigest(position),
+      },
+    })
+  );
+  data.ucl.standings.forEach(standing =>
+    createNode({
+      ...standing,
+      id: createNodeId(`${UCL_STANDING_NODE_TYPE}-${standing.group}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: UCL_STANDING_NODE_TYPE,
+        content: JSON.stringify(standing),
+        contentDigest: createContentDigest(standing),
       },
     })
   );
@@ -138,18 +162,19 @@ exports.sourceNodes = async ({
 };
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
-  const { createNodeField } = actions
+  const { createNodeField } = actions;
   if (node.internal.type === `FeedNewsRSS`) {
-    const slug = node.title.toLowerCase()
-      .replace(/[^\w\s-]/g, '') // remove non-word [a-z0-9_], non-whitespace, non-hyphen characters
-      .replace(/[\s_-]+/g, '-') // swap any length of whitespace, underscore, hyphen characters with a single -
-      .replace(/^-+|-+$/g, ''); // remove leading, trailing -
+    const slug = node.title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "") // remove non-word [a-z0-9_], non-whitespace, non-hyphen characters
+      .replace(/[\s_-]+/g, "-") // swap any length of whitespace, underscore, hyphen characters with a single -
+      .replace(/^-+|-+$/g, ""); // remove leading, trailing -
 
     createNodeField({
       node,
       name: `slug`,
       value: slug,
-    })
+    });
   }
 };
 
@@ -186,6 +211,47 @@ exports.createPages = async ({ graphql, actions }) => {
       // Data passed to context is available
       // in page queries as GraphQL variables.
       scorers: scorersResult.data.allScorer.edges.map(edge => ({
+        ...edge.node,
+      })),
+    },
+  });
+
+  const uclStandingsResult = await graphql(`
+    query {
+      allGroup {
+        edges {
+          node {
+            id
+            group
+            table {
+              position
+              playedGames
+              won
+              draw
+              lost
+              points
+              goalsFor
+              goalsAgainst
+              goalDifference
+              team {
+                id
+                name
+                crestUrl
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  createPage({
+    path: "/champions/gironi",
+    component: path.resolve(`./src/templates/Groups/Groups.tsx`),
+    context: {
+      // Data passed to context is available
+      // in page queries as GraphQL variables.
+      groups: uclStandingsResult.data.allGroup.edges.map(edge => ({
         ...edge.node,
       })),
     },
