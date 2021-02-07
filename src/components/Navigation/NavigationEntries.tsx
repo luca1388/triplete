@@ -11,12 +11,14 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { colors } from '../../constants/colors';
 import Link from "./Link/Link";
 import './NavigationEntries.css';
+import { Competition } from "../../types";
 
 interface NavigationEntriesProps {
   mobile?: Boolean;
+  competition?: Competition;
 }
 
-const NavigationEntries: React.FC<NavigationEntriesProps> = ({ mobile }) => {
+const NavigationEntries: React.FC<NavigationEntriesProps> = ({ mobile, competition }) => {
   return (
     <>
       <Link to="/">
