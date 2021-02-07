@@ -13,8 +13,15 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-width: 130px;
     cursor: pointer;
+    @media (max-width: 960px) {
+        height: 35px;
+        padding: 0px 12px;
+    }
+`;
+
+const Label = styled.div`
+    margin: 0 5px 0 0;
 `;
 
 interface CompetitionsSelectorProps {
@@ -25,7 +32,7 @@ interface CompetitionsSelectorProps {
 const CompetitionsSelector: React.FC<CompetitionsSelectorProps> = ({ onOpenSelectorMenu, opened }) => {
     return (
         <Container onClick={onOpenSelectorMenu}>
-            <div>Serie A</div> { opened ? <IoIosArrowDropupCircle /> : <IoIosArrowDropdownCircle /> }
+            <Label>Serie A</Label> { opened ? <IoIosArrowDropupCircle /> : <IoIosArrowDropdownCircle /> }
         </Container>
     );
 };

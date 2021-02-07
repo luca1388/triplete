@@ -46,15 +46,19 @@ const CompetitionsList: React.FC<CompetitionsListProps> = ({ show }) => {
         .concat(show ? "CompetitionsSelector--opened" : '')
         .join(" ")}
     >
-      Seleziona la competizione:
-      <ul className="ListContainer">
+      <div className="Label">
+        Seleziona la competizione:
+      </div>
+      <a className="CompetitionLink">Serie A</a>
+      <a className="CompetitionLink">Champions League</a>
+      {/* <ul className="ListContainer">
         <li className="ListItem">
           <a className="CompetitionLink">Serie A</a>
         </li>
         <li className="ListItem">
           <a className="CompetitionLink">Champions League</a>
         </li>
-      </ul>
+      </ul> */}
     </div>
   );
 };
