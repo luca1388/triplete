@@ -73,7 +73,7 @@ const Layout: React.FC<LayoutProps> = ({ children, defaultCompetition }) => {
         />
         <main className="main-container">
           {children}
-          <BottomNavigation />
+          <BottomNavigation competition={selectedCompetition} />
         </main>
         {!cookiesAccepted && (
           <CookiesBanner onAcceptCookies={acceptCookiesHandler} />

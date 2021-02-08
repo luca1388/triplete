@@ -3,10 +3,10 @@ import React from 'react';
 import NavigationEntries from '../NavigationEntries/NavigationEntries';
 import './BottomNavigation.css';
 
-const BottomNavigation = props => {
+const BottomNavigation = ({ competition }) => {
     return(
         <nav className="bottomNavigationContainer">
-            <NavigationEntries mobile />
+            <NavigationEntries mobile competition={competition} />
         </nav>
     );
 };
