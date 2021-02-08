@@ -48,7 +48,7 @@ const IndexPage: React.FC<PageProps<IndexPageProps>> = ({ data }) => {
   //   .join("\n");
 
   return (
-    <Layout>
+    <Layout defaultCompetition="SA">
       <SEO image={data.site.siteMetadata.image} title={data.site.siteMetadata.title} description={data.site.siteMetadata.description}></SEO>
       <div
         className=""

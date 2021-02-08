@@ -50,7 +50,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
   const scheduleContainerClasses: string[] = ['scheduleContainer'].concat(!scrollCompleted ? 'hidden' : '' );
 
   return (
-    <Layout>
+    <Layout defaultCompetition="SA">
       <SEO title={"Calendario e risultati delle partite"} description="Serie A: Il calendario delle partite di calcio del campionato italiano. Guarda i risultati della tua squadra e controlla quando giocherà la prossima partita!"></SEO>
       <TeamFilter onType={onFilterTeams} />
       <div className={scheduleContainerClasses.join(' ')}>

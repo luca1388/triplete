@@ -18,10 +18,14 @@ import CookiesBanner from "../CookieBanner/CookiesBanner";
 // import loadable from "@loadable/component";
 import { readCookie, setCookie } from "../../utils/cookiesHandler";
 
-const Layout: React.FC = ({ children }) => {
+interface LayoutProps {
+  defaultCompetition?: Competition;
+};
+
+const Layout: React.FC<LayoutProps> = ({ children, defaultCompetition }) => {
   // const CookiesHandler = loadable.lib(() => import("../../utils/cookiesHandler"));
   const [cookiesAccepted, setCookiesAccepted] = useState<boolean>(true);
-  const [selectedCompetition, setSelectedCompetition] = useState<Competition>('SA');
+  const [selectedCompetition, setSelectedCompetition] = useState<Competition>(defaultCompetition || 'SA');
 
   useEffect(() => {
     if (!readCookie("ac")) {

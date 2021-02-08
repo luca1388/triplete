@@ -30,7 +30,7 @@ interface GroupsProps {
 const Groups: React.FC<GroupsProps> = ({ pageContext }) => {
   console.log(pageContext.groups);
   return (
-    <Layout>
+    <Layout defaultCompetition="UCL">
       <SEO
         title="Classifica marcatori Serie A"
         description="Scopri chi è il capocannoniere della Serie A: guarda la classifica marcatori del campionato di calcio."
