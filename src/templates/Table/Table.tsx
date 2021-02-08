@@ -4,17 +4,17 @@ import "./Table.css";
 import { standingPosition } from '../../types'
 import { tableConfig } from '../../constants/football';
 import Toolbar from "../../components/Toolbar/Toolbar";
-import { node } from "prop-types";
 
 export interface TableProps {
     standings: standingPosition[];
+    label: string;
   }
   
 
-const Table: React.FC<TableProps> = ({ standings }) => {
+const Table: React.FC<TableProps> = ({ standings, label }) => {
   return (      
       <div className="standingsContainer">
-        <Toolbar />
+        <Toolbar leagueName={label} />
         <div className="standingsHeader">
           <span className="rank"></span>
           <span className="imageWrapper"></span>

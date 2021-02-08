@@ -7,12 +7,13 @@ import { SiteData } from "../../types";
 import ShareIcon from "../ShareIcon/ShareIcon";
 
 interface ToolbarProps {
-  site: SiteData;
+  site?: SiteData;
   shareUrl?: string;
   shareTitle?: string;
+  leagueName: string;
 }
 
-const Toolbar: React.FC = () => {
+const Toolbar: React.FC<ToolbarProps> = ({ leagueName }) => {
   const ActionsBar = styled.div`
     display: flex;
     flex-direction: row;
@@ -44,7 +45,7 @@ const Toolbar: React.FC = () => {
 
   return (
     <ActionsBar>
-      <LeagueTitle>Serie A</LeagueTitle>
+      <LeagueTitle>{leagueName}</LeagueTitle>
       {typeof navigator !== "undefined" && navigator.share && (
         <ShareIcon title={data.site.siteMetadata.title} />
       )}

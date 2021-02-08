@@ -61,7 +61,7 @@ const IndexPage: React.FC<PageProps<IndexPageProps>> = ({ data }) => {
           width: '100%',
         }}
       >
-        <Table standings={standings} />
+        <Table label="Serie A" standings={standings} />
       </div>
     </Layout>
   );
