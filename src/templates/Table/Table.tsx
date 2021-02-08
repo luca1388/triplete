@@ -1,17 +1,18 @@
 import React from "react";
 
 import "./Table.css";
-import { standingPosition } from '../../types'
-import { tableConfig } from '../../constants/football';
+import { standingPosition, TableConfig } from '../../types'
+import { tableConfigDefault } from '../../constants/football';
 import Toolbar from "../../components/Toolbar/Toolbar";
 
 export interface TableProps {
     standings: standingPosition[];
     label: string;
+    tableConfig?: TableConfig;
   }
   
 
-const Table: React.FC<TableProps> = ({ standings, label }) => {
+const Table: React.FC<TableProps> = ({ standings, label, tableConfig = tableConfigDefault }) => {
   return (      
       <div className="standingsContainer">
         <Toolbar leagueName={label} />
@@ -31,13 +32,13 @@ const Table: React.FC<TableProps> = ({ standings, label }) => {
         <div className="standingsTeamsContainer">
           {standings.map((entry, index) => {
             let teamNameClasses = ["teamName"];
-            if (index <= tableConfig.championsLeagueTeamsCount) {
+            if (index < tableConfig.mainCompetitionTeamsCount) {
               teamNameClasses.push("championsLeague");
             }
-            if (index > tableConfig.championsLeagueTeamsCount && index <= tableConfig.championsLeagueTeamsCount + tableConfig.europaLeagueTeamsCount) {
+            if (index >= tableConfig.mainCompetitionTeamsCount && index < tableConfig.mainCompetitionTeamsCount + tableConfig.secondaryCompetitionTeamsCount) {
               teamNameClasses.push("europaLeague");
             }
-            if (index > standings.length - tableConfig.serieBTeamsCount - 1) {
+            if (index > standings.length - tableConfig.worstCompetitionTeamsCount - 1) {
               teamNameClasses.push("serieB");
             }
 

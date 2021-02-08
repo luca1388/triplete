@@ -7,6 +7,7 @@ import SEO from '../components/SEO/seo';
 import { standingPosition, TableProps } from "../types";
 
 import { SiteData } from '../types';
+import { tableConfigSA } from "../constants/football";
 
 type IndexPageProps = {
   allPosition: {
@@ -61,7 +62,7 @@ const IndexPage: React.FC<PageProps<IndexPageProps>> = ({ data }) => {
           width: '100%',
         }}
       >
-        <Table label="Serie A" standings={standings} />
+        <Table label="Serie A" standings={standings} tableConfig={tableConfigSA} />
       </div>
     </Layout>
   );

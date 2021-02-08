@@ -1,3 +1,5 @@
+import { number } from "prop-types";
+
 declare global {
   interface Window {
     gtag: (type: string, eventName: string, eventObject: {[key in string]: any}) => void
@@ -84,3 +86,9 @@ export interface TableProps {
 }
 
 export type Competition = 'SA' | 'UCL';
+
+export type TableConfig = {
+  mainCompetitionTeamsCount: number;
+  secondaryCompetitionTeamsCount: number;
+  worstCompetitionTeamsCount: number;
+};

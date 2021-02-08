@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout/Layout";
 import SEO from "../../components/SEO/seo";
+import { tableConfigUCL } from "../../constants/football";
 import Table from "../Table/Table";
 
 interface GroupsProps {
@@ -57,6 +58,7 @@ const Groups: React.FC<GroupsProps> = ({ pageContext }) => {
             <Table
               label={`Gruppo ${group.group[group.group.length - 1]}`}
               standings={standings}
+              tableConfig={tableConfigUCL}
             />
           );
         })}
