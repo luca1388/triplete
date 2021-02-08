@@ -51,6 +51,11 @@ exports.sourceNodes = async ({
       }
     );
 
+  const fetchUCLTeams = async () =>
+    axios.get("https://api.football-data.org/v2/competitions/CL/teams", {
+      headers: { "X-Auth-Token": process.env.API_TOKEN },
+    });
+
   const fetchStandingsUCL = async () =>
     axios.get("https://api.football-data.org/v2/competitions/CL/standings", {
       headers: { "X-Auth-Token": process.env.API_TOKEN },
@@ -63,6 +68,7 @@ exports.sourceNodes = async ({
   data.ucl.standings = (await fetchStandingsUCL()).data.standings.filter(
     standing => standing.type === "TOTAL"
   );
+  data.ucl.teams = (await fetchUCLTeams()).data.teams;
 
   // loop through data and create Gatsby nodes
   data.teams.forEach(team => {
@@ -99,6 +105,18 @@ exports.sourceNodes = async ({
       },
     })
   );
+  data.ucl.standings = data.ucl.standings.map(entry => ({
+    ...entry,
+    ["table"]: entry.table.map(tab => {
+      const updatedTeam = data.ucl.teams.find(team => team.id === tab.team.id);
+
+      return {
+        ...tab,
+        ["team"]: updatedTeam,
+      };
+    }),
+  }));
+
   data.ucl.standings.forEach(standing =>
     createNode({
       ...standing,
@@ -234,9 +252,11 @@ exports.createPages = async ({ graphql, actions }) => {
               goalsAgainst
               goalDifference
               team {
-                id
+                teamId: id
                 name
                 crestUrl
+                shortName
+                tla
               }
             }
           }

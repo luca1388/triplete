@@ -20,6 +20,7 @@ interface GroupsProps {
         team: {
           id:  number;
           name: string;
+          shortName: string;
           crestUrl: string;
         }
       }
@@ -74,7 +75,7 @@ const Groups: React.FC<GroupsProps> = ({ pageContext }) => {
                       height={30}
                       width={30}
                     />
-                    <span>{position.team.name}</span>
+                    <span>{position.team.shortName}</span>
                   </span>
                   <span className="match">{position.playedGames}</span>
                   <span className="match">{position.won}</span>
