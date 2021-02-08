@@ -18,7 +18,7 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
     <Layout defaultCompetition="SA">
       <SEO title="Classifica marcatori Serie A" description="Scopri chi è il capocannoniere della Serie A: guarda la classifica marcatori del campionato di calcio." />
       <div className="scorersContainer">
-        <Toolbar />
+        <Toolbar leagueName="Serie A" />
         {pageContext.scorers.map((entry, index) => {
           const scorerClasses = ["scorer"];
           if (index === 0) {
