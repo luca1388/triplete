@@ -12,7 +12,7 @@ import Header from "../Header/header";
 import BottomNavigation from "../Navigation/BottomNavigation/BottomNavigation";
 import "./Layout.css";
 
-import { SiteData } from "../../types";
+import { Competition, SiteData } from "../../types";
 import Navigation from "../Navigation/Navigation";
 import CookiesBanner from "../CookieBanner/CookiesBanner";
 // import loadable from "@loadable/component";
@@ -21,6 +21,7 @@ import { readCookie, setCookie } from "../../utils/cookiesHandler";
 const Layout: React.FC = ({ children }) => {
   // const CookiesHandler = loadable.lib(() => import("../../utils/cookiesHandler"));
   const [cookiesAccepted, setCookiesAccepted] = useState<boolean>(true);
+  const [selectedCompetition, setSelectedCompetition] = useState<Competition>('SA');
 
   useEffect(() => {
     if (!readCookie("ac")) {
@@ -50,14 +51,21 @@ const Layout: React.FC = ({ children }) => {
     }
   `);
 
+  const changeCompetitionsHandler = useCallback((newCompetition: Competition) => {
+    setSelectedCompetition(newCompetition);
+  }, []);
+
   return (
     <div className="app">
       <Header
         siteTitle={data.site.siteMetadata?.displayTitle || `Triplete.net`}
+        competition={selectedCompetition}
+        onChangeCompetition={changeCompetitionsHandler}
       />
       <div className="header-container">
         <Navigation
           siteTitle={data.site.siteMetadata?.displayTitle || `Triplete.net`}
+          competition={selectedCompetition}
         />
         <main className="main-container">
           {children}

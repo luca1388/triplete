@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { competitionsName } from "../../constants/LeaguesName";
+import { Competition } from "../../types";
 import "./CompetitionsSelector.css";
 
 const ListItem = styled.li`
@@ -8,9 +10,13 @@ const ListItem = styled.li`
 
 interface CompetitionsListProps {
   show: boolean;
+  onSelectCompetition: (newCompetition: Competition) => void;
 }
 
-const CompetitionsList: React.FC<CompetitionsListProps> = ({ show }) => {
+const CompetitionsList: React.FC<CompetitionsListProps> = ({
+  show,
+  onSelectCompetition,
+}) => {
   const ListContainer = styled.ul`
     list-style: none;
     padding: 0px 10px;
@@ -33,32 +39,25 @@ const CompetitionsList: React.FC<CompetitionsListProps> = ({ show }) => {
       `};
   `;
 
-  // if (!show) {
-  //   return null;
-  // }
   return (
-    // <ListContainer>
-    //   <ListItem>Serie A</ListItem>
-    //   <ListItem>Champions League</ListItem>
-    // </ListContainer>
     <div
       className={["CompetitionsSelector"]
-        .concat(show ? "CompetitionsSelector--opened" : '')
+        .concat(show ? "CompetitionsSelector--opened" : "")
         .join(" ")}
     >
-      <div className="Label">
-        Seleziona la competizione:
-      </div>
-      <a className="CompetitionLink">Serie A</a>
-      <a className="CompetitionLink">Champions League</a>
-      {/* <ul className="ListContainer">
-        <li className="ListItem">
-          <a className="CompetitionLink">Serie A</a>
-        </li>
-        <li className="ListItem">
-          <a className="CompetitionLink">Champions League</a>
-        </li>
-      </ul> */}
+      <div className="Label">Seleziona la competizione:</div>
+      {Object.keys(competitionsName).map((league) => {
+        const competition: Competition = league as Competition;
+        return (
+          <a
+            key={league}
+            className="CompetitionLink"
+            onClick={() => onSelectCompetition(competition)}
+          >
+            {competitionsName[competition].displayName}
+          </a>
+        );
+      })}
     </div>
   );
 };

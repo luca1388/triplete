@@ -82,3 +82,5 @@ export interface TableProps {
     }
   ];
 }
+
+export type Competition = 'SA' | 'UCL';

@@ -1,34 +1,31 @@
 import React from "react";
-import {
-  GiSoccerBall,
-  GiPodium,
-  GiSoccerField,
-  GiRss
-} from "react-icons/gi";
+import { GiSoccerBall, GiPodium, GiSoccerField, GiRss } from "react-icons/gi";
 
-import { BsInfoCircle } from 'react-icons/bs';
+import { BsInfoCircle } from "react-icons/bs";
 
-import { colors } from '../../constants/colors';
-import Link from "./Link/Link";
-import './NavigationEntries.css';
-import { Competition } from "../../types";
+import { colors } from "../../../constants/colors";
+import Link from "../Link/Link";
+import "./NavigationEntries.css";
+import { Competition } from "../../../types";
+import TableSA from "./Entries/TableSA";
+import TableUCL from "./Entries/TableUCL";
 
 interface NavigationEntriesProps {
-  mobile?: Boolean;
+  mobile?: boolean;
   competition?: Competition;
 }
 
-const NavigationEntries: React.FC<NavigationEntriesProps> = ({ mobile, competition }) => {
+const NavigationEntries: React.FC<NavigationEntriesProps> = ({
+  mobile,
+  competition,
+}) => {
   return (
     <>
-      <Link to="/">
-        <GiPodium
-          className="NavigationIcon"
-          color={colors.accent}
-          size={mobile ? 32 : 40}
-        />
-        Classifica
-      </Link>
+      {competition === "SA" ? (
+        <TableSA mobile={mobile} />
+      ) : (
+        <TableUCL mobile={mobile} />
+      )}
       <Link to="/marcatori">
         <GiSoccerBall
           className="NavigationIcon"

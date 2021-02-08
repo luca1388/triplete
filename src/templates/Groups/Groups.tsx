@@ -2,7 +2,32 @@ import React from "react";
 import Layout from "../../components/Layout/Layout";
 import SEO from "../../components/SEO/seo";
 
-const Groups = ({ pageContext }) => {
+interface GroupsProps {
+  pageContext: {
+    groups: [{
+      id: string;
+      group: string;
+      table: {
+        position: number;
+        playedGames: number;
+        won: number;
+        draw: number;
+        lost: number;
+        points: number;
+        goalsFor: number;
+        goalsAgainst: number;
+        goalDifference: number;
+        team: {
+          id:  number;
+          name: string;
+          crestUrl: string;
+        }
+      }
+    }]
+  }
+}
+
+const Groups: React.FC<GroupsProps> = ({ pageContext }) => {
   console.log(pageContext.groups);
   return (
     <Layout>

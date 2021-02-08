@@ -1,6 +1,8 @@
 import React from 'react';
 import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from 'react-icons/io';
 import styled from 'styled-components';
+import { competitionsName } from '../../constants/LeaguesName';
+import { Competition } from '../../types';
 
 const Container = styled.div`
     border-radius: 24px;
@@ -27,12 +29,13 @@ const Label = styled.div`
 interface CompetitionsSelectorProps {
     onOpenSelectorMenu: () => void;
     opened: boolean;
+    selectedCompetition: Competition
 }
 
-const CompetitionsSelector: React.FC<CompetitionsSelectorProps> = ({ onOpenSelectorMenu, opened }) => {
+const CompetitionsSelector: React.FC<CompetitionsSelectorProps> = ({ onOpenSelectorMenu, opened, selectedCompetition }) => {
     return (
         <Container onClick={onOpenSelectorMenu}>
-            <Label>Serie A</Label> { opened ? <IoIosArrowDropupCircle /> : <IoIosArrowDropdownCircle /> }
+            <Label>{competitionsName[selectedCompetition].displayName}</Label> { opened ? <IoIosArrowDropupCircle /> : <IoIosArrowDropdownCircle /> }
         </Container>
     );
 };
