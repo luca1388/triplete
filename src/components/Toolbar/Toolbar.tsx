@@ -13,20 +13,20 @@ interface ToolbarProps {
   leagueName: string;
 }
 
-const Toolbar: React.FC<ToolbarProps> = ({ leagueName }) => {
-  const ActionsBar = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin: 0 0 1rem 0;
-    font-size: 22px;
-  `;
-  const LeagueTitle = styled.h3`
-    margin: 0;
-  `;
+const ActionsBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 1rem 0;
+  font-size: 22px;
+`;
+const LeagueTitle = styled.h3`
+  margin: 0;
+`;
 
+const Toolbar: React.FC<ToolbarProps> = ({ leagueName, children }) => {
   const data: {
     site: SiteData;
   } = useStaticQuery(graphql`
@@ -46,6 +46,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ leagueName }) => {
   return (
     <ActionsBar>
       <LeagueTitle>{leagueName}</LeagueTitle>
+      { children }
       {typeof navigator !== "undefined" && navigator.share && (
         <ShareIcon title={data.site.siteMetadata.title} />
       )}
