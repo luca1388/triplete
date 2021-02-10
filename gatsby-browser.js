@@ -4,9 +4,8 @@
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
 import { useGoogleAnalytics } from "./src/hooks/useGoogleAnalytics";
-import React from 'react';
+import React from "react";
 import ReactDOM from "react-dom";
-// import { Workbox, messageSW } from 'workbox-window';
 
 import "./src/global.css";
 import NewVersionBanner from "./src/components/NewVersionBanner/NewVersionBanner";
@@ -70,8 +69,8 @@ if (navigator && navigator.serviceWorker) {
     });
 
     // detect controller change and refresh the page
-    navigator.serviceWorker.addEventListener("controllerchange", (event) => {
-      console.log('controllerchange');
+    navigator.serviceWorker.addEventListener("controllerchange", event => {
+      console.log("controllerchange");
       // window.location.reload();
     });
 
