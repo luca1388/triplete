@@ -310,40 +310,40 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  const newsResult = await graphql(`
-    {
-      allFeedNewsRss {
-        edges {
-          node {
-            fields {
-              slug
-            }
-            title
-            content
-            pubDate
-            enclosure {
-              url
-            }
-            link
-            isoDate
-          }
-        }
-      }
-    }
-  `);
+  // const newsResult = await graphql(`
+  //   {
+  //     allFeedNewsRss {
+  //       edges {
+  //         node {
+  //           fields {
+  //             slug
+  //           }
+  //           title
+  //           content
+  //           pubDate
+  //           enclosure {
+  //             url
+  //           }
+  //           link
+  //           isoDate
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
 
-  newsResult.data.allFeedNewsRss.edges.forEach(({ node }) => {
-    createPage({
-      path: '/news/' + node.fields.slug,
-      component: path.resolve("./src/templates/News/News.tsx"),
-      context: {
-        // additional data can be passed via context
-        content: node.content,
-        title: node.title,
-        pubDate: node.pubDate,
-        link: node.link,
-        imageUrl: node.enclosure.url,
-      },
-    });
-  });
+  // newsResult.data.allFeedNewsRss.edges.forEach(({ node }) => {
+  //   createPage({
+  //     path: '/news/' + node.fields.slug,
+  //     component: path.resolve("./src/templates/News/News.tsx"),
+  //     context: {
+  //       // additional data can be passed via context
+  //       content: node.content,
+  //       title: node.title,
+  //       pubDate: node.pubDate,
+  //       link: node.link,
+  //       imageUrl: node.enclosure.url,
+  //     },
+  //   });
+  // });
 };
