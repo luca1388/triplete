@@ -31,6 +31,7 @@ const Table: React.FC<TableProps> = ({ standings }) => {
         <div className="standingsTeamsContainer">
           {standings.map((entry, index) => {
             let teamNameClasses = ["teamName"];
+            let standingsWrapperClasses = ["standingsTeam"];
             if (index <= tableConfig.championsLeagueTeamsCount) {
               teamNameClasses.push("championsLeague");
             }
@@ -40,9 +41,12 @@ const Table: React.FC<TableProps> = ({ standings }) => {
             if (index > standings.length - tableConfig.serieBTeamsCount - 1) {
               teamNameClasses.push("serieB");
             }
+            if (index === 0) {
+              standingsWrapperClasses.push("firstScorer");
+            }
 
             return (
-              <div className="standingsTeam" key={entry.id}>
+              <div className={standingsWrapperClasses.join(" ")} key={entry.id}>
                 <span className="rank">{index + 1}</span>
                 <span className="imageWrapper">
                   <img
