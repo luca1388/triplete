@@ -7,9 +7,9 @@ import "./CardNews.css";
 interface CardNewsProps {
   title: string;
   link: string;
-  source: string;
+  source?: string;
   description: string;
-  imageURL: string;
+  imageURL?: string;
   date: string;
   slug: string;
 }

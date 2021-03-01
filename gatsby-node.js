@@ -18,6 +18,19 @@ const TABLE_POSITION_NODE_TYPE = `Position`;
 const MATCH_NODE_TYPE = `Match`;
 const SCORER_NODE_TYPE = "Scorer";
 
+// exports.createSchemaCustomization = ({ actions }) => {
+//   const { createTypes } = actions
+//   const typeDefs = `
+//     type AuthorJson implements Node @dontInfer {
+//       name: String!
+//       firstName: String!
+//       email: String!
+//       joinedAt: Date
+//     }
+//   `
+//   createTypes(typeDefs)
+// }
+
 exports.sourceNodes = async ({
   actions,
   createContentDigest,
@@ -144,11 +157,20 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       .replace(/[^\w\s-]/g, '') // remove non-word [a-z0-9_], non-whitespace, non-hyphen characters
       .replace(/[\s_-]+/g, '-') // swap any length of whitespace, underscore, hyphen characters with a single -
       .replace(/^-+|-+$/g, ''); // remove leading, trailing -
-
-    createNodeField({
+    
+    let nodeField = {
       node,
       name: `slug`,
       value: slug,
+    };
+    if (!nodeField.node.enclosure || !nodeField.node.enclosure.url) {
+      nodeField.node.enclosure = {
+        url: ''
+      };
+    }
+
+    createNodeField({
+      ...nodeField
     })
   }
 };
