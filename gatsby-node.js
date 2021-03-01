@@ -19,6 +19,19 @@ const MATCH_NODE_TYPE = `Match`;
 const SCORER_NODE_TYPE = "Scorer";
 const UCL_STANDING_NODE_TYPE = "Group";
 
+// exports.createSchemaCustomization = ({ actions }) => {
+//   const { createTypes } = actions
+//   const typeDefs = `
+//     type AuthorJson implements Node @dontInfer {
+//       name: String!
+//       firstName: String!
+//       email: String!
+//       joinedAt: Date
+//     }
+//   `
+//   createTypes(typeDefs)
+// }
+
 exports.sourceNodes = async ({
   actions,
   createContentDigest,
@@ -182,17 +195,25 @@ exports.sourceNodes = async ({
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `FeedNewsRSS`) {
-    const slug = node.title
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, "") // remove non-word [a-z0-9_], non-whitespace, non-hyphen characters
-      .replace(/[\s_-]+/g, "-") // swap any length of whitespace, underscore, hyphen characters with a single -
-      .replace(/^-+|-+$/g, ""); // remove leading, trailing -
-
-    createNodeField({
+    const slug = node.title.toLowerCase()
+      .replace(/[^\w\s-]/g, '') // remove non-word [a-z0-9_], non-whitespace, non-hyphen characters
+      .replace(/[\s_-]+/g, '-') // swap any length of whitespace, underscore, hyphen characters with a single -
+      .replace(/^-+|-+$/g, ''); // remove leading, trailing -
+    
+    let nodeField = {
       node,
       name: `slug`,
       value: slug,
-    });
+    };
+    if (!nodeField.node.enclosure || !nodeField.node.enclosure.url) {
+      nodeField.node.enclosure = {
+        url: ''
+      };
+    }
+
+    createNodeField({
+      ...nodeField
+    })
   }
 };
 
