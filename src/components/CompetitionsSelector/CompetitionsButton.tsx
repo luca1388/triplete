@@ -1,7 +1,8 @@
 import React from 'react';
 import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from 'react-icons/io';
+import { GiTrophyCup } from 'react-icons/gi';
 import styled from 'styled-components';
-import { competitionsName } from '../../constants/LeaguesName';
+// import { competitionsName } from '../../constants/LeaguesName';
 import { Competition } from '../../types';
 
 const Container = styled.div`
@@ -9,8 +10,8 @@ const Container = styled.div`
     box-shadow: 0px 5px 20px #81a4f1;
     border: 1px solid #0c50a7;
     background: white;
-    height: 50px;
-    padding: 0px 20px;
+    height: 40px;
+    padding: 0px 10px;
     color: #444;
     display: flex;
     justify-content: space-between;
@@ -36,7 +37,7 @@ interface CompetitionsSelectorProps {
 const CompetitionsSelector: React.FC<CompetitionsSelectorProps> = ({ onOpenSelectorMenu, opened, selectedCompetition }) => {
     return (
         <Container onClick={onOpenSelectorMenu}>
-            <Label>{competitionsName[selectedCompetition].displayName}</Label> { opened ? <IoIosArrowDropupCircle /> : <IoIosArrowDropdownCircle /> }
+            <GiTrophyCup /> { opened ? <IoIosArrowDropupCircle /> : <IoIosArrowDropdownCircle /> }
         </Container>
     );
 };
