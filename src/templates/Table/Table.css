@@ -95,11 +95,9 @@ span.teamName {
 
     .standingsContainer {
         width: 90%;
-    }
-
-    .standingsContainer {
         box-shadow: none;
     }
+
     .teamName {
         margin-left: 5px;
     }
