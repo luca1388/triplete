@@ -49,7 +49,7 @@ const IndexPage: React.FC<PageProps<IndexPageProps>> = ({ data }) => {
   //   .join("\n");
 
   return (
-    <Layout defaultCompetition="SA">
+    <Layout defaultCompetition="SA" leagueNameVisible>
       <SEO image={data.site.siteMetadata.image} title={data.site.siteMetadata.title} description={data.site.siteMetadata.description}></SEO>
       <div
         className=""
@@ -62,7 +62,7 @@ const IndexPage: React.FC<PageProps<IndexPageProps>> = ({ data }) => {
           width: '100%',
         }}
       >
-        <Table label="Serie A" standings={standings} tableConfig={tableConfigSA} />
+        <Table label="Classifica" standings={standings} tableConfig={tableConfigSA} />
       </div>
     </Layout>
   );

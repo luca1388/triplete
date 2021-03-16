@@ -49,13 +49,13 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
   );
 
   return (
-    <Layout defaultCompetition="SA">
+    <Layout defaultCompetition="SA" leagueNameVisible>
       <SEO
         title="Classifica marcatori Serie A"
         description="Scopri chi è il capocannoniere della Serie A: guarda la classifica marcatori del campionato di calcio."
       />
       <div className="scorersContainer">
-        <Toolbar leagueName="Serie A">
+        <Toolbar leagueName="Marcatori">
           <Filter
             ref={filterInputRef}
             type="text"

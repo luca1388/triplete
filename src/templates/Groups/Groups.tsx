@@ -37,7 +37,7 @@ interface GroupsProps {
 const Groups: React.FC<GroupsProps> = ({ pageContext }) => {
   console.log(pageContext.groups);
   return (
-    <Layout defaultCompetition="UCL">
+    <Layout defaultCompetition="UCL" leagueNameVisible>
       <SEO
         title="Champions League - Fase a gironi"
         description="Uefa Champions League: i gironi della masssima competizione europea."
