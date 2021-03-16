@@ -60,7 +60,7 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
             ref={filterInputRef}
             type="text"
             value={filter}
-            placeholder="Filtra per squadra"
+            placeholder="Filtra"
             onChange={changeFilterInputHandler}
             onKeyDown={keyDownHandler}
           />
