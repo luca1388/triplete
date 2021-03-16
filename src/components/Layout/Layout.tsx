@@ -17,15 +17,23 @@ import Navigation from "../Navigation/Navigation";
 import CookiesBanner from "../CookieBanner/CookiesBanner";
 // import loadable from "@loadable/component";
 import { readCookie, setCookie } from "../../utils/cookiesHandler";
+import { competitionsName } from "../../constants/LeaguesName";
 
 interface LayoutProps {
   defaultCompetition?: Competition;
-};
+  leagueNameVisible?: boolean;
+}
 
-const Layout: React.FC<LayoutProps> = ({ children, defaultCompetition }) => {
+const Layout: React.FC<LayoutProps> = ({
+  children,
+  defaultCompetition,
+  leagueNameVisible = false,
+}) => {
   // const CookiesHandler = loadable.lib(() => import("../../utils/cookiesHandler"));
   const [cookiesAccepted, setCookiesAccepted] = useState<boolean>(true);
-  const [selectedCompetition, setSelectedCompetition] = useState<Competition>(defaultCompetition || 'SA');
+  const [selectedCompetition, setSelectedCompetition] = useState<Competition>(
+    defaultCompetition || "SA"
+  );
 
   useEffect(() => {
     if (!readCookie("ac")) {
@@ -55,9 +63,12 @@ const Layout: React.FC<LayoutProps> = ({ children, defaultCompetition }) => {
     }
   `);
 
-  const changeCompetitionsHandler = useCallback((newCompetition: Competition) => {
-    setSelectedCompetition(newCompetition);
-  }, []);
+  const changeCompetitionsHandler = useCallback(
+    (newCompetition: Competition) => {
+      setSelectedCompetition(newCompetition);
+    },
+    []
+  );
 
   return (
     <div className="app">
@@ -72,6 +83,11 @@ const Layout: React.FC<LayoutProps> = ({ children, defaultCompetition }) => {
           competition={selectedCompetition}
         />
         <main className="main-container">
+          {leagueNameVisible && (
+            <div className="league-name">
+              <h3>{competitionsName[selectedCompetition].displayName}</h3>
+            </div>
+          )}
           {children}
           <BottomNavigation competition={selectedCompetition} />
         </main>
