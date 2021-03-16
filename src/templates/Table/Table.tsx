@@ -32,10 +32,10 @@ const Table: React.FC<TableProps> = ({ standings }) => {
           {standings.map((entry, index) => {
             let teamNameClasses = ["teamName"];
             let standingsWrapperClasses = ["standingsTeam"];
-            if (index <= tableConfig.championsLeagueTeamsCount) {
+            if (index < tableConfig.championsLeagueTeamsCount) {
               teamNameClasses.push("championsLeague");
             }
-            if (index > tableConfig.championsLeagueTeamsCount && index <= tableConfig.championsLeagueTeamsCount + tableConfig.europaLeagueTeamsCount) {
+            if (index >= tableConfig.championsLeagueTeamsCount && index < tableConfig.championsLeagueTeamsCount + tableConfig.europaLeagueTeamsCount) {
               teamNameClasses.push("europaLeague");
             }
             if (index > standings.length - tableConfig.serieBTeamsCount - 1) {
