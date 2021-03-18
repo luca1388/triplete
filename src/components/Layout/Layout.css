@@ -644,6 +644,7 @@ pre tt:after {
 .league-name {
   width: 70%;
   padding: 10px 0;
+  text-decoration: underline;
 }
 
 @media only screen and (max-width: 960px) {
