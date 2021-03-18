@@ -55,7 +55,7 @@ exports.sourceNodes = async ({
 
   const fetchScorers = async () =>
     axios.get(
-      "https://api.football-data.org/v2/competitions/SA/scorers?limit=50",
+      "https://api.football-data.org/v2/competitions/SA/scorers?limit=80",
       {
         headers: { "X-Auth-Token": process.env.API_TOKEN },
       }
