@@ -7,10 +7,9 @@ import { SiteData } from "../../types";
 import ShareIcon from "../ShareIcon/ShareIcon";
 
 interface ToolbarProps {
-  site: SiteData;
   shareUrl?: string;
   shareTitle?: string;
-  leagueName: string;
+  leagueName?: string;
 }
 
 const ActionsBar = styled.div`
