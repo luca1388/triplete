@@ -15,9 +15,9 @@ interface ScheduleProps {
 
 const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
   const [ filteredTeam, setFilteredTeam ] = useState<number>(-1);
-  const [ scrollCompleted, setScrollCompleted ] = useState<boolean>(false);
-  const todayRef = useRef<HTMLDivElement>();
-  const matchdayRef = useRef<HTMLDivElement>();
+  const [ scrollCompleted, setScrollCompleted ] = useState<boolean>(true);
+  const todayRef = useRef<HTMLDivElement>(null);
+  const matchdayRef = useRef<HTMLDivElement>(null);
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -44,7 +44,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
   const currentMatchday = pageContext.calendar[days[0]][0]?.season.currentMatchday;
   const firstDayOfCurrentMatchday = days.find( day => {
     const matches = pageContext.calendar[day];
-    return matches.find(match => match.matchday === currentMatchday);
+    return matches.find(match => match?.matchday === currentMatchday);
   });
   
   const scheduleContainerClasses: string[] = ['scheduleContainer'].concat(!scrollCompleted ? 'hidden' : '' );
@@ -58,41 +58,41 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
           let matches = pageContext.calendar[day];
           let matchesOfTheDay = matches.map(match => {
             let message = null;
-            const startTime = getTimeFromUtcDateTime(match.utcDate);
-            if (match.status === "SCHEDULED") {
+            const startTime = getTimeFromUtcDateTime(match?.utcDate);
+            if (match?.status === "SCHEDULED") {
               message = startTime ? (
                 <span style={{ fontStyle: "italic" }}>{startTime}</span>
               ) : null;
             }
-            if (match.status === "IN_PLAY") {
+            if (match?.status === "IN_PLAY") {
               message = (
                 <span style={{ color: "#009688", fontWeight: "bold" }}>
                   Iniziata!
                 </span>
               );
             }
-            if (match.status === "PAUSED") {
+            if (match?.status === "PAUSED") {
               message = (
                 <span style={{ color: "#FF9800", fontWeight: "bold" }}>
                   Intervallo
                 </span>
               );
             }
-            if (match.status === "FINISHED") {
+            if (match?.status === "FINISHED") {
               message = (
                 <span style={{ color: "#2196f3", fontWeight: "bold" }}>
                   Finita
                 </span>
               );
             }
-            if (match.status === "AWARDED") {
+            if (match?.status === "AWARDED") {
               message = (
                 <span style={{ color: "#2196f3", fontWeight: "bold" }}>
                   Vinta a tavolino
                 </span>
               );
             }
-            if (match.status === "POSTPONED") {
+            if (match?.status === "POSTPONED") {
               message = (
                 <span style={{ color: "#FF9800", fontWeight: "bold" }}>
                   Rinviata
@@ -104,25 +104,25 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
             if (filteredTeam < 0) {
               filteringClasses = ["match"];
             } else {
-              filteringClasses = match.homeTeam.teamId !== filteredTeam && filteredTeam !== match.awayTeam.teamId ?
+              filteringClasses = match?.homeTeam.teamId !== filteredTeam && filteredTeam !== match?.awayTeam.teamId ?
               ["match", "filteredOutMatch"] : ["match", "filteredInMatch"];
             }
 
             return (
-              <div className={filteringClasses.join(' ')} key={match.id}>
+              <div className={filteringClasses.join(' ')} key={match?.id}>
                 <div className="matchResultContainer">
                   <div className="matchResult">
                     <span className="teamNameBlock">
                       <span className="longName">
-                        {match.homeTeam.shortName.split(" ")[0]}
+                        {match?.homeTeam.shortName.split(" ")[0]}
                       </span>
                       <span className="veryShortName">
-                        {match.homeTeam.tla}
+                        {match?.homeTeam.tla}
                       </span>
                       <img
-                        src={match.homeTeam.crestUrl}
-                        title={match.homeTeam.shortName}
-                        alt={match.homeTeam.shortName}
+                        src={match?.homeTeam.crestUrl}
+                        title={match?.homeTeam.shortName}
+                        alt={match?.homeTeam.shortName}
                         height={30}
                         width={30}
                       />
@@ -130,34 +130,34 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
 
                     <span className="scoreSquare">
                       <span>
-                        {match.score.fullTime.homeTeam}
+                        {match?.score.fullTime.homeTeam}
                       </span>
                       <span> : </span>
                       <span>
-                        {match.score.fullTime.awayTeam}
+                        {match?.score.fullTime.awayTeam}
                       </span>
                     </span>
 
                     <span className="teamNameBlock">
                       <img
-                        src={match.awayTeam.crestUrl}
-                        title={match.awayTeam.shortName}
-                        alt={match.awayTeam.shortName}
+                        src={match?.awayTeam.crestUrl}
+                        title={match?.awayTeam.shortName}
+                        alt={match?.awayTeam.shortName}
                         height={30}
                         width={30}
                       />
                       <span className="longName">
-                        {match.awayTeam.shortName.split(" ")[0]}
+                        {match?.awayTeam.shortName.split(" ")[0]}
                       </span>
                       <span className="veryShortName">
-                        {match.awayTeam.tla}
+                        {match?.awayTeam.tla}
                       </span>
                     </span>
                   </div>
                 </div>
 
                 <div className="matchDayCard">
-                  <span>Giornata {match.matchday}</span>
+                  <span>Giornata {match?.matchday}</span>
                   <span>{message}</span>
                 </div>
               </div>
