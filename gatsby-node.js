@@ -17,6 +17,7 @@ const POST_NODE_TYPE = `Team`;
 const TABLE_POSITION_NODE_TYPE = `Position`;
 const MATCH_NODE_TYPE = `Match`;
 const SCORER_NODE_TYPE = "Scorer";
+const SCORER_UCL_NODE_TYPE = "ScorerUCL";
 const UCL_STANDING_NODE_TYPE = "Group";
 
 // exports.createSchemaCustomization = ({ actions }) => {
@@ -73,6 +74,11 @@ exports.sourceNodes = async ({
     axios.get("https://api.football-data.org/v2/competitions/CL/standings", {
       headers: { "X-Auth-Token": process.env.API_TOKEN },
     });
+  
+  const fetchScorersUCL = async () =>
+    axios.get("https://api.football-data.org/v2/competitions/CL/scorers", {
+      headers: { "X-Auth-Token": process.env.API_TOKEN },
+    });
 
   data.teams = (await fetchTeams()).data.teams;
   data.table = (await fetchTable()).data.standings[0].table;
@@ -82,6 +88,7 @@ exports.sourceNodes = async ({
     standing => standing.type === "TOTAL"
   );
   data.ucl.teams = (await fetchUCLTeams()).data.teams;
+  data.ucl.scorers = (await fetchScorersUCL()).data.scorers;
 
   // loop through data and create Gatsby nodes
   data.teams.forEach(team => {
@@ -189,6 +196,25 @@ exports.sourceNodes = async ({
       },
     });
   });
+
+  data.ucl.scorers = data.ucl.scorers.map(scorer => ({
+    ...scorer,
+    ["team"]: { ...data.ucl.teams.find(team => team.id === scorer.team.id) },
+  }));
+
+  data.ucl.scorers.forEach(scorer =>
+    createNode({
+      ...scorer,
+      id: createNodeId(`${SCORER_UCL_NODE_TYPE}-${scorer.player.id}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: SCORER_UCL_NODE_TYPE,
+        content: JSON.stringify(scorer),
+        contentDigest: createContentDigest(scorer),
+      },
+    })
+  );
   return;
 };
 
@@ -250,6 +276,41 @@ exports.createPages = async ({ graphql, actions }) => {
       // Data passed to context is available
       // in page queries as GraphQL variables.
       scorers: scorersResult.data.allScorer.edges.map(edge => ({
+        ...edge.node,
+      })),
+    },
+  });
+
+  const uclScorersResult = await graphql(`
+    query {
+      allScorerUcl {
+        edges {
+          node {
+            id
+            player {
+              id
+              name
+              nationality
+            }
+            team {
+              teamId: id
+              shortName
+              crestUrl
+            }
+            numberOfGoals
+          }
+        }
+      }
+    }
+  `);
+
+  createPage({
+    path: "/champions/marcatori",
+    component: path.resolve(`./src/templates/Scorers/Scorers.tsx`),
+    context: {
+      // Data passed to context is available
+      // in page queries as GraphQL variables.
+      scorers: uclScorersResult.data.allScorerUcl.edges.map(edge => ({
         ...edge.node,
       })),
     },
