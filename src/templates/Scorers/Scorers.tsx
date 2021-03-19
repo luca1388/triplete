@@ -40,7 +40,7 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
           <Filter
             type="text"
             value={filter}
-            placeholder="Cerca per squadra"
+            placeholder="Cerca"
             onChange={event => setFilter(event.target.value.toLowerCase())}
           />
         </Toolbar>
