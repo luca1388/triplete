@@ -15,7 +15,7 @@ interface ScheduleProps {
 
 const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
   const [ filteredTeam, setFilteredTeam ] = useState<number>(-1);
-  const [ scrollCompleted, setScrollCompleted ] = useState<boolean>(true);
+  const [ scrollCompleted, setScrollCompleted ] = useState<boolean>(false);
   const todayRef = useRef<HTMLDivElement>(null);
   const matchdayRef = useRef<HTMLDivElement>(null);
 
