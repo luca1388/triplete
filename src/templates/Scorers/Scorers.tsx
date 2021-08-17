@@ -35,9 +35,12 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
       : pageContext.scorers;
   };
 
-  const changeFilterInputHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilter(event.target.value.toLowerCase());
-  }, []);
+  const changeFilterInputHandler = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFilter(event.target.value.toLowerCase());
+    },
+    []
+  );
 
   const keyDownHandler = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -84,10 +87,12 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
               </div>
             );
           })
-        ) : (
+        ) : filter ? (
           <NoResultsText>
             Nessun risultato, prova a cercare altro ...
           </NoResultsText>
+        ) : (
+          <h1>Missing empty screen!</h1>
         )}
       </div>
     </Layout>
