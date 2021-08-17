@@ -3,8 +3,8 @@ import React, { useCallback, useState } from "react";
 import Title from "../Typography/Title/Title";
 import "./Header.css";
 import { colors } from "../../constants/colors";
-import CompetitionsSelector from "../CompetitionsSelector/CompetitionsButton";
-import CompetitionsList from "../CompetitionsSelector/CompetitionsSelector";
+// import CompetitionsSelector from "../CompetitionsSelector/CompetitionsButton";
+// import CompetitionsList from "../CompetitionsSelector/CompetitionsSelector";
 import { Competition } from "../../types";
 import { competitionsName } from "../../constants/LeaguesName";
 
@@ -29,13 +29,13 @@ const Header: React.FC<HeaderProps> = ({ siteTitle, competition, onChangeCompeti
         <Title>
           <h1>{siteTitle}</h1>
         </Title>
-        <CompetitionsSelector
+        {/* <CompetitionsSelector
           selectedCompetition={competition}
           onOpenSelectorMenu={() => setListOpened(oldState => !oldState)}
           opened={listOpened}
-        />
+        /> */}
       </header>
-      <CompetitionsList show={listOpened} onSelectCompetition={selectCompetitionHandler} />
+      {/* <CompetitionsList show={listOpened} onSelectCompetition={selectCompetitionHandler} /> */}
     </>
   );
 };
