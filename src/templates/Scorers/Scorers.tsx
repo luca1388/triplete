@@ -44,24 +44,32 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
             onChange={event => setFilter(event.target.value.toLowerCase())}
           />
         </Toolbar>
-        {getScorers().map((entry, index) => {
-          const scorerClasses = ["scorer"];
-          if (index === 0) {
-            scorerClasses.push("firstScorer");
-          }
-          return (
-            <div className={scorerClasses.join(" ")} key={entry.id}>
-              <span className="number">{index + 1}</span>
-              <span className="playerName" style={{ flex: 1 }}>
-                <strong>{entry.player.name}</strong>{" "}
-                <span>({entry.team.shortName})</span>
-              </span>
-              <span className="number">
-                <strong>{entry.numberOfGoals}</strong>
-              </span>
-            </div>
-          );
-        })}
+        {getScorers().length ? (
+          getScorers().map((entry, index) => {
+            const scorerClasses = ["scorer"];
+            if (index === 0) {
+              scorerClasses.push("firstScorer");
+            }
+            return (
+              <div className={scorerClasses.join(" ")} key={entry.id}>
+                <span className="number">{index + 1}</span>
+                <span className="playerName" style={{ flex: 1 }}>
+                  <strong>{entry.player.name}</strong>{" "}
+                  <span>({entry.team.shortName})</span>
+                </span>
+                <span className="number">
+                  <strong>{entry.numberOfGoals}</strong>
+                </span>
+              </div>
+            );
+          })
+        ) : filter ? (
+          <span>
+            Nessun risultato, prova a cercare altro ...
+          </span>
+        ) : (
+          <h1>Missing empty screen!</h1>
+        )}
       </div>
     </Layout>
   );
