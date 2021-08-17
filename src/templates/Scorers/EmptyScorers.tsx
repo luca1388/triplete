@@ -5,18 +5,20 @@ const EmptyScorers = props => {
     return (
         <div style={{
             display: 'flex',
-            flexDirection: 'column',
             justifyContent: 'center',
-            alignContent: 'center',
+            alignItems: 'center',
             width: '95%',
             margin: '20px 0',
             boxSizing: 'border-box'
         }}>
-            <img src={emptyImg} style={{width: '65%', maxHeight: '550px'}} />
+            <div style={{margin: '0 20px 0 0', width: '30%'}}>
             <h3 style={{ textAlign: 'center', margin: '40px 0 0' }}>Cercasi bomber!</h3>
-            <p style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: 'center', padding: '10px 0 0 0' }}>
                 La stagione non è ancora iniziata e non ci sono marcatori.
-            </p>
+            </div>
+
+            </div>
+                <img src={emptyImg} style={{width: '65%', maxHeight: '550px', maxWidth: '500px'}} />
         </div>
     );
 };

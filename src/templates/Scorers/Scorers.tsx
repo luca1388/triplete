@@ -6,6 +6,7 @@ import { scorers } from "../../types";
 import styled from "styled-components";
 
 import "./Scorers.css";
+import EmptyScorers from "./EmptyScorers";
 
 const Filter = styled.input`
   font-size: 13px;
@@ -28,6 +29,12 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
         scorer.team.shortName.toLowerCase().indexOf(filter) > -1
     ) : pageContext.scorers;
   };
+
+  if (!pageContext.scorers.length) {
+    return <Layout>
+      <EmptyScorers />
+    </Layout>;
+  }
 
   return (
     <Layout>
@@ -63,12 +70,10 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
               </div>
             );
           })
-        ) : filter ? (
+        ) : (
           <span>
             Nessun risultato, prova a cercare altro ...
           </span>
-        ) : (
-          <h1>Missing empty screen!</h1>
         )}
       </div>
     </Layout>
