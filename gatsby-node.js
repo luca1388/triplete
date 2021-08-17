@@ -76,7 +76,7 @@ exports.sourceNodes = async ({
     });
   
   const fetchScorersUCL = async () =>
-    axios.get("https://api.football-data.org/v2/competitions/CL/scorers", {
+    axios.get("https://api.football-data.org/v2/competitions/CL/scorers?limit=25", {
       headers: { "X-Auth-Token": process.env.API_TOKEN },
     });
 
