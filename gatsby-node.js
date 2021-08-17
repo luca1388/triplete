@@ -218,14 +218,99 @@ exports.sourceNodes = async ({
   return;
 };
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  const typeDefs = `
+    type Scorer implements Node {
+          id: String
+          player: playerScorer
+          team: teamScorer
+          numberOfGoals: Int
+    } 
+
+    type playerScorer implements Node {
+      id: Int
+      name: String
+      nationality: String
+    }
+
+    type teamScorer implements Node {
+      teamId: Int
+      shortName: String
+      crestUrl: String
+    }
+
+    type Group implements Node {
+      id: Int
+      group: String
+      table: tableGroup
+    }
+
+    type tableGroup implements Node {
+      position: Int
+      playedGames: Int
+      won: Int
+      draw: Int
+      lost: Int
+      points: Int
+      goalsFor: Int
+      goalsAgainst: Int
+      goalDifference: Int
+      team: teamGroup
+    }
+
+    type teamGroup implements Node {
+      id: String
+      name: String
+      crestUrl: String
+      shortName: String
+      tla: String
+    }
+
+    type Match implements Node {
+      id: Int
+      season: season
+      utcDate: Date
+      status: String
+      matchday: Int
+      score: timeScore
+      homeTeam: teamScore
+      awayTeam: teamScore
+    }
+
+    type teamScore implements Node {
+      shortName: String
+      id: Int
+      crestUrl: String
+      tla: String
+    }
+
+    type season implements Node {
+      currentMatchday: Int
+    }
+
+    type timeScore implements Node {
+      fullTime: scoreMatch
+    }
+
+    type scoreMatch implements Node {
+        homeTeam: Int
+        awayTeam: Int
+    }
+
+  `;
+  createTypes(typeDefs);
+};
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `FeedNewsRSS`) {
-    const slug = node.title.toLowerCase()
-      .replace(/[^\w\s-]/g, '') // remove non-word [a-z0-9_], non-whitespace, non-hyphen characters
-      .replace(/[\s_-]+/g, '-') // swap any length of whitespace, underscore, hyphen characters with a single -
-      .replace(/^-+|-+$/g, ''); // remove leading, trailing -
-    
+    const slug = node.title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "") // remove non-word [a-z0-9_], non-whitespace, non-hyphen characters
+      .replace(/[\s_-]+/g, "-") // swap any length of whitespace, underscore, hyphen characters with a single -
+      .replace(/^-+|-+$/g, ""); // remove leading, trailing -
+
     let nodeField = {
       node,
       name: `slug`,
@@ -233,13 +318,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     };
     if (!nodeField.node.enclosure || !nodeField.node.enclosure.url) {
       nodeField.node.enclosure = {
-        url: ''
+        url: "",
       };
     }
 
     createNodeField({
-      ...nodeField
-    })
+      ...nodeField,
+    });
   }
 };
 
@@ -249,21 +334,19 @@ exports.createPages = async ({ graphql, actions }) => {
   const scorersResult = await graphql(`
     query {
       allScorer {
-        edges {
-          node {
+        nodes {
+          id
+          player {
             id
-            player {
-              id
-              name
-              nationality
-            }
-            team {
-              teamId: id
-              shortName
-              crestUrl
-            }
-            numberOfGoals
+            name
+            nationality
           }
+          team {
+            teamId: id
+            shortName
+            crestUrl
+          }
+          numberOfGoals
         }
       }
     }
@@ -275,7 +358,7 @@ exports.createPages = async ({ graphql, actions }) => {
     context: {
       // Data passed to context is available
       // in page queries as GraphQL variables.
-      scorers: scorersResult.data.allScorer.edges.map(edge => ({
+      scorers: scorersResult.data?.allScorer.nodes.map(edge => ({
         ...edge.node,
       })),
     },
@@ -310,7 +393,7 @@ exports.createPages = async ({ graphql, actions }) => {
     context: {
       // Data passed to context is available
       // in page queries as GraphQL variables.
-      scorers: uclScorersResult.data.allScorerUcl.edges.map(edge => ({
+      scorers: uclScorersResult.data?.allScorerUcl.edges.map(edge => ({
         ...edge.node,
       })),
     },
@@ -319,27 +402,25 @@ exports.createPages = async ({ graphql, actions }) => {
   const uclStandingsResult = await graphql(`
     query {
       allGroup {
-        edges {
-          node {
-            id
-            group
-            table {
-              position
-              playedGames
-              won
-              draw
-              lost
-              points
-              goalsFor
-              goalsAgainst
-              goalDifference
-              team {
-                teamId: id
-                name
-                crestUrl
-                shortName
-                tla
-              }
+        nodes {
+          id
+          group
+          table {
+            position
+            playedGames
+            won
+            draw
+            lost
+            points
+            goalsFor
+            goalsAgainst
+            goalDifference
+            team {
+              teamId: id
+              name
+              crestUrl
+              shortName
+              tla
             }
           }
         }
@@ -353,9 +434,7 @@ exports.createPages = async ({ graphql, actions }) => {
     context: {
       // Data passed to context is available
       // in page queries as GraphQL variables.
-      groups: uclStandingsResult.data.allGroup.edges.map(edge => ({
-        ...edge.node,
-      })),
+      groups: uclStandingsResult.data?.allGroup.nodes,
     },
   });
 
@@ -363,41 +442,39 @@ exports.createPages = async ({ graphql, actions }) => {
     {
       allMatch {
         totalCount
-        edges {
-          node {
-            id
-            season {
-              currentMatchday
+        nodes {
+          id
+          season {
+            currentMatchday
+          }
+          utcDate
+          status
+          matchday
+          score {
+            fullTime {
+              homeTeam
+              awayTeam
             }
-            utcDate
-            status
-            matchday
-            score {
-              fullTime {
-                homeTeam
-                awayTeam
-              }
-            }
-            homeTeam {
-              shortName
-              teamId: id
-              crestUrl
-              tla
-            }
-            awayTeam {
-              shortName
-              teamId: id
-              crestUrl
-              tla
-            }
+          }
+          homeTeam {
+            shortName
+            teamId: id
+            crestUrl
+            tla
+          }
+          awayTeam {
+            shortName
+            teamId: id
+            crestUrl
+            tla
           }
         }
       }
     }
   `);
 
-  const calendar = scheduleResult.data.allMatch.edges
-    .map(entry => ({ ...entry.node }))
+  const calendar = scheduleResult.data?.allMatch.nodes
+    // .map(entry => ({ ...entry.node }))
     .reduce((acc, current) => {
       acc[current.utcDate.split("T")[0]] = [
         ...(acc[current.utcDate.split("T")[0]] || []),
