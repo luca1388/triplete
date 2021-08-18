@@ -251,7 +251,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 };
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
-  const { createNodeField } = actions
+  const { createNodeField } = actions;
   if (node.internal.type === `FeedNewsRSS`) {
     const slug = node.title
       .toLowerCase()
@@ -386,7 +386,7 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `)
+  `);
 
   teams.data.allSquad.nodes.forEach(node => {
     console.log(node);
