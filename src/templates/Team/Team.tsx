@@ -26,8 +26,8 @@ const PlayerData = styled.div`
   flex-direction: column;
 `;
 const Position = styled.div`
-    width: 30%;
-    text-align: right;
+  width: 30%;
+  text-align: right;
 `;
 const Nationality = styled.div`
   font-size: 12px;
@@ -40,14 +40,14 @@ const PlayerName = styled.div`
 const Team: React.FC<TeamProps> = ({ pageContext }) => {
   const team = pageContext.squad;
 
-//   const squad = team.squad.reduce((r, a) => {
-//     r[a.position] = [...(r[a.position] || []), a];
-//     return r;
-//   }, []);
-const goalKeepers = team.squad.filter(player => player.position === "Goalkeeper");
-const defenders = team.squad.filter(player => player.position === "Defender");
-const midfielders = team.squad.filter(player => player.position === "Midfielder");
-const attackers = team.squad.filter(player => player.position === "Attacker");
+  const goalKeepers = team.squad.filter(
+    player => player.position === "Goalkeeper"
+  );
+  const defenders = team.squad.filter(player => player.position === "Defender");
+  const midfielders = team.squad.filter(
+    player => player.position === "Midfielder"
+  );
+  const attackers = team.squad.filter(player => player.position === "Attacker");
   return (
     <Layout>
       <SEO
@@ -55,51 +55,63 @@ const attackers = team.squad.filter(player => player.position === "Attacker");
         description="La lista di tutti i giocatori della rosa della squadra."
       />
       <h1>{team.shortName}</h1>
-      <div style={{ width: '80%'}}>
-        {goalKeepers
-          .map(player => (
-            <Player key={player.id}>
-              {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}
-              <PlayerData>
-                <PlayerName>{player.name}</PlayerName>
-                <Nationality>{`${player.nationality} (${new Date(player.dateOfBirth).toLocaleString('it-IT', { dateStyle: 'short'})})`}</Nationality>
-              </PlayerData>
-              <Position>Por</Position>
-            </Player>
-          ))}
-          {defenders
-          .map(player => (
-            <Player key={player.id}>
-              {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}
-              <PlayerData>
-                <PlayerName>{player.name}</PlayerName>
-                <Nationality>{`${player.nationality} (${new Date(player.dateOfBirth).toLocaleString('it-IT', { dateStyle: 'short'})})`}</Nationality>
-              </PlayerData>
-              <Position>Dif</Position>
-            </Player>
-          ))}
-          {midfielders
-          .map(player => (
-            <Player key={player.id}>
-              {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}
-              <PlayerData>
-                <PlayerName>{player.name}</PlayerName>
-                <Nationality>{`${player.nationality} (${new Date(player.dateOfBirth).toLocaleString('it-IT', { dateStyle: 'short'})})`}</Nationality>
-              </PlayerData>
-              <Position>Cen</Position>
-            </Player>
-          ))}
-          {attackers
-          .map(player => (
-            <Player key={player.id}>
-              {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}
-              <PlayerData>
-                <PlayerName>{player.name}</PlayerName>
-                <Nationality>{`${player.nationality} (${new Date(player.dateOfBirth).toLocaleString('it-IT', { dateStyle: 'short'})})`}</Nationality>
-              </PlayerData>
-              <Position>Att</Position>
-            </Player>
-          ))}
+      <div style={{ width: "80%" }}>
+        {goalKeepers.map(player => (
+          <Player key={player.id}>
+            {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}
+            <PlayerData>
+              <PlayerName>{player.name}</PlayerName>
+              <Nationality>{`${player.nationality} (${new Date(
+                player.dateOfBirth
+              ).toLocaleString("it-IT", {
+                dateStyle: "short",
+              })})`}</Nationality>
+            </PlayerData>
+            <Position>Por</Position>
+          </Player>
+        ))}
+        {defenders.map(player => (
+          <Player key={player.id}>
+            {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}
+            <PlayerData>
+              <PlayerName>{player.name}</PlayerName>
+              <Nationality>{`${player.nationality} (${new Date(
+                player.dateOfBirth
+              ).toLocaleString("it-IT", {
+                dateStyle: "short",
+              })})`}</Nationality>
+            </PlayerData>
+            <Position>Dif</Position>
+          </Player>
+        ))}
+        {midfielders.map(player => (
+          <Player key={player.id}>
+            {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}
+            <PlayerData>
+              <PlayerName>{player.name}</PlayerName>
+              <Nationality>{`${player.nationality} (${new Date(
+                player.dateOfBirth
+              ).toLocaleString("it-IT", {
+                dateStyle: "short",
+              })})`}</Nationality>
+            </PlayerData>
+            <Position>Cen</Position>
+          </Player>
+        ))}
+        {attackers.map(player => (
+          <Player key={player.id}>
+            {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}
+            <PlayerData>
+              <PlayerName>{player.name}</PlayerName>
+              <Nationality>{`${player.nationality} (${new Date(
+                player.dateOfBirth
+              ).toLocaleString("it-IT", {
+                dateStyle: "short",
+              })})`}</Nationality>
+            </PlayerData>
+            <Position>Att</Position>
+          </Player>
+        ))}
       </div>
     </Layout>
   );
