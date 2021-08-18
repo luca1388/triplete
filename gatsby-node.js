@@ -17,6 +17,7 @@ const POST_NODE_TYPE = `Team`;
 const TABLE_POSITION_NODE_TYPE = `Position`;
 const MATCH_NODE_TYPE = `Match`;
 const SCORER_NODE_TYPE = "Scorer";
+const SQUAD_NODE_TYPE = "Squad";
 
 // exports.createSchemaCustomization = ({ actions }) => {
 //   const { createTypes } = actions
@@ -78,6 +79,21 @@ exports.sourceNodes = async ({
         type: POST_NODE_TYPE,
         content: JSON.stringify(team),
         contentDigest: createContentDigest(team),
+      },
+    });
+
+    const squad = require(`./content/teams/${team.id}.json`);
+
+    createNode({
+      ...squad,
+      squadId: squad.id,
+      id: createNodeId(`${SQUAD_NODE_TYPE}-${team.id}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: SQUAD_NODE_TYPE,
+        content: JSON.stringify(squad),
+        contentDigest: createContentDigest(squad),
       },
     });
   });
@@ -349,33 +365,41 @@ exports.createPages = async ({ graphql, actions }) => {
     },
   });
 
-  // const teams = await graphql(`
-  //   {
-  //     allTeam {
-  //       edges {
-  //         node {
-  //           id
-  //           teamId
-  //         }
-  //       }
-  //     }
-  //   }
-  // `)
+  const teams = await graphql(`
+    {
+      allSquad {
+        nodes {
+          id
+          shortName
+          tla
+          crestUrl
+          slug
+          squad {
+            id
+            name
+            position
+            role
+            shirtNumber
+            nationality
+            dateOfBirth
+          }
+        }
+      }
+    }
+  `)
 
-  //     createPage({
-  //       path: "/schedule/teams/" + searchedTeamId,
-  //       component: path.resolve(`./src/templates/Schedule/Schedule.tsx`),
-  //       context: {
-  //         // Data passed to context is available
-  //         // in page queries as GraphQL variables.
-  //         teamId: searchedTeamId,
-  //         teamName: searchedTeam.name,
-  //         matches: searchedTeamMatches,
-  //         teamShortName: searchedTeam.shortName,
-  //         teamImage: searchedTeam.crestUrl,
-  //       },
-  //     })
-  //   })
+  teams.data.allSquad.nodes.forEach(node => {
+    console.log(node);
+    createPage({
+      path: node.slug,
+      component: path.resolve(`./src/templates/Team/Team.tsx`),
+      context: {
+        // Data passed to context is available
+        // in page queries as GraphQL variables.
+        squad: node,
+      },
+    });
+  });
 
   const result = await graphql(`
     {
