@@ -54,8 +54,8 @@ const Team: React.FC<TeamProps> = ({ pageContext }) => {
         title={`${team.shortName}`}
         description="La lista di tutti i giocatori della rosa della squadra."
       />
-      <h1>{team.shortName}</h1>
       <div style={{ width: "80%" }}>
+      <h3>{team.shortName}</h3>
         {goalKeepers.map(player => (
           <Player key={player.id}>
             {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}

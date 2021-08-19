@@ -15,6 +15,7 @@ type IndexPageProps = {
         node: {
           position: number;
           id: string;
+          slug: string;
           team: {
             crestUrl: string;
             tla: string;
@@ -76,6 +77,7 @@ export const query = graphql`
         node {
           id
           position
+          slug
           team {
             id
             shortName

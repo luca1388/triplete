@@ -45,6 +45,7 @@ export type calendar = {
 export type standingPosition = {
   position: number;
   id: string;
+  slug: string;
   team: team;
   points: number;
   playedGames: number;

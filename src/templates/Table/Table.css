@@ -51,6 +51,7 @@ span.teamName {
 } */
 
 .teamName {
+    color: #444;
     padding: 0 4px;
     margin-left: 10px;
 }

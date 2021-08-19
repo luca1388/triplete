@@ -69,9 +69,12 @@ exports.sourceNodes = async ({
 
   // loop through data and create Gatsby nodes
   data.teams.forEach(team => {
+    const squad = require(`./content/teams/${team.id}.json`);
+
     createNode({
       ...team,
       teamId: team.id,
+      slug: squad.slug,
       id: createNodeId(`${POST_NODE_TYPE}-${team.id}`),
       parent: null,
       children: [],
@@ -82,7 +85,6 @@ exports.sourceNodes = async ({
       },
     });
 
-    const squad = require(`./content/teams/${team.id}.json`);
 
     createNode({
       ...squad,
@@ -107,6 +109,7 @@ exports.sourceNodes = async ({
   data.table.forEach(position =>
     createNode({
       ...position,
+      slug: require(`./content/teams/${position.team.id}.json`).slug,
       id: createNodeId(`${TABLE_POSITION_NODE_TYPE}-${position.position}`),
       parent: null,
       children: [],

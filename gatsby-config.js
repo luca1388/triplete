@@ -140,8 +140,11 @@ let plugins = [
   // To learn more, visit: https://gatsby.dev/offline
   {
     resolve: `gatsby-plugin-offline`,
+    options: {
+      debug: false
+    },
   },
-  
+
   {
     resolve: `gatsby-plugin-sitemap`,
     options: {
@@ -169,7 +172,10 @@ let plugins = [
   },
 ];
 
-if (process.env.GATSBY_GA_TRACKING_ID && process.env.GATSBY_GA_TRACKING_ID !== " ") {
+if (
+  process.env.GATSBY_GA_TRACKING_ID &&
+  process.env.GATSBY_GA_TRACKING_ID !== " "
+) {
   plugins.push({
     resolve: `gatsby-plugin-gtag`,
     options: {
@@ -183,7 +189,11 @@ if (process.env.GATSBY_GA_TRACKING_ID && process.env.GATSBY_GA_TRACKING_ID !== "
   });
 }
 
-if (process.env.SENTRY_DSN && process.env.BRANCH_ENV && process.env.SENTRY_DSN !== " ") {
+if (
+  process.env.SENTRY_DSN &&
+  process.env.BRANCH_ENV &&
+  process.env.SENTRY_DSN !== " "
+) {
   plugins.push({
     resolve: "@sentry/gatsby",
     options: {
@@ -201,7 +211,7 @@ module.exports = {
     image: "https://www.triplete.net/preview.png",
     url: "https://www.triplete.net",
     siteUrl: "https://www.triplete.net",
-    displayTitle: "Triplete.net"
+    displayTitle: "Triplete.net",
   },
   plugins: plugins,
 };
