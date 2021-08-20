@@ -13,7 +13,7 @@ const Player = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 0;
+  padding: 4px 5px;
   border-bottom: 1px solid #e6e6e6;
 `;
 const ShirtNumber = styled.div`
@@ -57,7 +57,7 @@ const Team: React.FC<TeamProps> = ({ pageContext }) => {
       <div style={{ width: "80%" }}>
       <h3>{team.shortName}</h3>
         {goalKeepers.map(player => (
-          <Player key={player.id}>
+          <Player key={player.id} style={{ backgroundColor: 'rgb(38 187 213 / 32%)'}}>
             {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}
             <PlayerData>
               <PlayerName>{player.name}</PlayerName>
@@ -71,7 +71,7 @@ const Team: React.FC<TeamProps> = ({ pageContext }) => {
           </Player>
         ))}
         {defenders.map(player => (
-          <Player key={player.id}>
+          <Player key={player.id} style={{ backgroundColor: 'rgb(228 234 5 / 34%)'}}>
             {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}
             <PlayerData>
               <PlayerName>{player.name}</PlayerName>
@@ -85,7 +85,7 @@ const Team: React.FC<TeamProps> = ({ pageContext }) => {
           </Player>
         ))}
         {midfielders.map(player => (
-          <Player key={player.id}>
+          <Player key={player.id} style={{ backgroundColor: 'rgb(72 234 5 / 34%)'}}>
             {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}
             <PlayerData>
               <PlayerName>{player.name}</PlayerName>
@@ -99,7 +99,7 @@ const Team: React.FC<TeamProps> = ({ pageContext }) => {
           </Player>
         ))}
         {attackers.map(player => (
-          <Player key={player.id}>
+          <Player key={player.id} style={{ backgroundColor: 'rgb(234 5 122 / 28%)'}}>
             {/* <ShirtNumber>{player.shirtNumber || "-"}</ShirtNumber> */}
             <PlayerData>
               <PlayerName>{player.name}</PlayerName>
