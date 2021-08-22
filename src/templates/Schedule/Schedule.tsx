@@ -104,7 +104,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
             if (filteredTeam < 0) {
               filteringClasses = ["match"];
             } else {
-              filteringClasses = match?.homeTeam.teamId !== filteredTeam && filteredTeam !== match?.awayTeam.teamId ?
+              filteringClasses = +(match?.homeTeam.teamId as number) !== filteredTeam && filteredTeam !== +(match?.awayTeam.teamId as number) ?
               ["match", "filteredOutMatch"] : ["match", "filteredInMatch"];
             }
 
