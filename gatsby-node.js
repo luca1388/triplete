@@ -303,6 +303,8 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
+  console.log(`Found ${scorersResult.data.allScorer.nodes.length} scorers.`);
+
   createPage({
     path: "/marcatori",
     component: path.resolve(`./src/templates/Scorers/Scorers.tsx`),
