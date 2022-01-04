@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import SEO from "../../components/SEO/seo";
 import Toolbar from "../../components/Toolbar/Toolbar";
@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 import "./Scorers.css";
 import EmptyScorers from "./EmptyScorers";
+import { useInterval } from "../../hooks/useInterval";
 
 const Filter = styled.input`
   font-size: 13px;
@@ -19,8 +20,19 @@ interface ScorersProps {
   };
 }
 
+const REFRESH_TIME = 60000;
+
 const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
   const [filter, setFilter] = useState<string>("");
+
+  const fetchScorers = useCallback(() => {
+    fetch("/.netlify/functions/scorers")
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
+  }, []);
+
+  useInterval(fetchScorers, REFRESH_TIME);
 
   const getScorers = () => {
     return filter ? pageContext.scorers.filter(

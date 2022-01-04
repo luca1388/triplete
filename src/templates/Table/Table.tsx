@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import "./Table.css";
 import { standingPosition } from "../../types";
@@ -11,12 +11,6 @@ export interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ standings }) => {
-  useEffect(() => {
-    fetch("/.netlify/functions/scorers")
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
-  }, []);
   return (
     <div className="standingsContainer">
       <Toolbar />
