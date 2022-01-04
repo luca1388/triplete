@@ -17,6 +17,7 @@ import Navigation from "../Navigation/Navigation";
 import CookiesBanner from "../CookieBanner/CookiesBanner";
 // import loadable from "@loadable/component";
 import { readCookie, setCookie } from "../../utils/cookiesHandler";
+import Footer from "../Footer/Footer";
 
 const Layout: React.FC = ({ children }) => {
   // const CookiesHandler = loadable.lib(() => import("../../utils/cookiesHandler"));
@@ -61,6 +62,7 @@ const Layout: React.FC = ({ children }) => {
         />
         <main className="main-container">
           {children}
+          <Footer />
           <BottomNavigation />
         </main>
         {!cookiesAccepted && (
