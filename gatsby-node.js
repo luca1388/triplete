@@ -16,6 +16,7 @@ require("dotenv").config({
 const POST_NODE_TYPE = `Team`;
 const TABLE_POSITION_NODE_TYPE = `Position`;
 const MATCH_NODE_TYPE = `Match`;
+const LIVE_MATCH_NODE_TYPE = `LiveMatch`;
 const SCORER_NODE_TYPE = "Scorer";
 const SQUAD_NODE_TYPE = "Squad";
 
@@ -62,10 +63,16 @@ exports.sourceNodes = async ({
       }
     );
 
+  const fetchTodayMatches = async () =>
+    axios.get("https://api.football-data.org/v2/matches?competitions=SA", {
+      headers: { "X-Auth-Token": process.env.API_TOKEN },
+    });
+
   data.teams = (await fetchTeams()).data.teams;
   data.table = (await fetchTable()).data.standings[0].table;
   data.schedule = (await fetchSchedule()).data.matches;
   data.scorers = (await fetchScorers()).data.scorers;
+  data.todayLive = (await fetchTodayMatches()).data.matches;
 
   // loop through data and create Gatsby nodes
   data.teams.forEach(team => {
@@ -84,7 +91,6 @@ exports.sourceNodes = async ({
         contentDigest: createContentDigest(team),
       },
     });
-
 
     createNode({
       ...squad,
@@ -141,6 +147,20 @@ exports.sourceNodes = async ({
       children: [],
       internal: {
         type: MATCH_NODE_TYPE,
+        content: JSON.stringify(match),
+        contentDigest: createContentDigest(match),
+      },
+    });
+  });
+
+  data.todayLive.forEach(match => {
+    createNode({
+      ...match,
+      id: createNodeId(`${LIVE_MATCH_NODE_TYPE}-${match.id}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: LIVE_MATCH_NODE_TYPE,
         content: JSON.stringify(match),
         contentDigest: createContentDigest(match),
       },
@@ -219,6 +239,17 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
 
     type Match implements Node {
+      id: Int
+      season: season
+      utcDate: Date
+      status: String
+      matchday: Int
+      score: timeScore
+      homeTeam: teamScore
+      awayTeam: teamScore
+    }
+
+    type LiveMatch implements Node {
       id: Int
       season: season
       utcDate: Date
@@ -367,6 +398,51 @@ exports.createPages = async ({ graphql, actions }) => {
       // Data passed to context is available
       // in page queries as GraphQL variables.
       calendar: calendar,
+    },
+  });
+
+  const liveMatchResult = await graphql(`
+    {
+      allLiveMatch {
+        totalCount
+        nodes {
+          id
+          season {
+            currentMatchday
+          }
+          utcDate
+          status
+          matchday
+          score {
+            fullTime {
+              homeTeam
+              awayTeam
+            }
+          }
+          homeTeam {
+            shortName
+            teamId: id
+            crestUrl
+            tla
+          }
+          awayTeam {
+            shortName
+            teamId: id
+            crestUrl
+            tla
+          }
+        }
+      }
+    }
+  `);
+
+  createPage({
+    path: "/live",
+    component: path.resolve(`./src/templates/Live/Live.tsx`),
+    context: {
+      // Data passed to context is available
+      // in page queries as GraphQL variables.
+      todayMatches: liveMatchResult.data.allLiveMatch.nodes,
     },
   });
 

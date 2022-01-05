@@ -3,7 +3,8 @@ import {
   GiSoccerBall,
   GiPodium,
   GiSoccerField,
-  GiRss
+  GiRss,
+  GiAlarmClock
 } from "react-icons/gi";
 
 import { BsInfoCircle } from 'react-icons/bs';
@@ -42,6 +43,14 @@ const NavigationEntries: React.FC<NavigationEntriesProps> = ({ mobile }) => {
           size={mobile ? 32 : 40}
         />
         Partite
+      </Link>
+      <Link to="/live">
+        <GiAlarmClock
+          className="NavigationIcon"
+          color={colors.accent}
+          size={mobile ? 32 : 40}
+        />
+        Oggi
       </Link>
       {/* <Link to="/news">
         <GiRss
