@@ -1,7 +1,7 @@
 import React from 'react';
 import emptyImg from '../../../content/images/fans.svg';
 
-const EmptyScorers = props => {
+const EmptyScorers: React.FC = _props => {
     return (
         <div style={{
             display: 'flex',
