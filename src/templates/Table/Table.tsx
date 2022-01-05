@@ -4,7 +4,6 @@ import "./Table.css";
 import { standingPosition } from "../../types";
 import { tableConfig } from "../../constants/football";
 import Toolbar from "../../components/Toolbar/Toolbar";
-// import Link from "../../components/Navigation/Link/Link";
 
 export interface TableProps {
   standings: standingPosition[];
@@ -60,11 +59,9 @@ const Table: React.FC<TableProps> = ({ standings }) => {
                   height={30}
                   width={30}
                 />
-                {/* <Link to={entry.slug}> */}
                 <span className={teamNameClasses.join(" ")}>
                   {entry.team.shortName.split(" ")[0]}
                 </span>
-                {/* </Link> */}
               </span>
               <span className="match">{entry.playedGames}</span>
               <span className="match">{entry.won}</span>
