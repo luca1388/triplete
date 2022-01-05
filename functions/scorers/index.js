@@ -5,7 +5,6 @@ const footballValue = require("../config");
 const SCORERS_TIME_TO_LEAVE = 5 * 60 * 1000; // 5 minutes
 
 exports.handler = async (event, context) => {
-  console.log(event);
   try {
     const requestTimestamp = new Date().getTime();
     const timeToLeaveScorersCache = parseInt(storage.getItem("scorersExpires"));
