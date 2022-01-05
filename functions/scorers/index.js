@@ -2,16 +2,28 @@ const fetch = require("node-fetch");
 const storage = require("../storage");
 const footballValue = require("../config");
 
+const SCORERS_TIME_TO_LEAVE = 5 * 60 * 1000; // 5 minutes
+
 exports.handler = async (event, context) => {
+  console.log(event);
   try {
-    const cachedScorers = storage.getItem("scorers");
-    console.log(cachedScorers);
+    const requestTimestamp = new Date().getTime();
+    const timeToLeaveScorersCache = parseInt(storage.getItem("scorersExpires"));
+    if (requestTimestamp < timeToLeaveScorersCache) {
+      const scorers = storage.getItem("scorers");
+      console.log("reading from cache ...");
+      return { statusCode: 200, body: JSON.stringify({ scorers }) };
+    }
+
     const response = await fetch(
       footballValue.competitionsUrl + "/SA/scorers?limit=80",
       { headers: { "X-Auth-Token": footballValue.tokenApi } }
     );
     const data = await response.json();
+    console.log("reading from api ...");
     storage.setItem("scorers", data);
+    const now = new Date().getTime();
+    storage.setItem("scorersExpires", now + SCORERS_TIME_TO_LEAVE);
     return { statusCode: 200, body: JSON.stringify({ data }) };
   } catch (error) {
     console.log(error);

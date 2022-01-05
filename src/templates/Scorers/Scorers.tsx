@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import SEO from "../../components/SEO/seo";
 import Toolbar from "../../components/Toolbar/Toolbar";
@@ -32,7 +32,10 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
       .catch(err => console.log(err));
   }, []);
 
-  useInterval(fetchScorers, REFRESH_TIME);
+  // useInterval(fetchScorers, REFRESH_TIME);
+  useEffect(() => {
+    fetchScorers();
+  }, [fetchScorers]);
 
   const getScorers = () => {
     return filter ? pageContext.scorers.filter(
