@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 
 import "./Table.css";
 import { standingPosition } from "../../types";
@@ -10,6 +10,24 @@ export interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ standings }) => {
+  const fetchStandings = useCallback(() => {
+    fetch("/.netlify/functions/standings")
+      .then(response => response.json())
+      .then((updatedStandings: standingPosition[]) => {
+        console.log(updatedStandings);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  // useInterval(fetchScorers, REFRESH_TIME);
+  useEffect(() => {
+    fetchStandings();
+  }, [fetchStandings]);
+
+  // useEffect(() => {
+  //   setScorers(initScorers);
+  // }, [initScorers]);
+
   return (
     <div className="standingsContainer">
       <Toolbar />
