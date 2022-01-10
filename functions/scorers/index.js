@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
     const timeToLeaveScorersCache = parseInt(storage.getItem("scorersExpires"));
     if (requestTimestamp < timeToLeaveScorersCache) {
       const scorers = storage.getItem("scorers");
-      console.log("reading from cache ...");
+      // console.log("reading from cache ...");
       return { statusCode: 200, body: JSON.stringify({ scorers }) };
     }
 
@@ -19,8 +19,8 @@ exports.handler = async (event, context) => {
       { headers: { "X-Auth-Token": footballValue.tokenApi } }
     );
     const data = await response.json();
-    console.log("reading from api ...");
-    storage.setItem("scorers", data);
+    // console.log("reading from api ...");
+    storage.setItem("scorers", data.data.scorers);
     const now = new Date().getTime();
     storage.setItem("scorersExpires", now + SCORERS_TIME_TO_LEAVE);
     return { statusCode: 200, body: JSON.stringify({ data }) };

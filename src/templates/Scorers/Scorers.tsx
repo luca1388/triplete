@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 import "./Scorers.css";
 import EmptyScorers from "./EmptyScorers";
-import { useInterval } from "../../hooks/useInterval";
+// import { useInterval } from "../../hooks/useInterval";
 
 const Filter = styled.input`
   font-size: 13px;
@@ -20,15 +20,21 @@ interface ScorersProps {
   };
 }
 
-const REFRESH_TIME = 60000;
+// const REFRESH_TIME = 60000;
 
 const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
   const [filter, setFilter] = useState<string>("");
+  const [ scorers, setScorers] = useState<scorers>();
+
+  const { scorers: initScorers } = pageContext;
 
   const fetchScorers = useCallback(() => {
     fetch("/.netlify/functions/scorers")
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then((updatedScorers: scorers) => {
+        console.log(updatedScorers);
+        setScorers(updatedScorers);
+      })
       .catch(err => console.log(err));
   }, []);
 
@@ -37,8 +43,12 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
     fetchScorers();
   }, [fetchScorers]);
 
+  useEffect(() => {
+    setScorers(initScorers);
+  }, [initScorers]);
+
   const getScorers = () => {
-    return filter ? pageContext.scorers.filter(
+    return filter ? (scorers || []).filter(
       scorer =>
         scorer.player.name.toLowerCase().indexOf(filter) > -1 ||
         scorer.team.shortName.toLowerCase().indexOf(filter) > -1
