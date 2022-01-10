@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import "./Table.css";
 import { standingPosition } from "../../types";
@@ -10,11 +10,24 @@ export interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ standings }) => {
+  const [table, setTable] = useState<standingPosition[]>();
+
   const fetchStandings = useCallback(() => {
     fetch("/.netlify/functions/standings")
       .then(response => response.json())
       .then((updatedStandings: standingPosition[]) => {
         console.log(updatedStandings);
+        setTable(oldTable => {
+          let updatedState = updatedStandings.map(updated => {
+            const old = oldTable?.find(entry => entry.id === updated.id);
+            return {
+              ...updated,
+              team: old ? old.team : updated.team
+            };
+          });
+          
+          return updatedState;
+        });
       })
       .catch(err => console.log(err));
   }, []);
@@ -24,9 +37,13 @@ const Table: React.FC<TableProps> = ({ standings }) => {
     fetchStandings();
   }, [fetchStandings]);
 
-  // useEffect(() => {
-  //   setScorers(initScorers);
-  // }, [initScorers]);
+  useEffect(() => {
+    setTable(standings);
+  }, [standings]);
+
+  const getTable = useCallback(() => {
+    return table || [];
+  }, [table]);
 
   return (
     <div className="standingsContainer">
@@ -45,7 +62,7 @@ const Table: React.FC<TableProps> = ({ standings }) => {
         </span>
       </div>
       <div className="standingsTeamsContainer">
-        {standings.map((entry, index) => {
+        {getTable().map((entry, index) => {
           let teamNameClasses = ["teamName"];
           let standingsWrapperClasses = ["standingsTeam"];
           if (index < tableConfig.championsLeagueTeamsCount) {
