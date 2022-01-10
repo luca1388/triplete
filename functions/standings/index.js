@@ -20,10 +20,11 @@ exports.handler = async (event, context) => {
     );
     const data = await response.json();
     // console.log("reading from api ...");
-    storage.setItem("standings", data.standings[0].table);
+    const table = data.standings[0].table;
+    storage.setItem("standings", table);
     const now = new Date().getTime();
     storage.setItem("scorersExpires", now + STANDINGS_TIME_TO_LEAVE);
-    return { statusCode: 200, body: JSON.stringify({ data }) };
+    return { statusCode: 200, body: JSON.stringify({ table }) };
   } catch (error) {
     console.log(error);
     return {
