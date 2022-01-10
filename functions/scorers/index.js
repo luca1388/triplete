@@ -20,7 +20,8 @@ exports.handler = async (event, context) => {
     );
     const data = await response.json();
     // console.log("reading from api ...");
-    storage.setItem("scorers", data.data.scorers);
+    console.log(data);
+    storage.setItem("scorers", data.scorers);
     const now = new Date().getTime();
     storage.setItem("scorersExpires", now + SCORERS_TIME_TO_LEAVE);
     return { statusCode: 200, body: JSON.stringify({ data }) };
