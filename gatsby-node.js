@@ -106,6 +106,8 @@ exports.sourceNodes = async ({
     ["team"]: { ...data.teams.find(team => team.id === tableEntry.team.id) },
   }));
 
+  data.table = data.table.sort((a, b) => a.position - b.position);
+
   data.table.forEach(position =>
     createNode({
       ...position,
