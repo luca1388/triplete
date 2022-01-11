@@ -26,7 +26,7 @@ const Table: React.FC<TableProps> = ({ standings }) => {
             team: old ? old.team : updated.team
           };
         });
-        setTable(updatedState);
+        setTable(updatedState.sort((a, b) => a.position - b.position));
         
       })
       .catch(err => console.log(err));
@@ -38,7 +38,7 @@ const Table: React.FC<TableProps> = ({ standings }) => {
   }, [fetchStandings]);
 
   useEffect(() => {
-    setTable(standings);
+    setTable(standings.sort((a, b) => a.position - b.position));
   }, [standings]);
 
   const getTable = useCallback(() => {
