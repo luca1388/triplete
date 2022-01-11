@@ -2,7 +2,7 @@ import React, { useCallback, useState, useRef, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
 import SEO from "../../components/SEO/seo";
 import TeamFilter from "../../components/TeamFilter/TeamFilter";
-import { calendar } from "../../types";
+import { calendar, team } from "../../types";
 import { getMatchDateFromUtcDate, getTimeFromUtcDateTime } from "../../utils/date";
 
 import "./Schedule.css";
@@ -10,6 +10,7 @@ import "./Schedule.css";
 interface ScheduleProps {
   pageContext: {
     calendar: calendar;
+    teams: team[]
   };
 }
 
@@ -18,6 +19,8 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
   const [ scrollCompleted, setScrollCompleted ] = useState<boolean>(false);
   const todayRef = useRef<HTMLDivElement>(null);
   const matchdayRef = useRef<HTMLDivElement>(null);
+
+  console.log(pageContext.teams);
 
   const today = new Date().toISOString().split('T')[0];
 

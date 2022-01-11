@@ -362,17 +362,7 @@ exports.createPages = async ({ graphql, actions }) => {
       return acc;
     }, {});
 
-  createPage({
-    path: "/partite",
-    component: path.resolve(`./src/templates/Schedule/Schedule.tsx`),
-    context: {
-      // Data passed to context is available
-      // in page queries as GraphQL variables.
-      calendar: calendar,
-    },
-  });
-
-  const teams = await graphql(`
+    const teams = await graphql(`
     {
       allSquad {
         nodes {
@@ -394,6 +384,17 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
+
+  createPage({
+    path: "/partite",
+    component: path.resolve(`./src/templates/Schedule/Schedule.tsx`),
+    context: {
+      // Data passed to context is available
+      // in page queries as GraphQL variables.
+      calendar: calendar,
+      teams: teams
+    },
+  });
 
   teams.data.allSquad.nodes.forEach(node => {
     createPage({
