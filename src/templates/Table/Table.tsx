@@ -15,10 +15,11 @@ const Table: React.FC<TableProps> = ({ standings }) => {
   const fetchStandings = useCallback(() => {
     fetch("/.netlify/functions/standings")
       .then(response => response.json())
-      .then((updatedStandings: standingPosition[]) => {
-        console.log(updatedStandings);
+      .then((updatedStandings: { table: standingPosition[]}) => {
+        const { table } = updatedStandings;
+        console.log(table);
         setTable(oldTable => {
-          let updatedState = updatedStandings.map(updated => {
+          let updatedState = table.map(updated => {
             const old = oldTable?.find(entry => entry.id === updated.id);
             return {
               ...updated,
