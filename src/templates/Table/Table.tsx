@@ -18,17 +18,16 @@ const Table: React.FC<TableProps> = ({ standings }) => {
       .then((updatedStandings: { table: standingPosition[]}) => {
         const { table } = updatedStandings;
         console.log(table);
-        setTable(oldTable => {
-          let updatedState = table.map(updated => {
-            const old = oldTable?.find(entry => entry.id === updated.id);
-            return {
-              ...updated,
-              team: old ? old.team : updated.team
-            };
-          });
-          
-          return updatedState;
+        
+        let updatedState = table.map(updated => {
+          const old = standings?.find(entry => entry.team.id  === updated.team.id);
+          return {
+            ...updated,
+            team: old ? old.team : updated.team
+          };
         });
+        setTable(updatedState);
+        
       })
       .catch(err => console.log(err));
   }, []);

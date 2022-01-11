@@ -20,6 +20,7 @@ export type team = {
   tla: string;
   shortName: string;
   teamId: number;
+  id: number;
 };
 
 export type calendar = {
