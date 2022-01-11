@@ -34,6 +34,18 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
     .then((updatedMatches: { matches: any}) => {
       const { matches } = updatedMatches;
       console.log(matches);
+      const matchesWithTeams = matches.map(m => {
+        const awayTeam = pageContext.teams.find(team => team.id === m.awayTeam.id);
+        const homeTeam = pageContext.teams.find(team => team.id === m.homeTeam.id);
+
+        return {
+          ...m,
+          awayTeam: {...awayTeam},
+          homeTeam: {...homeTeam}
+        };
+      });
+
+      console.log(matchesWithTeams);
       
       // let updatedState = table.map(updated => {
       //   const old = standings?.find(entry => entry.team.id  === updated.team.id);

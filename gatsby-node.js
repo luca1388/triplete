@@ -392,7 +392,7 @@ exports.createPages = async ({ graphql, actions }) => {
       // Data passed to context is available
       // in page queries as GraphQL variables.
       calendar: calendar,
-      teams: data.teams
+      teams: teams.allSquad.nodes
     },
   });
 
