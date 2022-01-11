@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 const storage = require("../storage");
 const footballValue = require("../config");
 
-const STANDINGS_TIME_TO_LEAVE = 10 * 60 * 1000; // 5 minutes
+const STANDINGS_TIME_TO_LEAVE = 5 * 60 * 1000; // 5 minutes
 
 exports.handler = async (event, context) => {
   try {

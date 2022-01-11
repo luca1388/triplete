@@ -25,6 +25,30 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
     setFilteredTeam(team);
   }, []);
 
+  const fetchSchedule = useCallback(() => {
+    fetch("/.netlify/functions/matches")
+    .then(response => response.json())
+    .then((updatedMatches: { matches: any}) => {
+      const { matches } = updatedMatches;
+      console.log(matches);
+      
+      // let updatedState = table.map(updated => {
+      //   const old = standings?.find(entry => entry.team.id  === updated.team.id);
+      //   return {
+      //     ...updated,
+      //     team: old ? old.team : updated.team
+      //   };
+      // });
+      // setTable(updatedState.sort((a, b) => a.position - b.position));
+      
+    })
+    .catch(err => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    fetchSchedule();
+  }, [fetchSchedule]);
+
   useEffect(() => {
     if (todayRef.current) {
 
