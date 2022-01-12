@@ -82,7 +82,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
 
   const days = Object.keys(schedule);
 
-  const currentMatchday = schedule[days[0]][0]?.season.currentMatchday;
+  const currentMatchday = days.length > 0 ? schedule[days[0]][0]?.season.currentMatchday : undefined;
   const firstDayOfCurrentMatchday = days.find( day => {
     const matches = schedule[day];
     return matches.find(match => match?.matchday === currentMatchday);
