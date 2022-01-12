@@ -362,7 +362,36 @@ exports.createPages = async ({ graphql, actions }) => {
       return acc;
     }, {});
 
-    const teams = await graphql(`
+    const teamsData = await graphql(`
+    {
+      allTeam {
+        edges {
+          node {
+            id
+            shortName
+            teamId
+            name
+            tla
+            crestUrl
+            slug
+          }
+        }
+      }
+    }
+  `);
+
+  createPage({
+    path: "/partite",
+    component: path.resolve(`./src/templates/Schedule/Schedule.tsx`),
+    context: {
+      // Data passed to context is available
+      // in page queries as GraphQL variables.
+      calendar: calendar,
+      teams: teamsData.data.allTeam.edges.map(edge => ({...edge.node}))
+    },
+  });
+
+  const teams = await graphql(`
     {
       allSquad {
         nodes {
@@ -384,17 +413,6 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
-
-  createPage({
-    path: "/partite",
-    component: path.resolve(`./src/templates/Schedule/Schedule.tsx`),
-    context: {
-      // Data passed to context is available
-      // in page queries as GraphQL variables.
-      calendar: calendar,
-      teams: teams.data.allSquad.nodes
-    },
-  });
 
   teams.data.allSquad.nodes.forEach(node => {
     createPage({

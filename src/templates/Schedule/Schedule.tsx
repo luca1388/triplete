@@ -47,15 +47,6 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
 
       console.log(matchesWithTeams);
       
-      // let updatedState = table.map(updated => {
-      //   const old = standings?.find(entry => entry.team.id  === updated.team.id);
-      //   return {
-      //     ...updated,
-      //     team: old ? old.team : updated.team
-      //   };
-      // });
-      // setTable(updatedState.sort((a, b) => a.position - b.position));
-      
     })
     .catch(err => console.log(err));
   }, []);
