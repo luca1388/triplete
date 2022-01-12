@@ -31,6 +31,20 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
     setSchedule(pageContext.calendar);
   }, [pageContext.calendar]);
 
+  const scrollHandler = useCallback(() => {
+    if (todayRef.current) {
+
+      window.scroll({ top: (todayRef.current.offsetTop - 140), left: 0 });
+      setScrollCompleted(true);
+    }
+    else {
+      if (matchdayRef.current) {
+        window.scroll({ top: (matchdayRef.current.offsetTop - 140), left: 0 });
+        setScrollCompleted(true);
+      }
+    }
+  }, []);
+
   const fetchSchedule = useCallback(() => {
     fetch("/.netlify/functions/matches")
     .then(response => response.json())
@@ -58,28 +72,18 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
       console.log(newCalendar);
 
       setSchedule(newCalendar);
-      setScrollCompleted(true);
+      scrollHandler();
     })
     .catch(err => console.log(err));
-  }, []);
+  }, [scrollHandler]);
 
   useEffect(() => {
     fetchSchedule();
   }, [fetchSchedule]);
 
   useEffect(() => {
-    if (todayRef.current) {
-
-      window.scroll({ top: (todayRef.current.offsetTop - 140), left: 0 });
-      setScrollCompleted(true);
-    }
-    else {
-      if (matchdayRef.current) {
-        window.scroll({ top: (matchdayRef.current.offsetTop - 140), left: 0 });
-        setScrollCompleted(true);
-      }
-    }
-  }, []);
+    scrollHandler();
+  }, [scrollHandler]);
 
   const days = Object.keys(schedule);
 
