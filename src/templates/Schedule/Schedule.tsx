@@ -35,8 +35,8 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
       const { matches } = updatedMatches;
       console.log(matches);
       const matchesWithTeams = matches.map(m => {
-        const awayTeam = pageContext.teams.find(team => team.id === m.awayTeam.id);
-        const homeTeam = pageContext.teams.find(team => team.id === m.homeTeam.id);
+        const awayTeam = pageContext.teams.find(team => team.teamId === m.awayTeam.id);
+        const homeTeam = pageContext.teams.find(team => team.teamId === m.homeTeam.id);
 
         return {
           ...m,
