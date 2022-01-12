@@ -17,10 +17,9 @@ interface ScheduleProps {
 const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
   const [ filteredTeam, setFilteredTeam ] = useState<number>(-1);
   const [ scrollCompleted, setScrollCompleted ] = useState<boolean>(false);
+  const [schedule, setSchedule] = useState<calendar>({});
   const todayRef = useRef<HTMLDivElement>(null);
   const matchdayRef = useRef<HTMLDivElement>(null);
-
-  console.log(pageContext.teams);
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -28,12 +27,16 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
     setFilteredTeam(team);
   }, []);
 
+  useEffect(() => {
+    setSchedule(pageContext.calendar);
+  }, [pageContext.calendar]);
+
   const fetchSchedule = useCallback(() => {
     fetch("/.netlify/functions/matches")
     .then(response => response.json())
     .then((updatedMatches: { matches: any}) => {
       const { matches } = updatedMatches;
-      console.log(matches);
+
       const matchesWithTeams = matches.map(m => {
         const awayTeam = pageContext.teams.find(team => team.teamId === m.awayTeam.id);
         const homeTeam = pageContext.teams.find(team => team.teamId === m.homeTeam.id);
@@ -45,8 +48,6 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
         };
       });
 
-      console.log(matchesWithTeams);
-
       const newCalendar = matchesWithTeams.reduce((acc, current) => {
         acc[current.utcDate.split("T")[0]] = [
           ...(acc[current.utcDate.split("T")[0]] || []),
@@ -54,9 +55,9 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
         ];
         return acc;
       }, {});
-
       console.log(newCalendar);
-      
+
+      setSchedule(newCalendar);
     })
     .catch(err => console.log(err));
   }, []);
@@ -79,11 +80,11 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
     }
   }, []);
 
-  const days = Object.keys(pageContext.calendar);
+  const days = Object.keys(schedule);
 
-  const currentMatchday = pageContext.calendar[days[0]][0]?.season.currentMatchday;
+  const currentMatchday = schedule[days[0]][0]?.season.currentMatchday;
   const firstDayOfCurrentMatchday = days.find( day => {
-    const matches = pageContext.calendar[day];
+    const matches = schedule[day];
     return matches.find(match => match?.matchday === currentMatchday);
   });
   
@@ -95,7 +96,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
       <TeamFilter onType={onFilterTeams} />
       <div className={scheduleContainerClasses.join(' ')}>
         {days.map(day => {
-          let matches = pageContext.calendar[day];
+          let matches = schedule[day];
           let matchesOfTheDay = matches.map(match => {
             let message = null;
             const startTime = getTimeFromUtcDateTime(match?.utcDate);
