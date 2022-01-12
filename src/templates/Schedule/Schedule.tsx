@@ -58,6 +58,7 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
       console.log(newCalendar);
 
       setSchedule(newCalendar);
+      setScrollCompleted(true);
     })
     .catch(err => console.log(err));
   }, []);
