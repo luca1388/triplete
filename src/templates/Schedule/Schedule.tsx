@@ -46,6 +46,16 @@ const Schedule: React.FC<ScheduleProps> = ({ pageContext }) => {
       });
 
       console.log(matchesWithTeams);
+
+      const newCalendar = matchesWithTeams.reduce((acc, current) => {
+        acc[current.utcDate.split("T")[0]] = [
+          ...(acc[current.utcDate.split("T")[0]] || []),
+          current,
+        ];
+        return acc;
+      }, {});
+
+      console.log(newCalendar);
       
     })
     .catch(err => console.log(err));
