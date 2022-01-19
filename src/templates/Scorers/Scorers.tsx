@@ -69,12 +69,12 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
       />
       <div className="scorersContainer">
         <Toolbar>
-          <Filter
+          {/* <Filter
             type="text"
             value={filter}
             placeholder="Cerca"
             onChange={event => setFilter(event.target.value.toLowerCase())}
-          />
+          /> */}
         </Toolbar>
         {getScorers().length ? (
           getScorers().map((entry, index) => {
