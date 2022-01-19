@@ -48,7 +48,7 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
   }, [initScorers]);
 
   const getScorers = () => {
-    return filter ? (scorers || []).filter(
+    return filter && scorers ? scorers.filter(
       scorer =>
         scorer.player.name.toLowerCase().indexOf(filter) > -1 ||
         scorer.team.shortName.toLowerCase().indexOf(filter) > -1
