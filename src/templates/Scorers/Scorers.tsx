@@ -31,9 +31,9 @@ const Scorers: React.FC<ScorersProps> = ({ pageContext }) => {
   const fetchScorers = useCallback(() => {
     fetch("/.netlify/functions/scorers")
       .then(response => response.json())
-      .then((updatedScorers: scorers) => {
+      .then((updatedScorers: {scorers: scorers}) => {
         console.log(updatedScorers);
-        setScorers(updatedScorers);
+        setScorers(updatedScorers.scorers);
       })
       .catch(err => console.log(err));
   }, []);
