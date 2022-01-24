@@ -36,7 +36,6 @@ const Live: React.FC<LiveProps> = ({ pageContext }) => {
           />
           <div>Sembra che oggi non giochi nessuno :(</div>
         </>
-        )
       </div>
     </Layout>
   );
