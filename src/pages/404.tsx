@@ -34,7 +34,7 @@ const NotFoundPage: React.FC = () => (
     <SEO title="404: Not found" />
     {/* <Title>Strada sbagliata?</Title> */}
     <NotFound>
-      <img src="/empty.png" title="Pagina non trovata"  width="45%" />
+      <img src="/fans.svg" title="Pagina non trovata"  width="45%" />
       <Paragraph>
         <Title>Strada sbagliata?</Title>
         Ci spiace ma questa pagina non esiste o non è piu disponibile. Vuoi
