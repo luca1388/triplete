@@ -391,6 +391,15 @@ exports.createPages = async ({ graphql, actions }) => {
     },
   });
 
+  createPage({
+    path: "/live",
+    component: path.resolve(`./src/templates/Live/Live.tsx`),
+    context: {
+      teams: teamsData.data.allTeam.edges.map(edge => ({...edge.node}))
+    },
+  });
+
+
   const teams = await graphql(`
     {
       allSquad {
